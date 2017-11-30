@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.epiinfo.statcalc"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout 
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+<TextView  
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_poisson_desc"
+    android:textStyle="bold"
+    android:textSize="26dip"
+    android:padding="10dip"
+    android:gravity="center"
+    />
+<View android:layout_width="fill_parent" android:layout_height="2dip" android:background="#a2b9d7"/>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_poisson_prob"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:padding="10dip"
+    android:gravity="center"
+    />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+	<TextView  
+		android:id="@+id/txtLTLabel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="X"
+	    android:textColor="#42638c"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+	    />
+	<TextView  
+		android:id="@+id/txtLTValue"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Y"
+	    android:textStyle="bold"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+	    />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtLELabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+    android:textColor="#42638c"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtLEValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtEQLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+    android:textColor="#42638c"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtEQValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtGELabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+    android:textColor="#42638c"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtGEValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtGTLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+    android:textColor="#42638c"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtGTValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:layout_margin="20dp"
+    />
+</LinearLayout>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    >
+<TextView  
+    android:layout_width="300dip"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_obs_events"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:padding="5dip"
+    />
+<EditText  
+	android:id="@+id/txtObservedEvents"
+    android:layout_width="120dip" 
+    android:layout_height="wrap_content"
+    android:text="10"
+    android:textSize="20dip"
+    android:inputType="number"
+    android:nextFocusForward="@+id/txtExpectedEvents"
+    android:imeOptions="actionNext"
+    />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+    android:layout_width="300dip"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_exp_events"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:padding="5dip"
+    />
+<EditText  
+	android:id="@+id/txtExpectedEvents"
+    android:layout_width="120dip" 
+    android:layout_height="wrap_content"
+    android:text="10"
+    android:textSize="20dip"
+    android:inputType="number"
+    android:imeOptions="actionDone"
+    />
+</LinearLayout>
+
+</LinearLayout>
+</ScrollView>

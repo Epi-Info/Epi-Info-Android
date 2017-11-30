@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:state_enabled="false">
+		<layer-list>
+			<item>
+				<shape android:shape="rectangle">
+					<stroke android:width="1dp" android:color="#FFCCCCCC" />
+					<solid android:color="#FFFEFEFE" />
+				</shape>
+			</item>
+			<item>
+				<bitmap android:gravity="bottom|right"
+					android:src="@drawable/arrow_disabled" />
+			</item>
+		</layer-list>
+	</item>
+	<item android:state_pressed="true">
+		<layer-list>
+			<item>
+				<shape android:shape="rectangle">
+					<stroke android:width="1dp" android:color="#FF3d6bc2" />
+					<solid android:color="#FFFEFEFE" />
+				</shape>
+			</item>
+			<item>
+				<bitmap android:gravity="bottom|right"
+					android:src="@drawable/arrow_select" />
+			</item>
+		</layer-list>
+	</item>
+	<item android:state_pressed="false" android:state_focused="true">
+		<layer-list>
+			<item>
+				<shape android:shape="rectangle">
+					<stroke android:width="1dp" android:color="#FF3d6bc2" />
+					<solid android:color="#FFFEFEFE" />
+				</shape>
+			</item>
+			<item>
+				<bitmap android:gravity="bottom|right"
+					android:src="@drawable/arrow_default" />
+			</item>
+		</layer-list>
+	</item>
+	<item>
+		<layer-list>
+			<item>
+				<shape android:shape="rectangle">
+					<stroke android:width="1dp" android:color="#FF000000" />
+					<solid android:color="#FFFEFEFE" />
+				</shape>
+			</item>
+			<item>
+				<bitmap android:gravity="bottom|right"
+					android:src="@drawable/arrow_default" />
+			</item>
+		</layer-list>
+	</item>
+</selector>

@@ -1,0 +1,4 @@
+#Thu Nov 30 09:27:45 EST 2017
+base.0=/Users/asad/git/EpiInfoMigrated/epiInfo/build/intermediates/transforms/dexMerger/debug/1
+renamed.0=classes.dex
+file.0=/Users/asad/git/EpiInfoMigrated/epiInfo/build/intermediates/transforms/dexMerger/debug/1/classes.dex

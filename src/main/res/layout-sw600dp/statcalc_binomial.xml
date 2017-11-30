@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.epiinfo.statcalc"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout 
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+<TextView  
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_binomial_desc"
+    android:textStyle="bold"
+    android:textSize="26dip"
+    android:padding="10dip"
+    android:gravity="center"
+    />
+<View android:layout_width="fill_parent" android:layout_height="2dip" android:background="#a2b9d7"/>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_poisson_prob"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:padding="10dip"
+    android:gravity="center"
+    />
+</LinearLayout>
+
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtLTLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+	    android:textColor="#42638c"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtLTValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+	    android:textStyle="bold"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtLELabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+	    android:textColor="#42638c"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtLEValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+	    android:textStyle="bold"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtEQLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+	    android:textColor="#42638c"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtEQValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+	    android:textStyle="bold"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+</LinearLayout>
+
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtGELabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+	    android:textColor="#42638c"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtGEValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+	    android:textStyle="bold"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+	android:id="@+id/txtGTLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="X"
+	    android:textColor="#42638c"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+<TextView  
+	android:id="@+id/txtGTValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+	    android:textStyle="bold"
+	    android:textSize="20dip"
+	    android:layout_margin="20dp"
+    />
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="5dp"
+    >
+<TextView  
+	android:id="@+id/txtPValueLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Two-tailed p-value"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right">
+<TextView  
+	android:id="@+id/txtPValueValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+</LinearLayout>
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="5dp"
+    >
+<TextView  
+	android:id="@+id/txtCILabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_95_conf"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+    <ProgressBar android:id="@+id/waitCursor" android:layout_width="30dip" android:layout_height="30dip" android:indeterminateOnly="true" />
+<TextView  
+	android:id="@+id/txtCIValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=" - "
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+</LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="5dp"
+    >
+<TextView  
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_numerator"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right">
+<EditText  
+	android:id="@+id/txtNumerator"
+    android:layout_width="120dip" 
+    android:layout_height="wrap_content"
+    android:text="3"
+    android:textSize="20dip"
+    android:inputType="number"
+    android:nextFocusForward="@+id/txtTotalObservations"
+    android:imeOptions="actionNext"
+    />
+</LinearLayout>
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="5dp"
+    >
+<TextView  
+    android:layout_width="200dip"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_total_obs"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right">
+<EditText  
+	android:id="@+id/txtTotalObservations"
+    android:layout_width="120dip" 
+    android:layout_height="wrap_content"
+    android:text="16"
+    android:textSize="20dip"
+    android:inputType="number"
+    android:imeOptions="actionDone"
+    />
+</LinearLayout>
+</LinearLayout>
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="5dp"
+    >
+<TextView  
+	android:id="@+id/txtExpPercentLabel"
+    android:layout_width="300dip"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_exp_pct"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right">
+<TextView  
+	android:id="@+id/txtExpPercentValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="10%"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    />
+</LinearLayout>
+</LinearLayout>
+<SeekBar 
+	android:id="@+id/skbExpPercent"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"	
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+	android:max="10000"
+	android:progress="1000"
+	android:layout_span="3"
+	/>
+</LinearLayout>
+
+</LinearLayout>
+</ScrollView>

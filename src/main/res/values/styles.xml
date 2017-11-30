@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppThemeNoBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#3d6bc2</item>
+        <item name="colorPrimaryDark">#1e52b6</item>
+    </style>
+    <style name="AppThemeDark" parent="Theme.AppCompat">
+        <item name="colorPrimary">#3d6bc2</item>
+        <item name="colorPrimaryDark">#1e52b6</item>
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#3d6bc2</item>
+        <item name="colorPrimaryDark">#1e52b6</item>
+    </style>
+</resources>

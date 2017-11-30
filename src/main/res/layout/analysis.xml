@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/analysis_scroller"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:background="#FFFFFFFF">
+    <LinearLayout 
+        android:orientation="vertical"
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent">
+		<LinearLayout 
+		    android:id="@+id/analysis_logo"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:gravity="center_horizontal"
+		    android:background="#FFFFFFFF">
+		    <ImageView 
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:scaleType="fitCenter"
+		        android:layout_margin="5dp"
+				android:contentDescription="Epi Info Analysis - touch the options menu to begin"
+		        android:src="@drawable/analysis_rect"/>
+		</LinearLayout>		
+		<LinearLayout 
+		    android:id="@+id/analysis_layout"
+			android:layout_height="fill_parent"
+			android:layout_width="fill_parent"
+			android:orientation="vertical"
+			android:gravity="center_horizontal"
+			android:visibility="gone"/>"
+	</LinearLayout>
+</ScrollView>

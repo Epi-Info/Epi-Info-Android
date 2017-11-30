@@ -1,0 +1,3 @@
+UniqueKey,RECSTATUS,GlobalRecordId,FirstSaveLogonName,FirstSaveTime,LastSaveLogonName,LastSaveTime,FKEY,ContactID,ContactFirstName,ContactLastName,ContactAge,ContactAddress,Latitude,Longitude,PatientID,PatientName,RelationshiptoPatient,Dateofexposureofcontacttopatient
+1,1,88b578cd-6408-434b-8028-f4dddb6de909,Epi Info Team,1/20/2016 12:00,Epi Info Team,1/20/2016 13:03,,1234,John,Doe,44,CDC Campus,33.798622,-84.328442,1,Joe Bloggs,Other,1/1/2016
+2,1,8af3965d-3011-4273-aafc-f951b1899187,Epi Info Team,1/20/2016 13:03,Epi Info Team,1/20/2016 13:03,,2345,Jane,Doe,42,CDC Campus,33.799429,-84.329974,1,Joe Bloggs,Other,1/1/2016

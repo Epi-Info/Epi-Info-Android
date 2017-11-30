@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MainLayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    >
+    <ImageView
+        android:src="@drawable/epi_info_logo"
+		android:adjustViewBounds="true" android:layout_gravity="center" android:layout_marginBottom="50dp"
+		android:contentDescription="Epi Info home screen"  android:layout_marginTop="20dp"
+		android:layout_height="wrap_content" android:layout_width="500dp"/>
+	<Button
+		android:id="@+id/btnStatcalc"
+		android:contentDescription="Click here to use the statistical calculators known as Statcalc"
+		android:layout_height="132dp" android:layout_width="460dp" android:layout_margin="15dp"
+		android:background="@drawable/btn_statcalc_land" 
+		/>
+	<Button
+		android:id="@+id/btnCollectData"
+		android:contentDescription="Click here to collect data"
+		android:layout_height="132dp" android:layout_width="460dp" android:layout_margin="15dp"
+		android:background="@drawable/btn_data_collection_land" 
+		/>
+	<Button
+		android:id="@+id/btnAnalyze"
+		android:contentDescription="Click here to analyze collected data"
+		android:layout_height="132dp" android:layout_width="460dp" android:layout_margin="15dp"
+		android:background="@drawable/btn_data_analysis_land" 
+		/>
+</LinearLayout>

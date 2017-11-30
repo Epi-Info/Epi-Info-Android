@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Epi Info</string>
+    <string name="record_viewer">Record Viewer</string>
+    <string name="interviewer">Interviewer</string>
+    <string name="analysis">Analysis</string>
+    <string name="no_records">&lt;No Records&gt;</string>
+    <string name="no_matching_records">No matching records found</string>
+    <string name="menu_insert">Add Record</string>
+    <string name="menu_save">Save Record</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_delete">Delete Record</string>
+    <string name="menu_delete_all">Delete All Data</string>
+    <string name="menu_analyze">Analyze Data</string>
+    <string name="menu_locate">Capture Coordinates</string>
+    <string name="menu_barcode">Scan Barcode</string>
+    <string name="menu_cloud_sync">Sync with Cloud</string>
+    <string name="menu_sync_file">Create Sync File</string>
+    <string name="menu_export_all">Export all databases</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_exit">Exit</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="prev">Prev</string>
+    <string name="next">Next</string>
+    <string name="load">Load</string>
+    <string name="set">Set</string>
+    <string name="record_id">Record ID:  </string>
+    <string name="record_preview">Preview:  </string>
+    <string name="conf_level_prompt">Two-sided confidence level</string>
+    <string name="not_in_range" formatted="false">Value is not in the given range.\r\nMinimum Range: %s \r\nMaximum Range: %s</string>
+    <string name="required_field">This is a required field.</string>
+    <string name="set_password">Set password for Epi Info 7 sync file:</string>
+    <string name="confirm">Confirm:</string>
+    <string name="not_match_password">Passwords do not match.</string>
+    <string name="not_match_pattern" formatted="false">Value does not match the given pattern: %s</string>
+    <string name="not_selected">&lt;Not Selected&gt;</string>
+    <string name="complete_req_fields">Please complete all required fields before saving.</string>
+    <string name="admin_password">Administrative Password</string>
+    <string name="available_forms">Available Forms</string>
+    <string name="select_form">Please select an Epi Info form.</string>
+    <string name="select_form_data_collection">Please select an Epi Info form for data collection</string>
+    <string name="select_form_data_analysis">Please select an Epi Info form for data analysis</string>
+    <string name="exit_form">Exit the form without saving?</string>
+    <string name="replace_audio">This will replace the existing audio. Continue?</string>
+    <string name="replace_video">This will replace the existing video. Continue?</string>
+    <string name="barcode_settings">Barcode Settings</string>
+    <string name="select_barcode_field">Select barcode field</string>
+    <string name="gps_settings">GPS Settings</string>
+    <string name="select_lat_field">Select latitude field</string>
+    <string name="select_long_field">Select longitude field</string>
+    <string name="gps_error">Could not receive GPS signals to determine current position. Please ensure that you have unobstructed view of sky and try again.</string>
+    <string name="photo_error">Photograph was not captured. Please try again.</string>
+    <string name="database_error">An error occurred while loading the database.</string>
+    <string name="no_fields">There are no data fields on this form.</string>
+    <string name="record_count" formatted="false">Records (%s)</string>
+    <string name="loading_form">Loading Form</string>
+    <string name="please_wait">Please wait&#8230;</string>
+    <string name="confirm_delete_all">This will delete all data associated with this form. Are you sure?</string>
+    <string name="configure_cloud">Cloud synchronization has not been configured. Configure it now?</string>
+    <string name="cloud_sync_started">Syncing with Cloud. Please check notification area for updates.</string>
+    <string name="cloud_sync_progress" formatted="false">Syncing with Cloud (%s)</string>
+    <string name="cloud_sync_receiving">Receiving&#8230;</string>
+    <string name="cloud_sync_sending">Sending / updating&#8230;</string>
+    <string name="cloud_sync_complete" formatted="false">Sync complete (%s)</string>
+    <string name="cloud_sync_complete_detail">Data was successfully synced with the cloud.</string>
+    <string name="cloud_sync_failed" formatted="false">Sync failed (%s)</string>
+    <string name="cloud_sync_failed_detail">Error syncing with cloud service. Please try again.</string>
+    <string name="sync_file_password">Set Password</string>
+    <string name="sync_file_started">Creating sync file. Please check notification area for updates.</string>
+    <string name="set_default_form">Set this form as default</string>
+    <string name="exit_default_form">Exit default mode</string>
+    <string name="box_signin">Sign in to Box account</string>
+    <string name="box_signout">Logout from Box</string>
+    
+    <string name="statcalc_btn1">Sample Size: Population Survey</string>
+	<string name="statcalc_btn2">Sample Size: Unmatched Case-Control</string>
+	<string name="statcalc_btn3">Sample Size: Cohort / Cross Sectional</string>
+	<string name="statcalc_btn4">2 x 2 Tables</string>
+	<string name="statcalc_btn5">Matched Pair Case Control</string>
+	<string name="statcalc_btn6">Analysis of Linear Trend</string>
+	<string name="statcalc_btn7">Poisson</string>		
+	<string name="statcalc_btn8">Binomial</string>
+	<string name="statcalc_btn9">More calculators at OpenEpi.com</string>
+    
+    <string name="statcalc_pop_srv_desc">Population survey or descriptive study using random (not cluster) sampling</string>
+    <string name="statcalc_unmatched_desc">Unmatched Case-Control Study</string>
+    <string name="statcalc_cohort_desc">Unmatched Cohort / Cross-Sectional Study</string>
+    <string name="statcalc_2x2_desc">Analysis of Single and Stratified Tables</string>
+    <string name="statcalc_matched_desc">Matched Pair Case Control</string>
+    <string name="statcalc_poisson_desc">Poisson Calculator</string>
+    <string name="statcalc_binomial_desc">Binomial Calculator</string>
+    <string name="statcalc_conf_level">Confidence Level</string>
+    <string name="statcalc_sample_size">Sample Size</string>
+    <string name="statcalc_pop_size">Population size:</string>
+    <string name="statcalc_exp_freq">Expected frequency:</string>
+    <string name="statcalc_conf_limits">Confidence limits:</string>
+    <string name="statcalc_cases">Cases</string>
+    <string name="statcalc_controls">Controls</string>
+    <string name="statcalc_exposed">Exposed</string>
+    <string name="statcalc_unexposed">Unexposed</string>
+    <string name="statcalc_disease">Disease</string>
+    <string name="statcalc_exposure">Exposure</string>
+    <string name="statcalc_estimate">Estimate</string>
+    <string name="statcalc_lower">Lower</string>
+    <string name="statcalc_upper">Upper</string>
+    <string name="statcalc_score">Score</string>
+    <string name="statcalc_total">Total</string>
+    <string name="statcalc_two_sided">Two-sided confidence level:</string>
+    <string name="statcalc_power">Power:</string>
+    <string name="statcalc_control_ratio">Ratio of controls to cases:</string>
+    <string name="statcalc_pct_ctrl_exp">Percent of controls exposed:</string>
+    <string name="statcalc_odds_ratio">Odds Ratio:</string>
+    <string name="statcalc_pct_case_exp">Percent of cases with exposure:</string>
+    <string name="statcalc_ratio_exposed">Ratio (Unexposed : Exposed):</string>
+    <string name="statcalc_pct_out_uexp">% outcome in unexposed group:</string>
+    <string name="statcalc_risk_ratio">Risk Ratio:</string>
+    <string name="statcalc_risk_diff">Risk Difference:</string>
+    <string name="statcalc_pct_out_exp">% outcome in exposed group:</string>
+    <string name="statcalc_summary_stat">Summary Statistics</string>
+    <string name="statcalc_odds_prm">Odds Based Parameters</string>
+    <string name="statcalc_risk_prm">Risk Based Parameters</string>
+    <string name="statcalc_stat_tests">Statistical Tests</string>
+    <string name="statcalc_uncorrected">Uncorrected:</string>
+    <string name="statcalc_corrected">Corrected:</string>
+    <string name="statcalc_poisson_prob">Probability that the number of events found is</string>
+    <string name="statcalc_obs_events">Observed # of events:</string>
+    <string name="statcalc_exp_events">Expected # of events:</string>
+    <string name="statcalc_95_conf">95% confidence interval</string>
+    <string name="statcalc_numerator">Numerator:</string>
+    <string name="statcalc_total_obs">Total observations:</string>
+    <string name="statcalc_exp_pct">Expected percentage:</string>
+    
+    <string name="analysis_add_freq">Add Frequency Gadget</string>
+    <string name="analysis_add_means">Add Means Gadget</string>
+    <string name="analysis_add_2x2">Add 2x2 Gadget</string>
+    <string name="analysis_add_map">Add Map Gadget</string>
+    <string name="analysis_add_chart_pie">Add Pie Chart</string>
+    <string name="analysis_view_list">View Line List</string>
+    <string name="analysis_freq">Frequency</string>
+    <string name="analysis_field">Field:</string>
+    <string name="analysis_select">&lt;Select&gt;</string>
+    <string name="analysis_obs">Observations:</string>
+    <string name="analysis_total">Total:</string>
+    <string name="analysis_mean">Mean:</string>
+    <string name="analysis_var">Variance:</string>
+    <string name="analysis_std">Std. Deviation:</string>
+    <string name="analysis_min">Minimum:</string>
+    <string name="analysis_med">Median:</string>
+    <string name="analysis_max">Maximum:</string>
+    <string name="analysis_outcome">Outcome</string>
+    <string name="analysis_lat">Latitude Field:</string>
+    <string name="analysis_long">Longitude Field:</string>
+    <string name="analysis_no_sheets">Please download a spreadsheet viewer app such as Google Sheets to view the line list.</string>
+    
+    <string name="form_layout">Form Layout</string>
+    <string name="form_layout_ei7">Form elements are positioned and sized consistent with their Epi Info 7 Form Designer counterparts.</string>
+    <string name="form_layout_ei7_title">Same as Epi Info 7</string>
+    <string name="form_layout_stacked">Form elements are stacked vertically according to their Tab Orders.</string>
+    <string name="form_layout_stacked_title">Stacked vertically</string>
+    <string name="form_layout_interview">Form elements are presented as questions one at a time.</string>
+    <string name="form_layout_interview_title">Interview mode</string>
+
+    <string name="sftp_url">Secure FTP URL</string>
+    <string name="cloud_user_name">User Name</string>
+    <string name="cloud_pwd">Password</string>
+    <string name="cloud_sync">Cloud Synchronization</string>
+    <string name="cloud_service_title">Cloud service</string>
+    <string name="cloud_service_desc">Select the cloud service that you would like to use.</string>
+    <!--<string name="cloud_sync_srv_name_title">Azure mobile service</string>-->
+    <string name="cloud_sync_srv_name_title">Azure Mobile App</string>
+    <!--<string name="cloud_sync_srv_name">Provide the Windows Azure mobile service name to use for data synchronization.</string>-->
+    <string name="cloud_sync_srv_name">Provide the Microsoft Azure Mobile App name to use for data synchronization.</string>
+    <!--<string name="cloud_sync_srv_name_dialog_title">Mobile Service Name</string>-->
+    <string name="cloud_sync_srv_name_dialog_title">Mobile App Name</string>
+    <!--<string name="cloud_sync_srv_name_dialog">Provide the service name</string>-->
+    <string name="cloud_sync_srv_name_dialog">Provide the service name</string>
+    <!--<string name="cloud_sync_app_key_title">Azure application key</string>-->
+    <string name="cloud_sync_app_key_title">Authorization token</string>
+    <!--<string name="cloud_sync_app_key">Provide the Windows Azure application key to use for data synchronization.</string>-->
+    <string name="cloud_sync_app_key">Provide the authorization token to use for data synchronization.</string>
+    <!--<string name="cloud_sync_app_key_dialog_title">Application Key</string>-->
+    <string name="cloud_sync_app_key_dialog_title">Authorization Token</string>
+    <!--<string name="cloud_sync_app_key_dialog">Provide the key (case sensitive)</string>-->
+    <string name="cloud_sync_app_key_dialog">Provide the token (case sensitive)</string>
+    <string name="cloud_sync_up_only">Data is only uploaded to the cloud. This user will not see other users\' data.</string>
+    <string name="cloud_sync_up_only_title">Upload data to cloud only</string>
+    <string name="cloud_sync_down_only">Data is only downloaded from the cloud. This user\'s data will not be sent.</string>
+    <string name="cloud_sync_down_only_title">Download data from cloud only</string>
+    <string name="cloud_sync_up_down">Data is uploaded to the cloud and other users\' data is downloaded from the cloud. WARNING: This user may inadvertently update other users\' data.</string>
+    <string name="cloud_sync_up_down_title">Upload and download data</string>
+    <string name="cloud_sync_save">Initiate cloud sync for a record when it is saved.</string>
+    <string name="cloud_sync_save_title">Sync on Save</string>
+    <string name="cloud_sync_del">Allow local record deletions to propagate to the cloud.</string>
+    <string name="cloud_sync_del_title">Cloud data deletion</string>
+    <string name="azure_classic">Use Microsoft Azure classic services</string>
+    <string name="samples_title">Samples</string>
+    <string name="samples">Sample forms</string>
+    <string name="record_list">Record List</string>
+    <string name="reverse_order_title">Reverse Order</string>
+    <string name="reverse_order">Display records in reverse order</string>
+    <string name="security">Security</string>
+    <string name="admin_pwd">Lock your application settings using an administrative password.</string>
+    <string name="admin_pwd_title">Admin password</string>
+    <string name="identification">Identification</string>
+    <string name="device_id">Provide a unique ID for this device (used for sync file names).</string>
+    <string name="device_id_title">Device ID</string>
+    <string name="sync_file_pref">Sync Files</string>
+    <string name="windows_decimal_symbol">Windows decimal symbol</string> 
+    <string name="windows_decimal_symbol_desc">The representation of decimal points in Microsoft Windows. WARNING: This setting affects the way numeric data is imported into Epi Info 7.</string>
+    <string name="windows_decimal_symbol_dialog_title">Windows decimal symbol</string>
+    <string name="windows_decimal_symbol_dialog">Please specify the symbol that Windows is using to represent decimal points</string>
+    <string name="sync_file_page_size">Sync file size</string> 
+    <string name="sync_file_page_size_desc">The maximum number of records each sync file should contain.</string>
+    <string name="sync_file_page_size_dialog_title">Sync file size</string>
+    <string name="sync_file_page_size_dialog">Please specify the number of records</string>
+    <string name="img_collect">Collect Data</string>
+    <string name="img_analyze">Analyze Data</string>
+    <string name="img_touch_opt">Touch the "Options Menu" to begin</string>
+    <string name="img_sample_size">Sample Size</string>
+    <string name="img_pop_surv">Population Survey</string>
+    <string name="img_chi_sq">Analysis of Linear Trend</string>
+    <string name="img_open_epi">More calculators at OpenEpi.com</string>
+    <string name="fab_alt_text">Add data</string>
+    <string name="build_number">Build number</string>
+    <string name="version_name">1.2.5</string>
+    
+    <string-array name="yn_array">
+        <item>&lt;Not Selected&gt;</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="cloud_services">
+        <item>Box</item>
+        <item>Secure FTP</item>
+        <item>Microsoft Azure</item>
+    </string-array>
+    <string-array name="cloud_service_codes">
+        <item>Box</item>
+        <item>SFTP</item>
+        <item>Microsoft Azure</item>
+    </string-array>
+    <string-array name="confidence_levels">
+        <item>80%</item>
+        <item>90%</item>
+        <item>95%</item>
+        <item>97%</item>
+        <item>99%</item>
+        <item>99.9%</item>
+        <item>99.99%</item>
+    </string-array>
+
+    <declare-styleable name="VerticalLabelView">
+        <attr name="text" format="string" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

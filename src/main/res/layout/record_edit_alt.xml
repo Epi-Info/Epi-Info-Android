@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/EditorScroller"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#FFCBD1DF">
+	<LinearLayout
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+		<LinearLayout
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="10dp"
+		    android:background="@drawable/editor_rectangle">
+			<LinearLayout
+				android:id="@+id/EditorLayout"
+				android:orientation="vertical"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="5dp"
+				android:background="#ffffffff"  />
+		</LinearLayout>
+		<View android:layout_width="fill_parent" android:layout_height="10dp" />
+	</LinearLayout>
+</ScrollView>

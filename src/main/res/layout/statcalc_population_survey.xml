@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_pop_srv_desc"
+    android:textStyle="bold"
+    android:textSize="20dip"
+    android:padding="10dip"
+    android:gravity="center"
+    />
+<View android:layout_width="fill_parent" android:layout_height="2dip" android:background="#a2b9d7"/>
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TableLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="250dip"
+    android:layout_gravity="center">
+<!-- <View android:layout_width="50dip" android:layout_height="2dip" android:background="#a2b9d7"/> -->
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="@string/statcalc_conf_level"
+            android:gravity="center"
+            android:textColor="#42638c"
+            android:textSize="20dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingBottom="5dip"
+            />
+        <TextView
+        	android:layout_column="2"
+            android:text="@string/statcalc_sample_size"
+            android:gravity="center"
+            android:textColor="#42638c"
+            android:textSize="20dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingBottom="5dip"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="80%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt80"
+        	android:layout_column="2"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="90%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt90"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="95%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt95"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="97%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt97"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="99%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt99"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="99.9%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt999"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="1"
+            android:text="99.99%"
+            android:textSize="12dip"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/txt9999"
+            android:text="..."
+            android:textSize="16dip"
+		    android:textStyle="bold"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+</TableLayout>    
+<TableLayout
+	android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+	android:padding="3dip">
+    <TableRow>
+<TextView  
+    android:layout_width="200dip"
+    android:layout_height="wrap_content"
+    android:text="@string/statcalc_pop_size"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:paddingRight="5dip"
+    android:paddingBottom="5dip"
+    android:layout_column="1"
+    />
+<EditText  
+	android:id="@+id/txtPopSiz"
+    android:layout_width="120dip" 
+    android:layout_height="wrap_content"
+    android:layout_column="2" 
+    android:text="999999"
+    android:textSize="16dip"
+    android:imeOptions="actionDone"
+    android:numeric="integer"
+    />
+</TableRow>
+<TableRow>
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_exp_freq"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:paddingRight="5dip"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip"
+    android:layout_column="1"
+    />
+<TextView  
+	android:id="@+id/lblExpFreq"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="50%"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:layout_column="2"
+    android:gravity="right"
+    />
+</TableRow>
+<TableRow>
+<SeekBar 
+	android:id="@+id/skbExpFreq"
+	android:layout_width="fill_parent"
+	android:layout_height="37dip"	
+	android:max="10000"
+	android:progress="5000"
+	android:layout_span="3"
+	/>
+</TableRow>
+<TableRow>
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="@string/statcalc_conf_limits"
+    android:textColor="#42638c"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:paddingRight="5dip"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip"
+    android:layout_column="1"
+    />
+<TextView  
+	android:id="@+id/lblWorst"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="5%"
+    android:textStyle="bold"
+    android:textSize="16dip"
+    android:layout_column="2"
+    android:gravity="right"
+    />
+</TableRow>
+<TableRow>
+<SeekBar 
+	android:id="@+id/skbWorst"
+	android:layout_width="fill_parent"
+	android:layout_height="37dip"	
+	android:max="5000"
+	android:progress="500"
+	android:layout_span="3"
+	/>
+</TableRow>
+</TableLayout>
+</LinearLayout>
+</ScrollView>
+</LinearLayout>
