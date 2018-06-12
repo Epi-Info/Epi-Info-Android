@@ -1,14 +1,9 @@
 package gov.cdc.epiinfo.analysis;
 
-import gov.cdc.epiinfo.AppManager;
-import gov.cdc.epiinfo.DeviceManager;
-import gov.cdc.epiinfo.EpiDbHelper;
-import gov.cdc.epiinfo.FormMetadata;
-import gov.cdc.epiinfo.R;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,8 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import gov.cdc.epiinfo.AppManager;
+import gov.cdc.epiinfo.DeviceManager;
+import gov.cdc.epiinfo.EpiDbHelper;
+import gov.cdc.epiinfo.FormMetadata;
+import gov.cdc.epiinfo.R;
 
-public class AnalysisMain extends ActionBarActivity {
+
+public class AnalysisMain extends AppCompatActivity {
 
 	private EpiDbHelper dbHelper;
 	private Bundle state;
@@ -127,7 +128,7 @@ public class AnalysisMain extends ActionBarActivity {
 	
 	private void GoToBottom()
 	{
-		final ScrollView scroller = (ScrollView) findViewById(R.id.analysis_scroller);
+		final ScrollView scroller = findViewById(R.id.analysis_scroller);
 		scroller.setBackgroundColor(0xFFCBD1DF);
     	scroller.post(new Runnable() {
     	    @Override
@@ -139,13 +140,13 @@ public class AnalysisMain extends ActionBarActivity {
 	
 	private void PrepareCanvas()
 	{
-		LinearLayout layout = (LinearLayout) findViewById(R.id.analysis_layout);
+		LinearLayout layout = findViewById(R.id.analysis_layout);
 		layout.setVisibility(View.VISIBLE);
 		
-		LinearLayout logo = (LinearLayout) findViewById(R.id.analysis_logo);
+		LinearLayout logo = findViewById(R.id.analysis_logo);
 		logo.setVisibility(View.GONE);
 		
-		ScrollView scroller = (ScrollView) findViewById(R.id.analysis_scroller);
+		ScrollView scroller = findViewById(R.id.analysis_scroller);
 		scroller.setBackgroundColor(0xFFCBD1DF);
 	}
 	
@@ -153,7 +154,7 @@ public class AnalysisMain extends ActionBarActivity {
 	{
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
-		LinearLayout layout = (LinearLayout) findViewById(R.id.analysis_layout);
+		LinearLayout layout = findViewById(R.id.analysis_layout);
 		MapViewer gadget = new MapViewer(this, view, dbHelper, state, (ScrollView) findViewById(R.id.analysis_scroller));
 		gadget.setLayoutParams(params);
 		layout.addView(gadget);
@@ -163,7 +164,7 @@ public class AnalysisMain extends ActionBarActivity {
 	{
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
-		LinearLayout layout = (LinearLayout) findViewById(R.id.analysis_layout);
+		LinearLayout layout = findViewById(R.id.analysis_layout);
 		MeansView gadget = new MeansView(this, view, dbHelper);
 		gadget.setLayoutParams(params);
 		layout.addView(gadget);
@@ -173,7 +174,7 @@ public class AnalysisMain extends ActionBarActivity {
 	{
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
-		LinearLayout layout = (LinearLayout) findViewById(R.id.analysis_layout);
+		LinearLayout layout = findViewById(R.id.analysis_layout);
 		TwoByTwoView gadget = new TwoByTwoView(this, view, dbHelper);
 		gadget.setLayoutParams(params);
 		layout.addView(gadget);
@@ -183,7 +184,7 @@ public class AnalysisMain extends ActionBarActivity {
 	{
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
-		LinearLayout layout = (LinearLayout) findViewById(R.id.analysis_layout);
+		LinearLayout layout = findViewById(R.id.analysis_layout);
 		FrequencyView gadget = new FrequencyView(this, view, dbHelper);
 		gadget.setLayoutParams(params);
 		layout.addView(gadget);
@@ -193,7 +194,7 @@ public class AnalysisMain extends ActionBarActivity {
 	{
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
-		LinearLayout layout = (LinearLayout) findViewById(R.id.analysis_layout);
+		LinearLayout layout = findViewById(R.id.analysis_layout);
 		PieChartView gadget = new PieChartView(this, view, dbHelper);
 		gadget.setLayoutParams(params);
 		layout.addView(gadget);
@@ -223,10 +224,10 @@ public class AnalysisMain extends ActionBarActivity {
 
         }
         
-        ScrollView scroller = (ScrollView) findViewById(R.id.analysis_scroller);
+        ScrollView scroller = findViewById(R.id.analysis_scroller);
 		scroller.setBackgroundColor(0xFFFFFFFF);
 		
-		LinearLayout logo = (LinearLayout) findViewById(R.id.analysis_logo);
+		LinearLayout logo = findViewById(R.id.analysis_logo);
 		logo.setBackgroundColor(0xFFFFFFFF);
         
 	}

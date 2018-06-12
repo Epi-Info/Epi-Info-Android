@@ -28,14 +28,16 @@ public class Field {
 	private boolean isRequired;
 	private boolean isReadOnly;
 	private boolean shouldRepeatLast;
+	private boolean shouldReturnToParent;
 	private int maxLength;
 	private double lower;
 	private double upper;
 	private Date lowerDate;
 	private Date upperDate;
 	private String[] list;
+	private int likertAnswerIndex;
 
-	public Field(String fieldName, String prompt, String fieldType, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, double fieldFontSize, String fieldFontStyle, double promptFontSize, int position, boolean isRequired, boolean isReadOnly, boolean shouldRepeatLast, int maxLength, double lower, double upper, Date lowerDate, Date upperDate, String pattern, String[] list, int pageId, String pageName)
+	public Field(String fieldName, String prompt, String fieldType, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, double fieldFontSize, String fieldFontStyle, double promptFontSize, int position, boolean isRequired, boolean isReadOnly, boolean shouldRepeatLast, boolean shouldReturnToParent, int maxLength, double lower, double upper, Date lowerDate, Date upperDate, String pattern, String[] list, int pageId, String pageName)
 	{
 		this.fieldName = fieldName;
 		this.fieldType = fieldType;
@@ -55,6 +57,7 @@ public class Field {
 		this.isRequired = isRequired;
 		this.isReadOnly = isReadOnly;
 		this.shouldRepeatLast = shouldRepeatLast;
+		this.shouldReturnToParent = shouldReturnToParent;
 		this.maxLength = maxLength;
 		this.lower = lower;
 		this.upper = upper;
@@ -198,6 +201,8 @@ public class Field {
 	{
 		return shouldRepeatLast;
 	}
+
+	public boolean getShouldReturnToParent() { return shouldReturnToParent; }
 	
 	public int getMaxLength()
 	{
@@ -232,6 +237,16 @@ public class Field {
 	public int getPageId()
 	{
 		return pageId;
+	}
+
+	public int getLikertAnswerIndex()
+	{
+		return this.likertAnswerIndex;
+	}
+
+	public void setLikertAnswerIndex( int answer )
+	{
+		this.likertAnswerIndex = answer;
 	}
 	
 }

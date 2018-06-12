@@ -40,8 +40,8 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 	private String photoFolderId;
 	private String mediaFolderId;
 
-	private static final String clientId = "d9jt9s9qdpym638crx6fryftomyw1myd";
-	private static final String clientSecret = "sQsk8NlXuurrYX4A4RiYm2t4ZQD5wHwF";
+	private static final String clientId = "ekdhizskyvh5k6jro280rr4cc7m80bvh";
+	private static final String clientSecret = "a6cL20YpdqLQCov47OI3htHWgZ7PD2Q7";
 
 	public static boolean isAuthenticated(Context context)
 	{
@@ -116,7 +116,7 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 
 	private void getTableFolderStructure()
 	{
-		String rootFolder = createFolder("0", "__EpiInfoEntomology");
+		String rootFolder = createFolder("0", "__EpiInfo");
 		tableFolderId = createFolder(rootFolder, tableName);
 	}
 
@@ -186,7 +186,7 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 				BoxIteratorItems photoFolderItems = folderApi.getItemsRequest(photoFolderId).send();
 				for (int x=0; x<photoFolderItems.size(); x++)
 				{
-					File f = new File("/sdcard/Download/EpiInfoEntomology/Images/" + photoFolderItems.get(x).getName());
+					File f = new File("/sdcard/Download/EpiInfo/Images/" + photoFolderItems.get(x).getName());
 					f.createNewFile();
 					fileApi.getDownloadRequest(f, photoFolderItems.get(x).getId()).send();
 				}
@@ -198,7 +198,7 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 				BoxIteratorItems mediaFolderItems = folderApi.getItemsRequest(mediaFolderId).send();
 				for (int x=0; x<mediaFolderItems.size(); x++)
 				{
-					File f = new File("/sdcard/Download/EpiInfoEntomology/Media/" + mediaFolderItems.get(x).getName());
+					File f = new File("/sdcard/Download/EpiInfo/Media/" + mediaFolderItems.get(x).getName());
 					f.createNewFile();
 					fileApi.getDownloadRequest(f, mediaFolderItems.get(x).getId()).send();
 				}
@@ -287,11 +287,11 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 					{
 						jsonObject.put(key, value.toString());
 					}
-					if (value.toString().contains("/EpiInfoEntomology/Images/"))
+					if (value.toString().contains("/EpiInfo/Images/"))
 					{
 						images.add(value.toString());
 					}
-					if (value.toString().contains("/EpiInfoEntomology/Media/"))
+					if (value.toString().contains("/EpiInfo/Media/"))
 					{
 						media.add(value.toString());
 					}

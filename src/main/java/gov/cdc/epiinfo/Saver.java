@@ -10,7 +10,7 @@ public class Saver {
 		ContentValues initialValues = new ContentValues();
 		for (int x=0;x<formMetadata.DataFields.size();x++)
 		{
-			if (formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("18"))
+			if (formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("18") || formMetadata.DataFields.get(x).getType().equals("98"))
 			{
 				initialValues.put(formMetadata.DataFields.get(x).getName(), extras.getInt(formMetadata.DataFields.get(x).getName()));
 			}

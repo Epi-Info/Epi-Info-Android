@@ -2,7 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 
     dexOptions {
         javaMaxHeapSize "4g"
@@ -33,15 +38,19 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:multidex:1.0.0'
-    compile 'com.google.android.gms:play-services:11.0.4'
-    compile 'net.schmizz:sshj:0.10.0'
-    compile 'com.androidplot:androidplot-core:1.5.1'
-    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    compile 'com.box:box-android-sdk:4.0.10'
-    compile 'com.google.maps.android:android-maps-utils:0.5'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:26.0.0-alpha1'
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.android.support:support-v4:26.+'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-identity:15.0.1'
+    implementation 'com.hierynomus:sshj:0.23.0'
+    implementation 'com.androidplot:androidplot-core:1.5.1'
+    implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    implementation 'com.box:box-android-sdk:4.0.11'
+    implementation 'com.github.gcacace:signature-pad:1.2.1'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
 }

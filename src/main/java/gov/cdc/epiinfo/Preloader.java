@@ -138,6 +138,17 @@ public class Preloader {
 												{
 													initialValues.put(strHeader, listIndex);
 												}
+												else
+												{
+													try
+													{
+														initialValues.put(strHeader,Integer.parseInt(dataRow[i]));
+													}
+													catch (Exception ex)
+													{
+
+													}
+												}
 											}
 											else if (formMetadata.GetFieldType(strHeader) == 19)
 											{

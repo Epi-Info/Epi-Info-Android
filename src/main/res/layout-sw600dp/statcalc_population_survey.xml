@@ -18,11 +18,18 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+	android:gravity="center_horizontal"
     >
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		>
 <TableLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="450dip"
-    android:gravity="center">
+    android:layout_width="match_parent"
+    android:layout_height="460dip"
+    android:gravity="center_horizontal">
     <TableRow>
         <TextView
             android:layout_column="1"
@@ -151,7 +158,8 @@
             android:gravity="center"
             android:padding="15dip" />
     </TableRow>
-</TableLayout>    
+</TableLayout>
+	</LinearLayout>
 <TableLayout
 	android:layout_width="wrap_content"
     android:layout_height="fill_parent"

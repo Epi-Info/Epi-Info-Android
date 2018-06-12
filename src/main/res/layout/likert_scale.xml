@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/likertScale"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+    <gov.cdc.epiinfo.etc.CustomTextView
+        android:id="@+id/answerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:textAlignment="center"
+        android:textColor="#ff3156b2"
+        android:textSize="20sp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="2dp"
+            android:background="#ff000000"
+            android:layout_gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+
+            <View
+                android:id="@+id/space1"
+                android:layout_width="10dp"
+                android:layout_height="40dp"/>
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+
+            <View
+                android:id="@+id/space2"
+                android:layout_width="10dp"
+                android:layout_height="40dp"/>
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+
+            <View
+                android:id="@+id/space3"
+                android:layout_width="10dp"
+                android:layout_height="40dp"/>
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+
+            <View
+                android:id="@+id/space4"
+                android:layout_width="10dp"
+                android:layout_height="40dp"/>
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+
+            <View
+                android:id="@+id/space5"
+                android:layout_width="10dp"
+                android:layout_height="40dp"/>
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+
+            <View
+                android:id="@+id/space6"
+                android:layout_width="10dp"
+                android:layout_height="40dp"/>
+
+            <gov.cdc.epiinfo.etc.CustomView
+                android:id="@+id/circle7"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+
+        <TextView
+            android:id="@+id/leftTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:textAlignment="textStart"/>
+
+        <TextView
+            android:id="@+id/rightTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:textAlignment="textEnd"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <gov.cdc.epiinfo.etc.CustomCheckBox
+            android:id="@+id/dontKnow"
+            android:text="Don't Know"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:textColor="?android:attr/textColorTertiary"/>
+
+        <gov.cdc.epiinfo.etc.CustomCheckBox
+            android:id="@+id/refused"
+            android:text="Refused"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:textColor="?android:attr/textColorTertiary"/>
+    </LinearLayout>
+
+
+</LinearLayout>

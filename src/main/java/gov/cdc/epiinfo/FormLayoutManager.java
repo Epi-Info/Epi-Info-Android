@@ -1,20 +1,5 @@
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.etc.AudioProcessor;
-import gov.cdc.epiinfo.etc.DateButton;
-import gov.cdc.epiinfo.interpreter.EnterRule;
-import gov.cdc.epiinfo.interpreter.Rule_Context;
-
-import java.io.File;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.UUID;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -62,7 +47,21 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.UUID;
+import java.util.regex.Pattern;
+
+import gov.cdc.epiinfo.etc.AudioProcessor;
+import gov.cdc.epiinfo.etc.DateButton;
+import gov.cdc.epiinfo.interpreter.EnterRule;
+import gov.cdc.epiinfo.interpreter.Rule_Context;
 
 
 public class FormLayoutManager {
@@ -192,7 +191,7 @@ public class FormLayoutManager {
 			}
 			else if (field.getType().equals("20"))
 			{
-				field.setId(AddRelateField(layout, field.getPrompt(), field.getX(), field.getY(), field.getFieldWidth(), field.getFieldHeight(), field.getFieldFontSize(), field.getPagePosition(), checkCode + System.getProperty("line.separator")));
+				field.setId(AddRelateField(layout, field.getPrompt(), field.getX(), field.getY(), field.getFieldWidth(), field.getFieldHeight(), field.getFieldFontSize(), field.getPagePosition(), field.getShouldReturnToParent(), checkCode + System.getProperty("line.separator")));
 			}
 			else if (field.getType().equals("3"))
 			{
@@ -415,9 +414,10 @@ public class FormLayoutManager {
 		else
 		{
 			params2 = new RelativeLayout.LayoutParams((int)Math.round(formWidth * fieldWidth * 0.98), LayoutParams.WRAP_CONTENT);
+			params2.leftMargin = (int)Math.round(formWidth * x);
+			params2.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
 		}
-		params2.leftMargin = (int)Math.round(formWidth * x);
-		params2.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
+
 		tv.setLayoutParams(params2);
 
 		if (!this.useAbsolutePos)
@@ -1676,8 +1676,10 @@ public class FormLayoutManager {
 		layout2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		params.leftMargin = (int)Math.round(formWidth * x);
-		params.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
+		if (useAbsolutePos) {
+			params.leftMargin = (int) Math.round(formWidth * x);
+			params.topMargin = (int) Math.round(formHeight * y + (pagePosition * formHeight));
+		}
 		layout1.setOrientation(LinearLayout.VERTICAL);
 
 		layout1.setLayoutParams(params);		
@@ -2021,7 +2023,7 @@ public class FormLayoutManager {
 		return fieldCounter;
 	}
 
-	public int AddRelateField(ViewGroup myLayout, String text, double x, double y, double fieldWidth, double fieldHeight, double fontSize, int pagePosition, String checkCodeClick)
+	public int AddRelateField(ViewGroup myLayout, String text, double x, double y, double fieldWidth, double fieldHeight, double fontSize, int pagePosition, final boolean shouldReturnToParent, String checkCodeClick)
 	{
 		fieldCounter++;
 		Button btn = new Button(container);
@@ -2066,6 +2068,7 @@ public class FormLayoutManager {
 				Intent recordList = new Intent(container, RecordList.class);
 				recordList.putExtra("ViewName", "_" + relateFieldName);
 				recordList.putExtra("FKEY", AppManager.GetFormGuid(container));
+				recordList.putExtra("ShouldReturnToParent", shouldReturnToParent);
 				container.startActivity(recordList);
 			}
 		});

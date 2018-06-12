@@ -16,54 +16,33 @@
 
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.analysis.AnalysisMain;
-import gov.cdc.epiinfo.cloud.BoxClient;
-import gov.cdc.epiinfo.etc.CustomListAdapter;
-import gov.cdc.epiinfo.etc.ImageProcessor;
-import gov.cdc.epiinfo.interpreter.CheckCodeEngine;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.Calendar;
-import java.util.Hashtable;
-import java.util.UUID;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Outline;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
@@ -72,8 +51,24 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
-public class RecordList extends ActionBarActivity {
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Calendar;
+import java.util.Hashtable;
+import java.util.UUID;
+
+import gov.cdc.epiinfo.analysis.AnalysisMain;
+import gov.cdc.epiinfo.cloud.BoxClient;
+import gov.cdc.epiinfo.etc.CustomListAdapter;
+import gov.cdc.epiinfo.etc.ImageProcessor;
+import gov.cdc.epiinfo.interpreter.CheckCodeEngine;
+
+
+public class RecordList extends AppCompatActivity {
 	private static final int ACTIVITY_CREATE=0;
 	private static final int ACTIVITY_EDIT=1;
 
@@ -102,6 +97,7 @@ public class RecordList extends ActionBarActivity {
 	private FormMetadata formMetadata;
 	private String newGuid;
 	private String fkeyGuid;
+	private boolean shouldReturnToParent;
 	private Bitmap logo;
 	private MenuItem mnuSetDefault;
 	private MenuItem mnuExitDefault;
@@ -154,6 +150,10 @@ public class RecordList extends ActionBarActivity {
 				if (extras.containsKey("FKEY"))
 				{
 					fkeyGuid = extras.getString("FKEY");
+				}
+				if (extras.containsKey("ShouldReturnToParent"))
+				{
+					shouldReturnToParent = extras.getBoolean("ShouldReturnToParent");
 				}
 				formMetadata = new FormMetadata("EpiInfo/Questionnaires/"+ viewName +".xml", this);
 				AppManager.AddFormMetadata(viewName, formMetadata);
@@ -294,6 +294,24 @@ public class RecordList extends ActionBarActivity {
 		CustomListAdapter notes = new CustomListAdapter(this, R.layout.line_list_row, mNotesCursor, from, to);
 		lineListFragment.setListAdapter(notes);
 		this.setTitle(viewName.replace("_", "").toUpperCase() + " - " + String.format(getString(R.string.record_count), mNotesCursor.getCount()));
+
+		try {
+			if (shouldReturnToParent) {
+				View addButton = findViewById(R.id.add_button);
+				if (mNotesCursor.getCount() > 0) {
+					addButton.setVisibility(View.GONE);
+				}
+				else
+				{
+					addButton.setVisibility(View.VISIBLE);
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+
+		}
+
 	}
 
 	private String BuildQuery(String searchTerm)
@@ -782,11 +800,11 @@ public class RecordList extends ActionBarActivity {
 		i.putExtra(EpiDbHelper.GUID, c.getString(c.getColumnIndexOrThrow(EpiDbHelper.GUID)));
 		for (int x=0;x<formMetadata.DataFields.size();x++)
 		{
-			if (formMetadata.DataFields.get(x).getType().equals("10") || formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("18"))
+			if (formMetadata.DataFields.get(x).getType().equals("10") || formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("98") || formMetadata.DataFields.get(x).getType().equals("18"))
 			{
 				String fieldName = formMetadata.DataFields.get(x).getName();
 				int columnIndex = c.getColumnIndexOrThrow(fieldName);
-				if (c.isNull(columnIndex) && formMetadata.DataFields.get(x).getType().equals("12"))
+				if (c.isNull(columnIndex) && (formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("98")))
 				{
 					i.putExtra(fieldName, -1);
 				}

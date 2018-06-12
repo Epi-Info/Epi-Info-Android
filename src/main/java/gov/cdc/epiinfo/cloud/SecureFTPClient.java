@@ -27,7 +27,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class SecureFTPClient implements ICloudClient {
 		private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
 		@Override
-		public OutputStream getOutputStream() throws IOException {
+		public OutputStream getOutputStream() {
 			// TODO Auto-generated method stub
 			return outputStream;
 		}
@@ -64,7 +66,7 @@ public class SecureFTPClient implements ICloudClient {
 		}
 
 		@Override
-		public InputStream getInputStream() throws IOException {
+		public InputStream getInputStream() {
 
 			return inputStream;
 		}
@@ -94,6 +96,44 @@ public class SecureFTPClient implements ICloudClient {
 		password = sharedPref.getString("cloud_pwd", "");
 	}
 
+	private ArrayList<FtpItem> sort(List<RemoteResourceInfo> files)
+	{
+		ArrayList<FtpItem> ftpItems = new ArrayList<FtpItem>();
+		for (int x=0; x<files.size(); x++)
+		{
+			ftpItems.add(new FtpItem(files.get(x).getName(), files.get(x).getAttributes().getMtime()));
+		}
+		Collections.sort(ftpItems);
+
+		return ftpItems;
+	}
+
+	private class FtpItem implements Comparable<FtpItem> {
+		private String name;
+		private Long updateDate;
+
+		public FtpItem(String name, long updateDate) {
+			this.name = name;
+			this.updateDate = updateDate;
+		}
+
+		public String getName()
+		{
+			return name;
+		}
+
+		public Long getUpdateDate()
+		{
+			return updateDate;
+		}
+
+		@Override
+		public int compareTo(FtpItem comparestu) {
+			return -1 * this.updateDate.compareTo(comparestu.getUpdateDate());
+		}
+
+	}
+
 	@Override
 	public JSONArray getData(boolean downloadImages, boolean downloadMedia, EpiDbHelper dbHelper) {
 
@@ -105,49 +145,9 @@ public class SecureFTPClient implements ICloudClient {
 			try {
 				final SFTPClient sftp = ssh.newSFTPClient();
 
-				if (downloadImages)
-				{
-					try
-					{
-						String photoPath = "/__EpiInfoPhotos/" + tableName;
-						List<RemoteResourceInfo> files = sftp.ls(photoPath);
-						for (int x=0; x<files.size(); x++)
-						{
-							String fileName = "/sdcard/Download/EpiInfo/Images/" + files.get(x).getName();
-							new File(fileName).createNewFile();
-							sftp.get(photoPath + "/" + files.get(x).getName(), fileName);
-						}
-					}
-					catch (Exception ex)
-					{
-						int x = 5;
-						x++;
-					}
-				}
-				
-				if (downloadMedia)
-				{
-					try
-					{
-						String mediaPath = "/__EpiInfoMedia/" + tableName;
-						List<RemoteResourceInfo> files = sftp.ls(mediaPath);
-						for (int x=0; x<files.size(); x++)
-						{
-							String fileName = "/sdcard/Download/EpiInfo/Media/" + files.get(x).getName();
-							new File(fileName).createNewFile();
-							sftp.get(mediaPath + "/" + files.get(x).getName(), fileName);
-						}
-					}
-					catch (Exception ex)
-					{
-						int x = 5;
-						x++;
-					}
-				}
-
-
 				String jsonPath = "/__EpiInfo/" + tableName;
-				List<RemoteResourceInfo> files = sftp.ls(jsonPath);
+				ArrayList<FtpItem> files = sort(sftp.ls(jsonPath));
+				//List<RemoteResourceInfo> files = sftp.ls(jsonPath);
 				try {
 					for (int x = 0; x < files.size(); x++)
 					{
@@ -160,6 +160,9 @@ public class SecureFTPClient implements ICloudClient {
 						String fileName = files.get(x).getName();
 						sftp.get(jsonPath + "/" + fileName, output);
 						String data = new String(((ByteArrayOutputStream)output.getOutputStream()).toByteArray());
+
+						dbHelper.SaveRecievedData(new JSONObject(data));
+
 						builder.append(data);
 
 						if (x==files.size()-1)
@@ -173,6 +176,47 @@ public class SecureFTPClient implements ICloudClient {
 
 
 					}
+
+					if (downloadImages)
+					{
+						try
+						{
+							String photoPath = "/__EpiInfoPhotos/" + tableName;
+							List<RemoteResourceInfo> imagefiles = sftp.ls(photoPath);
+							for (int x=0; x<imagefiles.size(); x++)
+							{
+								String fileName = "/sdcard/Download/EpiInfo/Images/" + imagefiles.get(x).getName();
+								new File(fileName).createNewFile();
+								sftp.get(photoPath + "/" + imagefiles.get(x).getName(), fileName);
+							}
+						}
+						catch (Exception ex)
+						{
+							int x = 5;
+							x++;
+						}
+					}
+
+					if (downloadMedia)
+					{
+						try
+						{
+							String mediaPath = "/__EpiInfoMedia/" + tableName;
+							List<RemoteResourceInfo> mediafiles = sftp.ls(mediaPath);
+							for (int x=0; x<mediafiles.size(); x++)
+							{
+								String fileName = "/sdcard/Download/EpiInfo/Media/" + mediafiles.get(x).getName();
+								new File(fileName).createNewFile();
+								sftp.get(mediaPath + "/" + mediafiles.get(x).getName(), fileName);
+							}
+						}
+						catch (Exception ex)
+						{
+							int x = 5;
+							x++;
+						}
+					}
+
 				} finally {
 					sftp.close();
 				}
@@ -183,6 +227,8 @@ public class SecureFTPClient implements ICloudClient {
 		}
 		catch (Exception ex)
 		{
+			int w=5;
+			w++;
 			return null;
 		}
 

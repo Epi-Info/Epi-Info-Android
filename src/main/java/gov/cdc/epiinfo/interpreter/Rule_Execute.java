@@ -22,11 +22,35 @@ public class Rule_Execute extends EnterRule
     @Override
     public Object Execute()
     {
-    	if (this.ExecutionItem.contains(".pdf"))
+        if (this.ExecutionItem.toLowerCase().startsWith("sign") && this.ExecutionItem.contains(","))
+        {
+            try {
+                String[] parts = this.ExecutionItem.split(",");
+                this.Context.CheckCodeInterface.CaptureHandwriting(parts[1],parts[2],parts[3]);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        else if (this.ExecutionItem.toLowerCase().equals("save"))
+        {
+            try {
+                this.Context.CheckCodeInterface.ForceSave();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        else if (this.ExecutionItem.contains(":"))
+        {
+            this.Context.CheckCodeInterface.ExecuteUrl(this.ExecutionItem.replace("::", "://"));
+        }
+    	else if (this.ExecutionItem.toLowerCase().contains(".pdf") || this.ExecutionItem.toLowerCase().contains(".png") || this.ExecutionItem.toLowerCase().contains(".gif") || this.ExecutionItem.toLowerCase().contains(".jpg") || this.ExecutionItem.toLowerCase().contains(".m4v") || this.ExecutionItem.toLowerCase().contains(".mov") || this.ExecutionItem.toLowerCase().contains(".avi") || this.ExecutionItem.toLowerCase().contains(".wmv"))
     	{
-    		this.Context.CheckCodeInterface.DisplayPDF(this.ExecutionItem);
+    		this.Context.CheckCodeInterface.DisplayMedia(this.ExecutionItem);
     	}
-        this.Context.CheckCodeInterface.ExecuteUrl(this.ExecutionItem.replace("::", "://"));
         return null;
     }
 }

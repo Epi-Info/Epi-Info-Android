@@ -1,13 +1,15 @@
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.etc.AudioProcessor;
+import android.app.Activity;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.maps.android.data.kml.KmlPlacemark;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import android.app.Activity;
+import gov.cdc.epiinfo.etc.AudioProcessor;
 
 public class AppManager {
 
@@ -19,6 +21,7 @@ public class AppManager {
 	private static String defaultForm;
 	private static int defaultLayoutMode;
 	private static GeoLocation geoLocation;
+	private static List<KmlPlacemark> loadedPlacemarks;
 
 	public static void AddFormMetadata(String name, FormMetadata formMetadata)
 	{
@@ -74,6 +77,16 @@ public class AppManager {
 	public static EpiDbHelper GetCurrentDatabase()
 	{
 		return currentDatabase;
+	}
+
+	public static List<KmlPlacemark> GetPlacemarks()
+	{
+		return loadedPlacemarks;
+	}
+
+	public static void SetPlacemarks(List<KmlPlacemark> placemarks)
+	{
+		loadedPlacemarks = placemarks;
 	}
 
 	public static void Started(Activity activity)

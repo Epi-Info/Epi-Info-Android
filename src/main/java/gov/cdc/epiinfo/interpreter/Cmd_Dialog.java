@@ -5,7 +5,6 @@ import goldengine.java.Reduction;
 import goldengine.java.Token;
 import gov.cdc.epiinfo.FormLayoutManager;
 import gov.cdc.epiinfo.RecordEditor;
-import android.view.View;
 
 public class Cmd_Dialog implements ICommand {
 
@@ -27,7 +26,7 @@ public class Cmd_Dialog implements ICommand {
 			String fileName = message.replace('"', ' ').split(":")[1].trim();
 			if (fileName.toLowerCase().endsWith(".pdf"))
 			{
-				((RecordEditor)controlHelper.getContainer()).DisplayPDF(fileName);
+				((RecordEditor)controlHelper.getContainer()).DisplayMedia(fileName);
 			}
 		}
 		else

@@ -18,6 +18,8 @@ public interface ICheckCodeHost
         void GoTo(String pDesitnation);
         void CaptureCoordinates(String latitudeField, String longitudeField);
         void CaptureBarcode(String field);
+        void CaptureHandwriting(final String button, final String fileNameField, final String statusField);
+        void ForceSave();
         void Hide(String[] pNameList, boolean pIsAnExceptList);
         void Highlight(String[] pNameList, boolean pIsAnExceptList);
         void UnHighlight(String[] pNameList, boolean pIsAnExceptList);
@@ -25,7 +27,7 @@ public interface ICheckCodeHost
         void Disable(String[] pNameList, boolean pIsAnExceptList);
         void Clear(String[] pNameList, boolean pIsAnExceptList);
         void ExecuteUrl(String text);
-        void DisplayPDF(String text);
+        void DisplayMedia(String text);
         void Alert(String text);
         void NewRecord();
         int RecordCount();

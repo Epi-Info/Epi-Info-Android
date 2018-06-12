@@ -1,13 +1,5 @@
 package gov.cdc.epiinfo.interpreter;
 
-import gov.cdc.epiinfo.AppManager;
-import gov.cdc.epiinfo.GeoLocation;
-import gov.cdc.epiinfo.interpreter.CSymbol.VariableScope;
-
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -15,6 +7,14 @@ import android.preference.PreferenceManager;
 
 import com.creativewidgetworks.goldparser.engine.Reduction;
 import com.creativewidgetworks.goldparser.engine.Token;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import gov.cdc.epiinfo.AppManager;
+import gov.cdc.epiinfo.GeoLocation;
+import gov.cdc.epiinfo.interpreter.CSymbol.VariableScope;
 
 
 
@@ -124,7 +124,7 @@ public class Rule_Assign extends EnterRule
 		{
 			if (((Rule_Value)value).Id != null)
 			{
-				if (((Rule_Value)value).Id.toLowerCase().contains("sysdeviceid") || ((Rule_Value)value).Id.toLowerCase().contains("sysaltitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslatitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslongitude") || ((Rule_Value)value).Id.toLowerCase().contains("sysbarcode") || ((Rule_Value)value).Id.toLowerCase().contains("sysaudio") || ((Rule_Value)value).Id.toLowerCase().contains("sysvideo"))
+				if (((Rule_Value)value).Id.toLowerCase().contains("sysdeviceid") || ((Rule_Value)value).Id.toLowerCase().contains("syskmlregion") || ((Rule_Value)value).Id.toLowerCase().contains("sysaltitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslatitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslongitude") || ((Rule_Value)value).Id.toLowerCase().contains("sysbarcode") || ((Rule_Value)value).Id.toLowerCase().contains("sysaudio") || ((Rule_Value)value).Id.toLowerCase().contains("sysvideo"))
 				{
 					result = ((Rule_Value)value).Id;
 				}
@@ -246,6 +246,10 @@ public class Rule_Assign extends EnterRule
 			{
 				return "";
 			}
+		}
+		else if (result.toString().toUpperCase().equals("SYSKMLREGION"))
+		{
+			return GeoLocation.GetCurrentGeography();
 		}
 		else if (result.toString().toUpperCase().equals("SYSBARCODE"))
 		{

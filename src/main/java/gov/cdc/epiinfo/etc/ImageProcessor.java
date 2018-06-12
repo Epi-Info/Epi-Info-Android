@@ -1,13 +1,13 @@
 package gov.cdc.epiinfo.etc;
 
-import java.util.Hashtable;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+
+import java.util.Hashtable;
 
 public class ImageProcessor {
 
@@ -56,6 +56,12 @@ public class ImageProcessor {
 				fileName = params[0].toString();
 				int reqHeight = imageView.getHeight();
 				int reqWidth = imageView.getWidth();
+
+				if (reqHeight == 0 || reqHeight > 720)
+				{
+					reqHeight = 720;
+					reqWidth = 540;
+				}
 
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inJustDecodeBounds = true;

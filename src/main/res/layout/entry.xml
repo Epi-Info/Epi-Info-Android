@@ -30,4 +30,10 @@
 		android:layout_height="66dp" android:layout_width="230dp" android:layout_margin="15dp"
 		android:background="@drawable/btn_data_analysis_land" 
 		/>
+	<com.google.android.gms.maps.MapView
+		android:id="@+id/map"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:visibility="gone"/>
 </LinearLayout>

@@ -1,27 +1,24 @@
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.interpreter.Rule_Context;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.LinkedList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import android.app.Activity;
+import android.os.Environment;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import android.app.Activity;
-import android.os.Environment;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.LinkedList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import gov.cdc.epiinfo.interpreter.Rule_Context;
 
 
 public class FormMetadata {
@@ -42,6 +39,7 @@ public class FormMetadata {
 	public boolean IsInterviewForm;
 	public boolean HasImageFields;
 	public boolean HasMediaFields;
+	private String surveyId;
 
 	public FormMetadata(String viewXmlFile, Activity container)
 	{
@@ -87,6 +85,16 @@ public class FormMetadata {
 				Height = Integer.parseInt(obj_view_list.item(0).getAttributes().getNamedItem("Height").getNodeValue());
 				Width = Integer.parseInt(obj_view_list.item(0).getAttributes().getNamedItem("Width").getNodeValue());
                 IsInterviewForm = Height == 780 && Width == 549;
+
+				try
+				{
+					surveyId = obj_view_list.item(0).getAttributes().getNamedItem("SurveyId").getNodeValue();
+				}
+				catch (Exception ex)
+				{
+
+				}
+
 				CheckCode = obj_view_list.item(0).getAttributes().getNamedItem("CheckCode").getNodeValue().replace("://", "::").replaceAll("(?s)(/\\*{1})(.*)(\\*/{1})", "").replaceAll("(//{1})(.*)", "");
 
 				NodeList page_list = feed.getElementsByTagName("Page");
@@ -196,19 +204,30 @@ public class FormMetadata {
 							boolean isRequired = false;
 							boolean isReadOnly = false;
 							boolean shouldRepeatLast = false;
+							boolean shouldReturnToParent = false;
 							try
 							{
 								promptFontSize = Double.parseDouble(obj_nod_list.item(x).getAttributes().getNamedItem("PromptFontSize").getNodeValue().replace(',','.'));
 								promptX = Double.parseDouble(obj_nod_list.item(x).getAttributes().getNamedItem("PromptLeftPositionPercentage").getNodeValue().replace(',','.'));
 								promptY = Double.parseDouble(obj_nod_list.item(x).getAttributes().getNamedItem("PromptTopPositionPercentage").getNodeValue().replace(',','.'));
-								isRequired = obj_nod_list.item(x).getAttributes().getNamedItem("IsRequired").getNodeValue().equals("True");
-								isReadOnly = obj_nod_list.item(x).getAttributes().getNamedItem("IsReadOnly").getNodeValue().equals("True");
-								shouldRepeatLast = obj_nod_list.item(x).getAttributes().getNamedItem("ShouldRepeatLast").getNodeValue().equals("True");
 							}
 							catch (Exception ex)
 							{
 								// 
 							}
+
+							try
+							{
+								isRequired = obj_nod_list.item(x).getAttributes().getNamedItem("IsRequired").getNodeValue().equals("True");
+								isReadOnly = obj_nod_list.item(x).getAttributes().getNamedItem("IsReadOnly").getNodeValue().equals("True");
+								shouldRepeatLast = obj_nod_list.item(x).getAttributes().getNamedItem("ShouldRepeatLast").getNodeValue().equals("True");
+								shouldReturnToParent = obj_nod_list.item(x).getAttributes().getNamedItem("ShouldReturnToParent").getNodeValue().equals("True");
+							}
+							catch (Exception ex)
+							{
+								//
+							}
+
 							int maxLength = 0;
 							try
 							{
@@ -219,7 +238,7 @@ public class FormMetadata {
 								//
 							}
 
-							Field field = new Field(fieldName, prompt, fieldType, fieldX, fieldY, promptX, promptY, fieldWidth, fieldHeight, controlFontSize, controlFontStyle, promptFontSize, pagePosition, isRequired, isReadOnly, shouldRepeatLast, maxLength, lower, upper, lowerDate, upperDate, pattern, list, pageId, PageName[pagePosition]); 
+							Field field = new Field(fieldName, prompt, fieldType, fieldX, fieldY, promptX, promptY, fieldWidth, fieldHeight, controlFontSize, controlFontStyle, promptFontSize, pagePosition, isRequired, isReadOnly, shouldRepeatLast, shouldReturnToParent, maxLength, lower, upper, lowerDate, upperDate, pattern, list, pageId, PageName[pagePosition]);
 							if (field.getType().equals("17"))
 							{
 								AddListValues(field, feed, obj_nod_list.item(x).getAttributes().getNamedItem("TextColumnName").getNodeValue(), null);
@@ -286,6 +305,19 @@ public class FormMetadata {
 								int w=5;
 								w++;
 							}
+
+							/*try
+							{
+								if (obj_nod_list.item(x).getAttributes().getNamedItem("Name").getNodeValue().toLowerCase().endsWith("likert") && field.getType().equals("12"))
+								{
+									field.setType("98");
+								}
+							}
+							catch (Exception ex)
+							{
+								int w=5;
+								w++;
+							}*/
 						}
 					}
 				}
@@ -322,6 +354,11 @@ public class FormMetadata {
 			}
 		}
 		return null;
+	}
+
+	public String GetSurveyId()
+	{
+		return this.surveyId;
 	}
 
 	private void AddListValues(Field field, String list)

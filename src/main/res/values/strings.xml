@@ -164,7 +164,7 @@
     <string name="form_layout_interview">Form elements are presented as questions one at a time.</string>
     <string name="form_layout_interview_title">Interview mode</string>
 
-    <string name="sftp_url">Secure FTP URL</string>
+    <string name="sftp_url">Service URL</string>
     <string name="cloud_user_name">User Name</string>
     <string name="cloud_pwd">Password</string>
     <string name="cloud_sync">Cloud Synchronization</string>
@@ -226,7 +226,7 @@
     <string name="img_open_epi">More calculators at OpenEpi.com</string>
     <string name="fab_alt_text">Add data</string>
     <string name="build_number">Build number</string>
-    <string name="version_name">1.2.5</string>
+    <string name="version_name">1.3.4</string>
     
     <string-array name="yn_array">
         <item>&lt;Not Selected&gt;</item>
@@ -237,11 +237,13 @@
         <item>Box</item>
         <item>Secure FTP</item>
         <item>Microsoft Azure</item>
+        <item>Epi Info API</item>
     </string-array>
     <string-array name="cloud_service_codes">
         <item>Box</item>
         <item>SFTP</item>
         <item>Microsoft Azure</item>
+        <item>EIWS</item>
     </string-array>
     <string-array name="confidence_levels">
         <item>80%</item>

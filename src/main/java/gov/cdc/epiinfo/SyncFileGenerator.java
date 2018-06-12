@@ -87,6 +87,7 @@ public class SyncFileGenerator {
 		}
 		else
 		{
+			builder.setProgress(100, 0, false);
 			builder.setProgress(100, pct, false);
 		}
 
@@ -150,6 +151,9 @@ public class SyncFileGenerator {
 			{
 				builder.setSmallIcon(R.drawable.ic_archive);
 				builder.setContentTitle("Sync file created (" + viewName + ")");
+
+				builder.setProgress(0, 0, false);
+
 				if (recordCount == 1)
 				{
 					builder.setContentText("with 1 record");

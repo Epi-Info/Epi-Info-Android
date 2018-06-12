@@ -1,21 +1,5 @@
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.etc.AudioProcessor;
-import gov.cdc.epiinfo.etc.ImageProcessor;
-import gov.cdc.epiinfo.interpreter.EnterRule;
-import gov.cdc.epiinfo.interpreter.ICheckCodeHost;
-import gov.cdc.epiinfo.interpreter.IInterpreter;
-import gov.cdc.epiinfo.interpreter.Rule_Context;
-import gov.cdc.epiinfo.interpreter.VariableCollection;
-
-import java.io.File;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Hashtable;
-import java.util.Stack;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -32,7 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,10 +36,31 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class Interviewer extends ActionBarActivity implements ICheckCodeHost 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.Stack;
+import java.util.UUID;
+
+import gov.cdc.epiinfo.etc.AudioProcessor;
+import gov.cdc.epiinfo.etc.CustomTextView;
+import gov.cdc.epiinfo.etc.CustomView;
+import gov.cdc.epiinfo.etc.ImageProcessor;
+import gov.cdc.epiinfo.interpreter.EnterRule;
+import gov.cdc.epiinfo.interpreter.ICheckCodeHost;
+import gov.cdc.epiinfo.interpreter.IInterpreter;
+import gov.cdc.epiinfo.interpreter.Rule_Context;
+import gov.cdc.epiinfo.interpreter.VariableCollection;
+
+public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 {
 
 	private Long mRowId;
@@ -97,7 +103,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 	{
 		for (int x=0; x<layoutManager.GetImageFieldIds().size(); x++)
 		{
-			ImageView iv = (ImageView)findViewById(layoutManager.GetImageFieldIds().get(x));
+			ImageView iv = findViewById(layoutManager.GetImageFieldIds().get(x));
 			if (iv.getTag() != null)
 			{
 				outState.putString("ImageFileName" + iv.getId(), (String)iv.getTag());
@@ -126,7 +132,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 		{
 			if (inState.containsKey("ImageFileName" + layoutManager.GetImageFieldIds().get(x)))
 			{
-				ImageView iv = (ImageView)findViewById(layoutManager.GetImageFieldIds().get(x));
+				ImageView iv = findViewById(layoutManager.GetImageFieldIds().get(x));
 				new ImageProcessor().SetImage(iv,inState.getString("ImageFileName" + layoutManager.GetImageFieldIds().get(x)));
 			}
 		}
@@ -136,11 +142,11 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 		}
 		if (inState.containsKey("CurrentImageViewId"))
 		{
-			currentImageView = (ImageView)findViewById(inState.getInt("CurrentImageViewId"));
+			currentImageView = findViewById(inState.getInt("CurrentImageViewId"));
 		}
 		if (inState.containsKey("CurrentBarcodeFieldId"))
 		{
-			barField = (EditText)findViewById(inState.getInt("CurrentBarcodeFieldId"));
+			barField = findViewById(inState.getInt("CurrentBarcodeFieldId"));
 		}
 	}
 
@@ -159,11 +165,11 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 		setContentView(R.layout.interviewer);
 		AppManager.Started(this);
 
-		ViewGroup layout = (ViewGroup) findViewById(R.id.EditorLayout);
+		ViewGroup layout = findViewById(R.id.EditorLayout);
 		currentPageIndex = 0;
 		pageStack = new Stack<Integer>();
 
-		scroller = (ScrollView) findViewById(R.id.EditorScroller);    
+		scroller = findViewById(R.id.EditorScroller);
 		scroller.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);     
 		scroller.setFocusable(true);     
 		scroller.setFocusableInTouchMode(true);     
@@ -189,8 +195,8 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 		}
 		this.CreateFields(layout, this.Context, false);
 
-		Button btnPrev = (Button) findViewById(R.id.btnPrev);
-		Button btnNext = (Button) findViewById(R.id.btnNext);
+		Button btnPrev = findViewById(R.id.btnPrev);
+		Button btnNext = findViewById(R.id.btnNext);
 		btnPrev.setEnabled(false);
 		if (formMetadata.PageCount < 2)
 		{
@@ -279,9 +285,9 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 						RadioGroup step2 = (RadioGroup)step1.getChildAt(0);
 						if (step2 != null)
 						{
-							if (rawValue < 10000 && rawValue > -1)
+							if (rawValue > -1)
 							{
-								step2.check(((x + 1) * 10000) + rawValue);
+								step2.check(((x + 1) * 10000) + (rawValue % 1000));
 							}
 							else
 							{
@@ -291,12 +297,19 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 					}
 					else if (formMetadata.Fields.get(x).getType().equalsIgnoreCase("14"))
 					{
-						String fieldName = formMetadata.Fields.get(x).getName();
-						String fileName = extras.getString(fieldName);
-						ImageView iv = layout.findViewById(x);
-						if (!fileName.equalsIgnoreCase(""))
+						try {
+
+
+							String fieldName = formMetadata.Fields.get(x).getName();
+							String fileName = extras.getString(fieldName);
+							ImageView iv = layout.findViewById(x);
+							if (!fileName.equalsIgnoreCase("")) {
+								new ImageProcessor().SetImage(iv, fileName);
+							}
+						}
+						catch (Exception ex)
 						{
-							new ImageProcessor().SetImage(iv,fileName);
+
 						}
 					}
 					else if (formMetadata.Fields.get(x).getType().equalsIgnoreCase("7"))
@@ -314,6 +327,67 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 					else if (formMetadata.Fields.get(x).getType().equalsIgnoreCase("20"))
 					{
 						//
+					}
+					else if (formMetadata.Fields.get(x).getType().equalsIgnoreCase("98"))
+					{
+						Field field = formMetadata.Fields.get(x);
+						int answer = extras.getInt(field.getName());
+						field.setLikertAnswerIndex( answer );
+
+						String name = field.getName();
+						View view = this.layoutManager.GetView( name );
+						CustomTextView answerTextView = view.findViewById( R.id.answerTextView );
+						CustomView circle1 = view.findViewById( R.id.circle1 );
+						CustomView circle2 = view.findViewById( R.id.circle2 );
+						CustomView circle3 = view.findViewById( R.id.circle3 );
+						CustomView circle4 = view.findViewById( R.id.circle4 );
+						CustomView circle5 = view.findViewById( R.id.circle5 );
+						CustomView circle6 = view.findViewById( R.id.circle6 );
+						CustomView circle7 = view.findViewById( R.id.circle7 );
+
+
+						if (answer > 0)
+						{
+							answer &= 0xf;
+
+							switch (answer) {
+								case 0:
+									selectAnswer( circle1 );
+									answerTextView.setIndex( circle1.getIndex());
+									answerTextView.setText( circle1.getText());
+									break;
+								case 1:
+									selectAnswer( circle2 );
+									answerTextView.setIndex( circle2.getIndex());
+									answerTextView.setText( circle2.getText());
+									break;
+								case 2:
+									selectAnswer( circle3 );
+									answerTextView.setIndex( circle3.getIndex());
+									answerTextView.setText( circle3.getText());
+									break;
+								case 3:
+									selectAnswer( circle4 );
+									answerTextView.setIndex( circle4.getIndex());
+									answerTextView.setText( circle4.getText());
+									break;
+								case 4:
+									selectAnswer( circle5 );
+									answerTextView.setIndex( circle5.getIndex());
+									answerTextView.setText( circle5.getText());
+									break;
+								case 5:
+									selectAnswer( circle6 );
+									answerTextView.setIndex( circle6.getIndex());
+									answerTextView.setText( circle6.getText());
+									break;
+								case 6:
+									selectAnswer( circle7 );
+									answerTextView.setIndex( circle7.getIndex());
+									answerTextView.setText( circle7.getText());
+									break;
+							}
+						}
 					}
 					else
 					{
@@ -392,10 +466,33 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 
 	}
 
+	private boolean selectAnswer( View circle )
+	{
+		Drawable selected = getResources().getDrawable( R.drawable.circle_selected );
+		Drawable unselected = getResources().getDrawable( R.drawable.circle );
+
+		boolean answer;
+
+		if (circle.getAlpha() < 1)
+		{
+			answer = false;
+			circle.setAlpha((float)1.0);
+			circle.setBackgroundDrawable( unselected );
+		}
+		else
+		{
+			answer = true;
+			circle.setAlpha((float)0.99);
+			circle.setBackgroundDrawable( selected );
+		}
+
+		return answer;
+	}
+
 	private void EnableDisableNavButtons()
 	{
-		Button btnPrev = (Button) findViewById(R.id.btnPrev);
-		Button btnNext = (Button) findViewById(R.id.btnNext);
+		Button btnPrev = findViewById(R.id.btnPrev);
+		Button btnNext = findViewById(R.id.btnNext);
 
 		if (currentPageIndex > 0)
 		{
@@ -514,7 +611,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 	{
 		if (layoutManager.RequiredFieldsComplete(currentPageIndex))
 		{
-			ViewGroup layout = (ViewGroup) findViewById(R.id.EditorLayout);
+			ViewGroup layout = findViewById(R.id.EditorLayout);
 
 			Bundle bundle = new Bundle();
 
@@ -552,7 +649,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 					{
 						LinearLayout step1 = layout.findViewById(x);
 						RadioGroup step2 = (RadioGroup)step1.getChildAt(0);
-						int step3 = step2.getCheckedRadioButtonId();
+						int step3 = step2.getCheckedRadioButtonId() % 1000;
 						bundle.putInt(formMetadata.Fields.get(x).getName(), step3);
 					}
 					else if (formMetadata.Fields.get(x).getType().equalsIgnoreCase("14"))
@@ -579,6 +676,13 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 						{
 							result = result.toString().split("-")[0];
 						}
+					}
+					else if (formMetadata.Fields.get(x).getType().equalsIgnoreCase("98"))
+					{
+						String name = formMetadata.Fields.get(x).getName();
+						View view = this.layoutManager.GetView( name );
+						CustomTextView textView = view.findViewById( R.id.answerTextView );
+						bundle.putInt( name, textView.getIndex());
 					}
 					else
 					{
@@ -713,7 +817,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 			public void onClick(View v) {
 
 				int barFieldId = Integer.parseInt(barSpinner.getSelectedItem().toString().split(":")[0]);
-				barField = (EditText) findViewById(barFieldId);
+				barField = findViewById(barFieldId);
 				IntentIntegrator integrator = new IntentIntegrator(self);
 				integrator.initiateScan();
 				barcodeDialog.dismiss();				
@@ -723,26 +827,83 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 		return barcodeDialog;
 	}
 
-	public void DisplayPDF(String fileName)
-	{
+	@Override
+	public void CaptureHandwriting(final String button, final String fileNameField, final String statusField) {
+		final Dialog hwDialog = new Dialog(this);
+		hwDialog.setTitle(getString(R.string.barcode_settings));
+		hwDialog.setContentView(R.layout.handwriting_dialog);
+		hwDialog.setCancelable(true);
+
+		final SignaturePad signaturePad = hwDialog.findViewById(R.id.signature_pad);
+
+		Button btnClear = hwDialog.findViewById(R.id.btnClear);
+		btnClear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				signaturePad.clear();
+			}
+		});
+
+		Button btnSet = hwDialog.findViewById(R.id.btnSet);
+		btnSet.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Bitmap bitmap = signaturePad.getSignatureBitmap();
+				hwDialog.dismiss();
+				String fileName = UUID.randomUUID().toString() + ".png";
+				Assign(statusField, "Signature on file");
+				Disable(new String[]{button},false);
+
+				try {
+					File filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+					File file = new File(filePath, "/EpiInfo/Images/" + fileName);
+
+					Assign(fileNameField,file.getPath());
+
+					FileOutputStream fOut = new FileOutputStream(file);
+					bitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+					fOut.flush();
+					fOut.close();
+				} catch (Exception e) {
+				}
+			}
+		});
+
+		hwDialog.show();
+	}
+
+	public void DisplayMedia(String fileName) {
 		File filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 		File file = new File(filePath, "/EpiInfo/Questionnaires/" + fileName);
 
-		if(file.exists())              
-		{                 
-			Uri path = Uri.fromFile(file);                  
-			Intent pdfIntent = new Intent(Intent.ACTION_VIEW);                 
-			pdfIntent.setDataAndType(path, "application/pdf");                 
-			pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);                  
-			try                 
-			{                     
-				startActivity(pdfIntent);                 
-			}                 
-			catch(Exception e)                 
-			{                     
+		if (file.exists()) {
+			Uri path = Uri.fromFile(file);
+			Intent fileIntent = new Intent(Intent.ACTION_VIEW);
+			if (fileName.toLowerCase().contains(".pdf"))
+				fileIntent.setDataAndType(path, "application/pdf");
+			else if (fileName.toLowerCase().contains(".png"))
+				fileIntent.setDataAndType(path, "image/png");
+			else if (fileName.toLowerCase().contains(".gif"))
+				fileIntent.setDataAndType(path, "image/gif");
+			else if (fileName.toLowerCase().contains(".jpg"))
+				fileIntent.setDataAndType(path, "image/jpg");
+			else if (fileName.toLowerCase().contains(".m4v"))
+				fileIntent.setDataAndType(path, "video/x-m4v");
+			else if (fileName.toLowerCase().contains(".mp4"))
+				fileIntent.setDataAndType(path, "video/mp4");
+			else if (fileName.toLowerCase().contains(".mov"))
+				fileIntent.setDataAndType(path, "video/quicktime");
+			else if (fileName.toLowerCase().contains(".avi"))
+				fileIntent.setDataAndType(path, "video/x-msvideo");
+			else if (fileName.toLowerCase().contains(".wmv"))
+				fileIntent.setDataAndType(path, "video/x-ms-wmv");
+			fileIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			try {
+				startActivity(fileIntent);
+			} catch (Exception e) {
 				//
-			}             
-		} 
+			}
+		}
 	}
 
 	private Dialog showLocationDialog()
@@ -781,8 +942,8 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 				int latFieldId = Integer.parseInt(latSpinner.getSelectedItem().toString().split(":")[0]);
 				int longFieldId = Integer.parseInt(longSpinner.getSelectedItem().toString().split(":")[0]);
 
-				latField = (EditText) findViewById(latFieldId);
-				longField = (EditText) findViewById(longFieldId);
+				latField = findViewById(latFieldId);
+				longField = findViewById(longFieldId);
 
 				try
 				{
@@ -1093,7 +1254,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 					{
 						if(field.getType().equalsIgnoreCase("19")) // separated by dash
 						{
-							result = result.toString().split("-")[0];
+							result = result.toString().split("-")[0].trim();
 						}
 						if(field.getType().equals("11"))
 						{
@@ -1352,46 +1513,39 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 	@Override
 	public void Clear(String[] pNameList, boolean pIsAnExceptList) 
 	{
+		try {
 
-		if(pIsAnExceptList)
-		{
+			if (pIsAnExceptList) {
 
-		}
-		else
-		{
-			for(int i = 0; i < pNameList.length; i++)
-			{
-				String s  = pNameList[i];
-				View control = this.layoutManager.GetView(s);
-				if (control instanceof Spinner)
-				{
-					((Spinner)control).setSelection(0);
-				}
-				else if (control instanceof CheckBox)
-				{
-					((CheckBox)control).setChecked(false);
-				}
-				else if (control instanceof TextView)
-				{
-					((TextView)control).setText("");
-				}
-				else if (control instanceof LinearLayout && !(control instanceof RadioGroup))
-				{
-					if (((LinearLayout)control).getChildCount() > 0)
-					{
-						if (((LinearLayout)control).getChildAt(0) instanceof TextView)
-						{
-							((TextView)((LinearLayout)control).getChildAt(0)).setText("");
+			} else {
+				for (int i = 0; i < pNameList.length; i++) {
+					String s = pNameList[i];
+					View control = this.layoutManager.GetView(s);
+					if (control instanceof Spinner) {
+						((Spinner) control).setSelection(0);
+					} else if (control instanceof CheckBox) {
+						((CheckBox) control).setChecked(false);
+					} else if (control instanceof EditText) {
+						((EditText) control).setText("");
+					} else if (control instanceof LinearLayout && !(control instanceof RadioGroup)) {
+						if (((LinearLayout) control).getChildCount() > 0) {
+							if (((LinearLayout) control).getChildAt(0) instanceof TextView) {
+								((TextView) ((LinearLayout) control).getChildAt(0)).setText("");
+							}
 						}
+					} else if (control instanceof RadioGroup) {
+						((RadioGroup) control).check(-1);
+					} else if (this.layoutManager.groupedItems.containsKey(control.getId())) {
+						String[] groupedItems = this.layoutManager.groupedItems.get(control.getId());
+						Clear(groupedItems, false);
 					}
-				}
-				else if (control instanceof RadioGroup)
-				{
-					((RadioGroup)control).check(-1);
 				}
 			}
 		}
+		catch (Exception ex)
+		{
 
+		}
 	}
 
 	@Override
@@ -1529,6 +1683,12 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 	}
 
 	@Override
+	public void ForceSave()
+	{
+		Save(false);
+	}
+
+	@Override
 	public void CaptureCoordinates(String latFieldName, String longFieldName)
 	{
 		EditText latitudeField = (EditText)this.layoutManager.GetView(latFieldName);
@@ -1588,7 +1748,7 @@ public class Interviewer extends ActionBarActivity implements ICheckCodeHost
 
 		try
 		{
-			barField = (EditText)findViewById(formMetadata.GetFieldByName(field).getId());
+			barField = findViewById(formMetadata.GetFieldByName(field).getId());
 			IntentIntegrator integrator = new IntentIntegrator(this);
 			integrator.initiateScan();
 		}

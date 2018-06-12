@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 public class CloudFactory {
 
-	public static ICloudClient GetCloudClient(String tableName, Context context)
+	public static ICloudClient GetCloudClient(String tableName, String surveyId, Context context)
 	{
 		ICloudClient cloudClient;
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -18,6 +18,10 @@ public class CloudFactory {
 		else if (serviceProvider.equals("SFTP"))
 		{
 			cloudClient = new SecureFTPClient(tableName, context);
+		}
+		else if (serviceProvider.equals("EIWS"))
+		{
+			cloudClient = new EpiInfoCloudClient(surveyId, context);
 		}
 		else
 		{

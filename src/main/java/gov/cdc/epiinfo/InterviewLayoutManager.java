@@ -1,22 +1,5 @@
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.etc.AudioProcessor;
-import gov.cdc.epiinfo.etc.DateButton;
-import gov.cdc.epiinfo.interpreter.EnterRule;
-import gov.cdc.epiinfo.interpreter.ICheckCodeHost;
-import gov.cdc.epiinfo.interpreter.Rule_Context;
-
-import java.io.File;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.UUID;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -25,8 +8,8 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,8 +17,10 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -63,6 +48,26 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.UUID;
+import java.util.regex.Pattern;
+
+import gov.cdc.epiinfo.etc.AudioProcessor;
+import gov.cdc.epiinfo.etc.CustomCheckBox;
+import gov.cdc.epiinfo.etc.CustomTextView;
+import gov.cdc.epiinfo.etc.CustomView;
+import gov.cdc.epiinfo.etc.DateButton;
+import gov.cdc.epiinfo.interpreter.EnterRule;
+import gov.cdc.epiinfo.interpreter.ICheckCodeHost;
+import gov.cdc.epiinfo.interpreter.Rule_Context;
 
 
 public class InterviewLayoutManager {
@@ -148,7 +153,7 @@ public class InterviewLayoutManager {
 			}
 			else if (field.getType().equals("7"))
 			{
-				field.setId(AddDateField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getPromptFontSize(), field.getFieldFontSize(), field.getIsReadOnly(), field.getLowerDate(), field.getUpperDate()));
+				field.setId(AddDateField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getPromptFontSize(), field.getFieldFontSize(), field.getIsRequired(), field.getIsReadOnly(), field.getLowerDate(), field.getUpperDate()));
 			}
 			else if (field.getType().equals("8"))
 			{
@@ -191,7 +196,7 @@ public class InterviewLayoutManager {
 			}
 			else if (field.getType().equals("20"))
 			{
-				field.setId(AddRelateField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getFieldWidth(), field.getFieldHeight(), field.getFieldFontSize(), field.getPagePosition(), checkCode + System.getProperty("line.separator")));
+				field.setId(AddRelateField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getFieldWidth(), field.getFieldHeight(), field.getFieldFontSize(), field.getPagePosition(), field.getShouldReturnToParent(), checkCode + System.getProperty("line.separator")));
 			}
 			else if (field.getType().equals("3"))
 			{
@@ -204,6 +209,10 @@ public class InterviewLayoutManager {
 			else if (field.getType().equals("82"))
 			{
 				field.setId(AddAudioField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getPromptFontSize(), field.getFieldFontSize(), field.getLowerDate(), field.getUpperDate()));
+			}
+			else if (field.getType().equals("98"))
+			{
+				field.setId(AddLikertField(pages.get(field.getPageName()), field.getPrompt(), field.getListValues(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getPromptFontSize(), field.getFieldFontSize(), field.getPattern(), checkCode + System.getProperty("line.separator"),field));
 			}
 			else
 			{
@@ -471,10 +480,10 @@ public class InterviewLayoutManager {
 		{
 			tv.setId(fieldCounter);
 		}
-		RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params2.leftMargin = (int)Math.round(formWidth * x);
-		params2.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
-		tv.setLayoutParams(params2);
+		//RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		//params2.leftMargin = (int)Math.round(formWidth * x);
+		//params2.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
+		tv.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
 		if (!this.useAbsolutePos)
 		{
@@ -702,7 +711,7 @@ public class InterviewLayoutManager {
 		return fieldCounter;
 	}
 
-	public int AddDateField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, double promptFontSize, double fieldFontSize, boolean isReadOnly, Date lowerDate, Date upperDate)
+	public int AddDateField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, double promptFontSize, double fieldFontSize, boolean isRequired, boolean isReadOnly, Date lowerDate, Date upperDate)
 	{
 		fieldCounter++;
 		View label = AddLabel(myLayout, prompt, promptX, promptY, pagePosition, promptFontSize);
@@ -798,6 +807,10 @@ public class InterviewLayoutManager {
 		
 		if (!isReadOnly)
 		horzLayout.addView(eraseButton);
+		if (isRequired)
+		{
+			requiredViews.put(fieldCounter,myLayout);
+		}
 
 		final ImageButton myEraseButton = eraseButton;
 		final Date myLowerDate = lowerDate;
@@ -1746,6 +1759,509 @@ public class InterviewLayoutManager {
 		return fieldCounter;
 	}
 
+	public int AddLikertField(ViewGroup myLayout, String prompt, final LinkedList<String> listValues, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, double promptFontSize, double controlFontSize, String controlFontStyle, String checkCodeAfter, Field field)
+	{
+		fieldCounter++;
+
+		final LinkedList<String> newListValues = new LinkedList<String>();
+
+		int dontKnowIndex = 7;
+		int refusedIndex = 8;
+
+		String refusedText = "";
+		String dontKnowText = "";
+		boolean isDontKnowEnabled = false;
+		boolean isRefusedEnabled = false;
+
+		for (int i=0;i<listValues.size();i++)
+		{
+			String value = listValues.get(i);
+
+			if (value.toLowerCase().equals( "dk" ))
+			{
+				dontKnowText = value;
+				isDontKnowEnabled = true;
+			}
+			else if (value.toLowerCase().equals( "ns" ))
+			{
+				dontKnowText = value;
+				isDontKnowEnabled = true;
+			}
+			else if (value.toLowerCase().equals( "r" ))
+			{
+				refusedText = value;
+				isRefusedEnabled = true;
+			}
+			else if (value.toLowerCase().equals( "sr" ))
+			{
+				refusedText = value;
+				isRefusedEnabled = true;
+			}
+			else if (value.toLowerCase().equals( "prefiro não responder" ))
+			{
+				refusedText = value;
+				isRefusedEnabled = true;
+			}
+			else if (value.toLowerCase().equals( "prefer not to answer" ))
+			{
+				refusedText = value;
+				isRefusedEnabled = true;
+			}
+			else
+			{
+				newListValues.add( value );
+			}
+		}
+
+		DisplayMetrics dm = new DisplayMetrics();
+		this.getContainer().getWindowManager().getDefaultDisplay().getMetrics( dm );
+
+		LayoutInflater layoutInflater = LayoutInflater.from( container.getBaseContext() );
+
+		View likertView = layoutInflater.inflate( R.layout.likert_scale, null );
+
+		myLayout.addView( likertView );
+
+		LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams( (int)((dm.widthPixels-32)*density), (int)(1*dm.density ));
+
+		TextView leftTextView = likertView.findViewById( R.id.leftTextView );
+		TextView rightTextView = likertView.findViewById( R.id.rightTextView );
+		TextView questionTextView = likertView.findViewById( R.id.questionTextView );
+		final CustomTextView answerTextView = likertView.findViewById( R.id.answerTextView );
+
+		float calcSize = (float) (controlFontSize * 1.8);
+
+		if (!this.useAbsolutePos) {
+			if (DeviceManager.GetLength(container) > 900)
+				questionTextView.setTextSize(23);
+			else
+				questionTextView.setTextSize(20);
+
+		} else {
+			double sp = DeviceManager.GetFontSize(controlFontSize);
+			//tv.setTextSize((float)(fieldFontSize * 1.8));
+			questionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) sp);
+		}
+
+		if (controlFontStyle.toLowerCase().contains("bold") && controlFontStyle.toLowerCase().contains("italic")) {
+			questionTextView.setTypeface(null, Typeface.BOLD_ITALIC);
+		} else {
+			if (controlFontStyle.toLowerCase().contains("bold")) {
+				questionTextView.setTypeface(null, Typeface.BOLD);
+			}
+			if (controlFontStyle.toLowerCase().contains("italic")) {
+				questionTextView.setTypeface(null, Typeface.ITALIC);
+			}
+		}
+
+		questionTextView.setText( prompt );
+		questionTextView.setTextColor( 0xff000000 );
+		leftTextView.setText( newListValues.getFirst());
+		rightTextView.setText( newListValues.getLast());
+
+		View space1 = likertView.findViewById( R.id.space1 );
+		View space2 = likertView.findViewById( R.id.space2 );
+		View space3 = likertView.findViewById( R.id.space3 );
+		View space4 = likertView.findViewById( R.id.space4 );
+		View space5 = likertView.findViewById( R.id.space5 );
+		View space6 = likertView.findViewById( R.id.space6 );
+
+		float numButtons = newListValues.size();
+
+		// 32 = 16dp padding left/right
+
+		float width = ((dm.widthPixels - 32*density - numButtons*40*dm.density) / (numButtons-1)) - 2;
+
+		linearLayoutParams = new LinearLayout.LayoutParams( (int)width, (int)(40*dm.density ));
+
+		space1.setLayoutParams( linearLayoutParams );
+		space2.setLayoutParams( linearLayoutParams );
+		space3.setLayoutParams( linearLayoutParams );
+		space4.setLayoutParams( linearLayoutParams );
+		space5.setLayoutParams( linearLayoutParams );
+		space6.setLayoutParams( linearLayoutParams );
+
+		final CustomView circle1 = likertView.findViewById( R.id.circle1 );
+		final CustomView circle2 = likertView.findViewById( R.id.circle2 );
+		final CustomView circle3 = likertView.findViewById( R.id.circle3 );
+		final CustomView circle4 = likertView.findViewById( R.id.circle4 );
+		final CustomView circle5 = likertView.findViewById( R.id.circle5 );
+		final CustomView circle6 = likertView.findViewById( R.id.circle6 );
+		final CustomView circle7 = likertView.findViewById( R.id.circle7 );
+
+		final CustomCheckBox dontKnowCheckBox = likertView.findViewById( R.id.dontKnow );
+		final CustomCheckBox refusedCheckBox = likertView.findViewById( R.id.refused );
+
+		int id = fieldCounter << 16;
+
+		circle1.setIndex( id + 0 );
+		circle2.setIndex( id + 1 );
+		circle3.setIndex( id + 2 );
+		circle4.setIndex( id + 3 );
+		circle5.setIndex( id + 4 );
+		circle6.setIndex( id + 5 );
+		circle7.setIndex( id + 6 );
+
+		try
+		{
+			circle1.setText( newListValues.get(0));
+			circle2.setText( newListValues.get(1));
+			circle3.setText( newListValues.get(2));
+			circle4.setText( newListValues.get(3));
+			circle5.setText( newListValues.get(4));
+			circle6.setText( newListValues.get(5));
+			circle7.setText( newListValues.get(6));
+		}
+		catch (Exception ex)
+		{
+
+		}
+
+		if (isDontKnowEnabled)
+		{
+			dontKnowCheckBox.setVisibility( View.VISIBLE );
+			dontKnowCheckBox.setIndex( id + dontKnowIndex );
+		}
+
+		if (isRefusedEnabled)
+		{
+			refusedCheckBox.setVisibility( View.VISIBLE );
+			refusedCheckBox.setIndex( id + refusedIndex );
+		}
+
+		if (numButtons < 7)
+		{
+			circle7.setVisibility( View.GONE );
+			space6.setVisibility( View.GONE );
+
+			if (numButtons < 6)
+			{
+				circle6.setVisibility( View.GONE );
+				space5.setVisibility( View.GONE );
+
+				if (numButtons < 5)
+				{
+					circle5.setVisibility( View.GONE );
+					space4.setVisibility( View.GONE );
+
+					if (numButtons < 4)
+					{
+						circle4.setVisibility( View.GONE );
+						space3.setVisibility( View.GONE );
+					}
+				}
+			}
+		}
+
+		circle1.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle2, circle3, circle4, circle5, circle6, circle7, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle1 ))
+				{
+					answerTextView.setIndex( circle1.getIndex());
+					answerTextView.setText( newListValues.get(0));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		circle2.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle1, circle3, circle4, circle5, circle6, circle7, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle2 ))
+				{
+					answerTextView.setIndex( circle2.getIndex());
+					answerTextView.setText( newListValues.get(1));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		circle3.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle1, circle2, circle4, circle5, circle6, circle7, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle3 ))
+				{
+					answerTextView.setIndex( circle3.getIndex());
+					answerTextView.setText( newListValues.get(2));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		circle4.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle1, circle2, circle3, circle5, circle6, circle7, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle4 ))
+				{
+					answerTextView.setIndex( circle4.getIndex());
+					answerTextView.setText( newListValues.get(3));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		circle5.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle1, circle2, circle3, circle4, circle6, circle7, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle5 ))
+				{
+					answerTextView.setIndex( circle5.getIndex());
+					answerTextView.setText( newListValues.get(4));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		circle6.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle1, circle2, circle3, circle4, circle5, circle7, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle6 ))
+				{
+					answerTextView.setIndex( circle6.getIndex());
+					answerTextView.setText( newListValues.get(5));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		circle7.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				unselectAll( circle1, circle2, circle3, circle4, circle5, circle6, dontKnowCheckBox, refusedCheckBox );
+				if (selectAnswer( circle7 ))
+				{
+					answerTextView.setIndex( circle7.getIndex());
+					answerTextView.setText( newListValues.get(6));
+				}
+				else
+				{
+					answerTextView.setIndex(-1);
+					answerTextView.setText("");
+				}
+			}
+		});
+
+		answerTextView.setIndex(-1);
+
+		int i = field.getLikertAnswerIndex();
+
+		if (i > 0)
+		{
+			i &= 0xf;
+
+			switch (i) {
+				case 0:
+					selectAnswer( circle1 );
+					answerTextView.setIndex( circle1.getIndex());
+					answerTextView.setText( newListValues.get(0));
+					break;
+				case 1:
+					selectAnswer( circle2 );
+					answerTextView.setIndex( circle2.getIndex());
+					answerTextView.setText( newListValues.get(1));
+					break;
+				case 2:
+					selectAnswer( circle3 );
+					answerTextView.setIndex( circle3.getIndex());
+					answerTextView.setText( newListValues.get(2));
+					break;
+				case 3:
+					selectAnswer( circle4 );
+					answerTextView.setIndex( circle4.getIndex());
+					answerTextView.setText( newListValues.get(3));
+					break;
+				case 4:
+					selectAnswer( circle5 );
+					answerTextView.setIndex( circle5.getIndex());
+					answerTextView.setText( newListValues.get(4));
+					break;
+				case 5:
+					selectAnswer( circle6 );
+					answerTextView.setIndex( circle6.getIndex());
+					answerTextView.setText( newListValues.get(5));
+					break;
+				case 6:
+					selectAnswer( circle7 );
+					answerTextView.setIndex( circle7.getIndex());
+					answerTextView.setText( newListValues.get(6));
+					break;
+				case 7:
+					answerTextView.setIndex( dontKnowCheckBox.getIndex());
+					dontKnowCheckBox.setChecked( true );
+					break;
+				case 8:
+					answerTextView.setIndex( refusedCheckBox.getIndex());
+					refusedCheckBox.setChecked( true );
+					break;
+			}
+		}
+
+		if (isDontKnowEnabled)
+		{
+			dontKnowCheckBox.setText( dontKnowText );
+			dontKnowCheckBox.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (dontKnowCheckBox.isChecked())
+					{
+						answerTextView.setIndex( dontKnowCheckBox.getIndex());
+						answerTextView.setText("");
+						unselectAll( circle1, circle2, circle3, circle4, circle5, circle6, null, null );
+						unselectAll( circle2, circle3, circle4, circle5, circle6, circle7, null, null );
+						if (refusedCheckBox.isChecked())
+						{
+							refusedCheckBox.toggle();
+						}
+						setDidAnswer( true );
+					}
+					else
+					{
+						answerTextView.setIndex(-1);
+						setDidAnswer( false );
+					}
+				}
+			});
+		}
+
+		if (isRefusedEnabled)
+		{
+			refusedCheckBox.setText( refusedText );
+			refusedCheckBox.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (refusedCheckBox.isChecked())
+					{
+						answerTextView.setIndex( refusedCheckBox.getIndex());
+						answerTextView.setText("");
+						unselectAll( circle1, circle2, circle3, circle4, circle5, circle6, null, null );
+						unselectAll( circle2, circle3, circle4, circle5, circle6, circle7, null, null );
+						if (dontKnowCheckBox.isChecked())
+						{
+							dontKnowCheckBox.toggle();
+						}
+						setDidAnswer( true );
+					}
+					else
+					{
+						answerTextView.setIndex(-1);
+						setDidAnswer( false );
+					}
+				}
+			});
+		}
+
+		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase(), likertView);
+
+		return fieldCounter;
+	}
+
+	private void setDidAnswer( boolean didAnswer )
+	{
+
+	}
+
+	private boolean selectAnswer( View circle )
+	{
+		Drawable selected = container.getResources().getDrawable( R.drawable.circle_selected );
+		Drawable unselected = container.getResources().getDrawable( R.drawable.circle );
+
+		boolean answer;
+
+		if (circle.getAlpha() < 1)
+		{
+			answer = false;
+			circle.setAlpha((float)1.0);
+			circle.setBackgroundDrawable( unselected );
+		}
+		else
+		{
+			answer = true;
+			circle.setAlpha((float)0.99);
+			circle.setBackgroundDrawable( selected );
+		}
+
+		setDidAnswer( answer );
+
+		return answer;
+	}
+
+	private void unselectAll( View circle1, View circle2, View circle3, View circle4, View circle5, View circle6, CheckBox dontKnowCheckBox, CheckBox refusedCheckBox )
+	{
+		if ((dontKnowCheckBox != null) && (dontKnowCheckBox.isChecked()))
+		{
+			dontKnowCheckBox.toggle();
+		}
+		if ((refusedCheckBox != null) && (refusedCheckBox.isChecked()))
+		{
+			refusedCheckBox.toggle();
+		}
+
+		Drawable unselected = container.getResources().getDrawable( R.drawable.circle );
+
+		circle1.setBackgroundDrawable( unselected );
+		circle2.setBackgroundDrawable( unselected );
+		circle3.setBackgroundDrawable( unselected );
+		circle4.setBackgroundDrawable( unselected );
+		circle5.setBackgroundDrawable( unselected );
+		circle6.setBackgroundDrawable( unselected );
+
+		circle1.setAlpha((float)1.0);
+		circle2.setAlpha((float)1.0);
+		circle3.setAlpha((float)1.0);
+		circle4.setAlpha((float)1.0);
+		circle5.setAlpha((float)1.0);
+		circle6.setAlpha((float)1.0);
+	}
+
 	public int AddOptionField(ViewGroup myLayout, String prompt, LinkedList<String> listValues, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, double promptFontSize, double controlFontSize, String pattern, String checkCodeAfter)
 	{
 		fieldCounter++;
@@ -1757,9 +2273,9 @@ public class InterviewLayoutManager {
 		layout2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		params.leftMargin = (int)Math.round(formWidth * x);
-		params.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight) + 30);
-		layout1.setLayoutParams(params);		
+		//params.leftMargin = (int)Math.round(formWidth * x);
+		//params.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight) + 30);
+		layout1.setLayoutParams(params);
 		layout1.setId(fieldCounter);
 		myLayout.addView(layout1);
 		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase(), layout2);
@@ -2133,7 +2649,7 @@ public class InterviewLayoutManager {
 		return fieldCounter;
 	}
 
-	public int AddRelateField(ViewGroup myLayout, String text, double x, double y, double fieldWidth, double fieldHeight, double fontSize, int pagePosition, String checkCodeClick)
+	public int AddRelateField(ViewGroup myLayout, String text, double x, double y, double fieldWidth, double fieldHeight, double fontSize, int pagePosition, final boolean shouldReturnToParent, String checkCodeClick)
 	{
 		fieldCounter++;
 		Button btn = new Button(container);
@@ -2178,6 +2694,7 @@ public class InterviewLayoutManager {
 				Intent recordList = new Intent(container, RecordList.class);
 				recordList.putExtra("ViewName", "_" + relateFieldName);
 				recordList.putExtra("FKEY", AppManager.GetFormGuid(container));
+				recordList.putExtra("ShouldReturnToParent", shouldReturnToParent);
 				container.startActivityForResult(recordList,0);
 			}
 		});

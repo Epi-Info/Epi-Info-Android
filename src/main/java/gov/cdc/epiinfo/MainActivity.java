@@ -1,26 +1,5 @@
 package gov.cdc.epiinfo;
 
-import gov.cdc.epiinfo.RecordList.CloudSynchronizer;
-import gov.cdc.epiinfo.analysis.AnalysisMain;
-import gov.cdc.epiinfo.etc.ExtFilter;
-import gov.cdc.epiinfo.statcalc.StatCalcMain;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.util.Calendar;
-import java.util.LinkedList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
@@ -31,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,7 +18,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,13 +30,39 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
-public class MainActivity extends ActionBarActivity {
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.Random;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import gov.cdc.epiinfo.analysis.AnalysisMain;
+import gov.cdc.epiinfo.etc.ExtFilter;
+import gov.cdc.epiinfo.statcalc.StatCalcMain;
+
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
 	private Button btnCollectData;
 	private Button btnStatcalc;
 	private Button btnAnalyze;
 	private MainActivity self;
+	private GoogleMap mMap;
+	private MapView mMapView;
 	private static boolean splashShown;
 
 	private void LoadActivity(Class c)
@@ -118,7 +124,11 @@ public class MainActivity extends ActionBarActivity {
 		self = this;
 
 		DeviceManager.Init(this);
-		DeviceManager.SetOrientation(this, false); 
+		DeviceManager.SetOrientation(this, false);
+
+		mMapView = findViewById(R.id.map);
+		mMapView.onCreate(savedInstanceState);
+		mMapView.getMapAsync(this);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		if (!sharedPref.getBoolean("ei7", false) && !sharedPref.getBoolean("stacked", false) && !sharedPref.getBoolean("interview", false))
@@ -184,7 +194,7 @@ public class MainActivity extends ActionBarActivity {
 
 		this.setTheme(R.style.AppTheme);
 
-		btnCollectData = (Button)findViewById(R.id.btnCollectData);
+		btnCollectData = findViewById(R.id.btnCollectData);
 		btnCollectData.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -194,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
-		btnAnalyze = (Button)findViewById(R.id.btnAnalyze);
+		btnAnalyze = findViewById(R.id.btnAnalyze);
 		btnAnalyze.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -204,7 +214,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 
-		btnStatcalc = (Button)findViewById(R.id.btnStatcalc);
+		btnStatcalc = findViewById(R.id.btnStatcalc);
 		btnStatcalc.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -322,36 +332,37 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
-	private void loadDefaults()
-	{
+
+	@Override
+	public void onMapReady(GoogleMap googleMap) {
+
+		KmlLoader.Load(googleMap, this);
+	}
+
+	private void loadDefaults() {
 		AppManager.setDefaultForm("");
-		try
-		{
+		try {
 			File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			File file = new File(path, "EpiInfo/defaults.xml");        		
+			File file = new File(path, "EpiInfo/defaults.xml");
 
-			InputStream obj_is = null; 
-			Document obj_doc = null; 
-			DocumentBuilderFactory doc_build_fact = null; 
-			DocumentBuilder doc_builder = null; 
-			obj_is = new FileInputStream(file); 
-			doc_build_fact = DocumentBuilderFactory.newInstance(); 
-			doc_builder = doc_build_fact.newDocumentBuilder(); 
+			InputStream obj_is = null;
+			Document obj_doc = null;
+			DocumentBuilderFactory doc_build_fact = null;
+			DocumentBuilder doc_builder = null;
+			obj_is = new FileInputStream(file);
+			doc_build_fact = DocumentBuilderFactory.newInstance();
+			doc_builder = doc_build_fact.newDocumentBuilder();
 
-			obj_doc = doc_builder.parse(obj_is); 
-			NodeList obj_nod_list = null; 
-			if(null != obj_doc) 
-			{ 
+			obj_doc = doc_builder.parse(obj_is);
+			NodeList obj_nod_list = null;
+			if (null != obj_doc) {
 				Element feed = obj_doc.getDocumentElement();
 				String form = feed.getAttributes().getNamedItem("Form").getNodeValue().replace(".xml", "");
-				if (!form.equals("") && !form.equals(null))
-				{
+				if (!form.equals("") && !form.equals(null)) {
 					AppManager.setDefaultForm(form);
 				}
 			}
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
 
 		}
 	}
@@ -373,12 +384,50 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	@Override
-	protected void onPause()
-	{
+	public void onResume() {
+		super.onResume();
+		if (mMapView != null) {
+			mMapView.onResume();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		if (mMapView != null) {
+			mMapView.onPause();
+		}
 		super.onPause();
 		removeDialog(1);
 		removeDialog(2);
 		removeDialog(3);
+	}
+
+	@Override
+	public void onDestroy() {
+		if (mMapView != null) {
+			try {
+				mMapView.onDestroy();
+			} catch (NullPointerException e) {
+
+			}
+		}
+		super.onDestroy();
+	}
+
+	@Override
+	public void onLowMemory() {
+		super.onLowMemory();
+		if (mMapView != null) {
+			mMapView.onLowMemory();
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (mMapView != null) {
+			mMapView.onSaveInstanceState(outState);
+		}
 	}
 
 	private void ShowSettings()
@@ -674,7 +723,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 	
-	private void SyncAllData(AsyncTask asyncTask)
+	/*private void SyncAllData(AsyncTask asyncTask)
 	{
 		File basePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 		File quesPath = new File(basePath + "/EpiInfo/Questionnaires");
@@ -699,7 +748,7 @@ public class MainActivity extends ActionBarActivity {
 				mDbHelper.SyncWithCloud(asyncTask);
 			}
 		}
-	}
+	}*/
 
 	private void ExportAllData(String password)
 	{
@@ -791,22 +840,73 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
 	}
-	
-	private void doCloudSync()
-	{
+
+	private void doCloudSync() {
 		Toast.makeText(self, getString(R.string.cloud_sync_started), Toast.LENGTH_LONG).show();
-		new CloudSynchronizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+		File basePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+		File quesPath = new File(basePath + "/EpiInfo/Questionnaires");
+
+		String[] files = quesPath.list(new ExtFilter("xml", null));
+		if (files != null) {
+			for (int x = 0; x < files.length; x++) {
+				int idx = files[x].indexOf(".");
+				String viewName = files[x].substring(0, idx);
+
+				new CloudSynchronizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,viewName);
+			}
+		}
+
 	}
 
-	public class CloudSynchronizer extends AsyncTask<Void,Void, Boolean>
-	{
+	public class CloudSynchronizer extends AsyncTask<String, Void, Integer> {
+
+		private String formName;
 
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected Integer doInBackground(String... params) {
 
-			SyncAllData(this);
-			return true;
+			formName = params[0];
+			FormMetadata formMetadata = new FormMetadata("EpiInfo/Questionnaires/" + formName + ".xml", self);
+
+			if (formName.startsWith("_")) {
+				formName = formName.toLowerCase();
+			}
+
+			EpiDbHelper mDbHelper = new EpiDbHelper(self, formMetadata, formName);
+			mDbHelper.open();
+
+			return mDbHelper.SyncWithCloud(this);
+
+			//return SyncAllData(this);
 		}
+
+		@Override
+		protected void onPostExecute(Integer status) {
+
+			int msgId = new Random().nextInt(Integer.MAX_VALUE);
+
+			if (status > 0) {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+						.setSmallIcon(R.drawable.ic_cloud_done)
+						.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+						.setContentTitle(String.format(getString(R.string.cloud_sync_complete), formName))
+						.setContentText(getString(R.string.cloud_sync_complete_detail));
+
+				NotificationManager notificationManager = (NotificationManager) self.getSystemService(Context.NOTIFICATION_SERVICE);
+				notificationManager.notify(msgId, builder.build());
+			} else if (status != -99 && status != 0) {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+						.setSmallIcon(R.drawable.ic_sync_problem)
+						.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+						.setContentTitle(String.format(getString(R.string.cloud_sync_failed),  formName))
+						.setContentText(getString(R.string.cloud_sync_failed_detail));
+
+				NotificationManager notificationManager = (NotificationManager) self.getSystemService(Context.NOTIFICATION_SERVICE);
+				notificationManager.notify(msgId, builder.build());
+			}
+		}
+
 
 	}
 

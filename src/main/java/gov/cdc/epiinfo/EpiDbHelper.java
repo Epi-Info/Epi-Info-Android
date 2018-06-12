@@ -26,8 +26,10 @@ import java.util.List;
 import java.util.Stack;
 import java.util.UUID;
 
+import gov.cdc.epiinfo.cloud.AzureClient;
 import gov.cdc.epiinfo.cloud.BoxClient;
 import gov.cdc.epiinfo.cloud.CloudFactory;
+import gov.cdc.epiinfo.cloud.EpiInfoCloudClient;
 import gov.cdc.epiinfo.cloud.ICloudClient;
 
 
@@ -66,7 +68,7 @@ public class EpiDbHelper {
 				if (!formMetadata.Fields.get(x).getType().equals("2") && !formMetadata.Fields.get(x).getType().equals("21"))
 				{
 					String dbType;
-					if (formMetadata.Fields.get(x).getType().equals("5") || formMetadata.Fields.get(x).getType().equals("10") || formMetadata.Fields.get(x).getType().equals("11") || formMetadata.Fields.get(x).getType().equals("12") || formMetadata.Fields.get(x).getType().equals("17") || formMetadata.Fields.get(x).getType().equals("18") || formMetadata.Fields.get(x).getType().equals("19"))
+					if (formMetadata.Fields.get(x).getType().equals("5") || formMetadata.Fields.get(x).getType().equals("10") || formMetadata.Fields.get(x).getType().equals("11") || formMetadata.Fields.get(x).getType().equals("12") || formMetadata.Fields.get(x).getType().equals("98") || formMetadata.Fields.get(x).getType().equals("17") || formMetadata.Fields.get(x).getType().equals("18") || formMetadata.Fields.get(x).getType().equals("19"))
 						dbType="real";
 					else
 						dbType="text";
@@ -227,6 +229,8 @@ public class EpiDbHelper {
 		}
 		catch (Exception ex)
 		{
+			int x =5;
+			x++;
 
 		}
 
@@ -268,29 +272,28 @@ public class EpiDbHelper {
 
 		String guidValue = initialValues.get(GUID).toString();		
 
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
 
 
 		try {
 			initialValues.put("id", guidValue);
 			initialValues.remove(GUID);
 
-			for (int x = 0; x < formMetadata.DataFields.size(); x++)
-			{
-				if (formMetadata.DataFields.get(x).getType().equals("7"))
-				{
+			for (int x = 0; x < formMetadata.DataFields.size(); x++) {
+				if (formMetadata.DataFields.get(x).getType().equals("7")) {
 					String dateValue = initialValues.getAsString(formMetadata.DataFields.get(x).getName());
-					if (!dateValue.equals(""))
-					{
+					if (!dateValue.equals("")) {
 						String jsonDate = "";
-						try
-						{
-							DateFormat jsonFormat = new SimpleDateFormat("M/d/yyyy h:mm:ss a");
+						try {
+							DateFormat jsonFormat;
+							if (cloudClient.getClass().equals(EpiInfoCloudClient.class)) {
+								jsonFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+							} else {
+								jsonFormat = new SimpleDateFormat("M/d/yyyy h:mm:ss a");
+							}
 							Date date = DateFormat.getDateInstance().parse(dateValue);
 							jsonDate = jsonFormat.format(date);
-						}
-						catch (Exception ex)
-						{
+						} catch (Exception ex) {
 							jsonDate = dateValue;
 						}
 
@@ -309,7 +312,7 @@ public class EpiDbHelper {
 
 	private ArrayList<String> GetCloudData()
 	{
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
 		ArrayList<String> guids = new ArrayList<String>();
 		try
 		{
@@ -372,9 +375,14 @@ public class EpiDbHelper {
 								}
 								else
 								{
-									try
-									{
-										Date date = new SimpleDateFormat("M/d/yyyy h:mm:ss a").parse(row.get(column).toString());
+									try {
+										SimpleDateFormat jsonFormat;
+										if (cloudClient.getClass().equals(EpiInfoCloudClient.class)) {
+											jsonFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+										} else {
+											jsonFormat = new SimpleDateFormat("M/d/yyyy h:mm:ss a");
+										}
+										Date date = jsonFormat.parse(row.get(column).toString());
 
 										DateFormat dateFormat = DateFormat.getDateInstance();
 										Calendar cal = GregorianCalendar.getInstance();
@@ -400,37 +408,34 @@ public class EpiDbHelper {
 							values.put(formMetadata.NumericFields.get(n).getName(), Double.POSITIVE_INFINITY);
 						}
 					}
-
-					Cursor tempCursor = fetchIdAndStamp(GUID + " = \"" + guid + "\"");
-					if (tempCursor.getCount() > 0)
-					{
-						tempCursor.moveToFirst();
-						int id = tempCursor.getInt(tempCursor.getColumnIndexOrThrow(KEY_ROWID));
-						long localTimeStamp;
-						if (tempCursor.isNull(tempCursor.getColumnIndexOrThrow("_updateStamp")))
-						{
-							localTimeStamp = 0;
-						}
-						else
-						{
-							localTimeStamp = tempCursor.getLong(tempCursor.getColumnIndexOrThrow("_updateStamp"));
-						}
-						long serverTimeStamp = values.getAsLong("_updateStamp");
-						if (serverTimeStamp > localTimeStamp)
-						{
-							updateRecord(id, values, false);
+					if (cloudClient.getClass() != AzureClient.class) {
+						if (guid != null && guid != "") {
 							guids.add(guid);
 						}
-					}
-					else
-					{
-						long insertedId = createRecord(values, false, guid, null);
-						if (insertedId < 0)
-						{
-							return null;
+					} else {
+						Cursor tempCursor = fetchIdAndStamp(GUID + " = \"" + guid + "\"");
+						if (tempCursor.getCount() > 0) {
+							tempCursor.moveToFirst();
+							int id = tempCursor.getInt(tempCursor.getColumnIndexOrThrow(KEY_ROWID));
+							long localTimeStamp;
+							if (tempCursor.isNull(tempCursor.getColumnIndexOrThrow("_updateStamp"))) {
+								localTimeStamp = 0;
+							} else {
+								localTimeStamp = tempCursor.getLong(tempCursor.getColumnIndexOrThrow("_updateStamp"));
+							}
+							long serverTimeStamp = values.getAsLong("_updateStamp");
+							if (serverTimeStamp > localTimeStamp) {
+								updateRecord(id, values, false);
+								guids.add(guid);
+							}
+						} else {
+							long insertedId = createRecord(values, false, guid, null);
+							if (insertedId < 0) {
+								return null;
+							}
+							updateSyncStatus(insertedId);
+							guids.add(guid);
 						}
-						updateSyncStatus(insertedId);
-						guids.add(guid);
 					}
 				}
 				else
@@ -510,84 +515,64 @@ public class EpiDbHelper {
 			}
 
 		} catch (Exception ex) {
+			int w=5;
+			w++;
 			return false;
 		}
 		return true;
 	}
 
-	public int SendRecordToCloud(long id)
-	{
+	public int SendRecordToCloud(long id) {
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
 		Cursor c = fetchWhere_all(KEY_ROWID + "=" + id);
 		double totalSize = c.getCount();
-		if (totalSize < 1)
-		{
+		if (totalSize < 1) {
 			return 0;
 		}
 
 		int retval = -1;
-		if (c.moveToFirst())
-		{
+		if (c.moveToFirst()) {
 
 			ContentValues initialValues = new ContentValues();
 
-			for (int x=0;x<formMetadata.DataFields.size();x++)
-			{
-				if (!c.isNull((c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName()))))
-				{
-					if (formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("18"))
-					{
+			for (int x = 0; x < formMetadata.DataFields.size(); x++) {
+				if (!c.isNull((c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())))) {
+					if (formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("18")) {
 						initialValues.put(formMetadata.DataFields.get(x).getName(), c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
-					}
-					else if (formMetadata.DataFields.get(x).getType().equals("17") || formMetadata.DataFields.get(x).getType().equals("19") )
-					{
-						if (formMetadata.DataFields.get(x).getListValues().size() > 100)
-						{
+					} else if (formMetadata.DataFields.get(x).getType().equals("17") || formMetadata.DataFields.get(x).getType().equals("19")) {
+						if (formMetadata.DataFields.get(x).getListValues().size() > 100) {
 							initialValues.put(formMetadata.DataFields.get(x).getName(), c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
-						}
-						else
-						{
+						} else {
 							initialValues.put(formMetadata.DataFields.get(x).getName(), c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
 						}
-					}
-					else if (formMetadata.DataFields.get(x).getType().equals("5"))
-					{
+					} else if (formMetadata.DataFields.get(x).getType().equals("5")) {
 						initialValues.put(formMetadata.DataFields.get(x).getName(), c.getDouble(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
-					}
-					else if (formMetadata.DataFields.get(x).getType().equals("7"))
-					{
-						if (c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())).equals(""))
-						{
-							initialValues.put(formMetadata.DataFields.get(x).getName(), "");	
-						}
-						else
-						{
+					} else if (formMetadata.DataFields.get(x).getType().equals("7")) {
+						if (c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())).equals("")) {
+							initialValues.put(formMetadata.DataFields.get(x).getName(), "");
+						} else {
 							String jsonDate = "";
-							try
-							{
-								DateFormat jsonFormat = new SimpleDateFormat("M/d/yyyy h:mm:ss a");
+							try {
+								DateFormat jsonFormat;
+								if (cloudClient.getClass().equals(EpiInfoCloudClient.class)) {
+									jsonFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+								} else {
+									jsonFormat = new SimpleDateFormat("M/d/yyyy h:mm:ss a");
+								}
 								Date date = DateFormat.getDateInstance().parse(c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
 								jsonDate = jsonFormat.format(date);
-							}
-							catch (Exception ex)
-							{
+							} catch (Exception ex) {
 								jsonDate = c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName()));
 							}
 							initialValues.put(formMetadata.DataFields.get(x).getName(), jsonDate);
 						}
-					}
-					else if (formMetadata.DataFields.get(x).getType().equals("10"))
-					{
-						if (c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())) == 1)
-						{
+					} else if (formMetadata.DataFields.get(x).getType().equals("10")) {
+						if (c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())) == 1) {
 							initialValues.put(formMetadata.DataFields.get(x).getName(), true);
-						}
-						else
-						{
+						} else {
 							initialValues.put(formMetadata.DataFields.get(x).getName(), false);
 						}
-					}
-					else
-					{
+					} else {
 						initialValues.put(formMetadata.DataFields.get(x).getName(), c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
 					}
 				}
@@ -595,37 +580,28 @@ public class EpiDbHelper {
 
 			String guidValue = c.getString(c.getColumnIndexOrThrow(GUID));
 			initialValues.put("id", guidValue);
-			if (c.isNull(c.getColumnIndexOrThrow("_updateStamp")))
-			{
+
+			if (c.isNull(c.getColumnIndexOrThrow("_updateStamp"))) {
 				initialValues.put("_updateStamp", new Date().getTime());
-			}
-			else
-			{
+			} else {
 				initialValues.put("_updateStamp", c.getLong(c.getColumnIndexOrThrow("_updateStamp")));
 			}
-			if (this.isRelatedTable)
-			{
+
+			if (this.isRelatedTable) {
 				initialValues.put("FKEY", c.getString(c.getColumnIndexOrThrow("FKEY")));
 			}
 
-			try 
-			{
-				ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, mCtx);
+			try {
 
-				if (cloudClient.updateRecord(guidValue, initialValues))
-				{
+				if (cloudClient.updateRecord(guidValue, initialValues)) {
 					System.out.println("update succeeded");
 					updateSyncStatus(id);
 					retval = 1;
-				}
-				else
-				{
+				} else {
 					retval = -1;
 					System.out.println("update failed");
 				}
-			}
-			catch (Exception ex)
-			{
+			} catch (Exception ex) {
 				retval = -1;
 			}
 		}
@@ -646,7 +622,7 @@ public class EpiDbHelper {
 
 	private int SendDataToCloud(AsyncTask asyncTask, ArrayList<String> receivedGuids)
 	{
-		Cursor c = fetchAllIds();
+		Cursor c = fetchAllIds(true);
 		double totalSize = c.getCount();
 		if (totalSize < 1)
 		{
@@ -890,11 +866,21 @@ public class EpiDbHelper {
 		return mCursor;
 	}
 
-	public Cursor fetchAllIds() throws SQLException
+	public Cursor fetchAllIds(boolean unsyncedOnly) throws SQLException
 	{
 		String[] columns = new String[] {KEY_ROWID};
 
-		Cursor mCursor = mDb.query(true, DATABASE_TABLE, columns, null, null,
+		String whereClause;
+		if (unsyncedOnly)
+		{
+			whereClause="_syncStatus != 1";
+		}
+		else
+		{
+			whereClause="1 = 1";
+		}
+
+		Cursor mCursor = mDb.query(true, DATABASE_TABLE, columns, whereClause, null,
 				null, null, null, null);
 		if (mCursor != null) {
 			mCursor.moveToFirst();
@@ -1059,7 +1045,7 @@ public class EpiDbHelper {
 	private void deleteCloudRecord(String guidValue) {
 
 
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
 
 
 		try {

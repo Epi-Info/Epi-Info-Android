@@ -1,10 +1,5 @@
 package gov.cdc.epiinfo;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.LinkedList;
-
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -16,6 +11,11 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.LinkedList;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -136,6 +136,9 @@ public class SettingsFragment extends PreferenceFragment {
 			sftp_url.setEnabled(false);
 			cloud_user_name.setEnabled(false);
 			cloud_pwd.setEnabled(false);
+
+			sync_down_only.setEnabled(true);
+			sync_up_down.setEnabled(true);
 		}
 		else if (cloud_service.getValue().equals("SFTP"))
 		{
@@ -145,6 +148,24 @@ public class SettingsFragment extends PreferenceFragment {
 			sftp_url.setEnabled(true);
 			cloud_user_name.setEnabled(true);
 			cloud_pwd.setEnabled(true);
+
+			sync_down_only.setEnabled(true);
+			sync_up_down.setEnabled(true);
+		}
+		else if (cloud_service.getValue().equals("EIWS"))
+		{
+			azure_classic.setEnabled(false);
+			service_name.setEnabled(false);
+			application_key.setEnabled(false);
+			sftp_url.setEnabled(true);
+			cloud_user_name.setEnabled(false);
+			cloud_pwd.setEnabled(false);
+
+			sync_up_only.setChecked(true);
+			sync_down_only.setChecked(false);
+			sync_up_down.setChecked(false);
+			sync_down_only.setEnabled(false);
+			sync_up_down.setEnabled(false);
 		}
 		else
 		{
@@ -154,6 +175,9 @@ public class SettingsFragment extends PreferenceFragment {
 			sftp_url.setEnabled(false);
 			cloud_user_name.setEnabled(false);
 			cloud_pwd.setEnabled(false);
+
+			sync_down_only.setEnabled(true);
+			sync_up_down.setEnabled(true);
 		}
 		
 		cloud_service.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -167,6 +191,9 @@ public class SettingsFragment extends PreferenceFragment {
 					sftp_url.setEnabled(false);
 					cloud_user_name.setEnabled(false);
 					cloud_pwd.setEnabled(false);
+
+					sync_down_only.setEnabled(true);
+					sync_up_down.setEnabled(true);
 				}
 				else if (val.toString().equals("SFTP"))
 				{
@@ -176,6 +203,24 @@ public class SettingsFragment extends PreferenceFragment {
 					sftp_url.setEnabled(true);
 					cloud_user_name.setEnabled(true);
 					cloud_pwd.setEnabled(true);
+
+					sync_down_only.setEnabled(true);
+					sync_up_down.setEnabled(true);
+				}
+				else if (val.toString().equals("EIWS"))
+				{
+					azure_classic.setEnabled(false);
+					service_name.setEnabled(false);
+					application_key.setEnabled(false);
+					sftp_url.setEnabled(true);
+					cloud_user_name.setEnabled(false);
+					cloud_pwd.setEnabled(false);
+
+					sync_up_only.setChecked(true);
+					sync_down_only.setChecked(false);
+					sync_up_down.setChecked(false);
+					sync_down_only.setEnabled(false);
+					sync_up_down.setEnabled(false);
 				}
 				else
 				{
@@ -185,6 +230,9 @@ public class SettingsFragment extends PreferenceFragment {
 					sftp_url.setEnabled(false);
 					cloud_user_name.setEnabled(false);
 					cloud_pwd.setEnabled(false);
+
+					sync_down_only.setEnabled(true);
+					sync_up_down.setEnabled(true);
 				}
 				return true;
 			}

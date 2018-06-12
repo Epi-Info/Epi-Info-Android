@@ -160,7 +160,7 @@
 	<string name="form_layout_interview">Les éléments de formulaire sont présentés sous forme de questions une à la fois.</string>
 	<string name="form_layout_interview_title">Mode Interview</string>
 	
-	<string name="sftp_url">URL FTP sécurisé</string>
+	<string name="sftp_url">URL du service</string>
     <string name="cloud_user_name">Nom d\'utilisateur</string>
     <string name="cloud_pwd">Mot de passe</string>
 	<string name="cloud_sync">Synchronisation avec le cloud</string>
@@ -220,6 +220,7 @@
         <item>Box</item>
         <item>FTP Sécurisé</item>
         <item>Microsoft Azure</item>
+		<item>API de Epi Info</item>
     </string-array>
 	
 </resources>
