@@ -20,6 +20,7 @@
     <string name="menu_export_all">Exporter toutes les bases de données</string>
 	<string name="menu_search">Rechercher</string>
 	<string name="menu_exit">Sortie</string>
+	<string name="menu_exit_no_save">Quitter sans sauvegarder</string>
 	<string name="ok">OK</string>
 	<string name="yes">Oui</string>
 	<string name="no">Non</string>
@@ -194,7 +195,6 @@
 	<string name="identification">Identification</string>
     <string name="device_id">Fournir un identifiant unique pour cet appareil (utilisé pour les noms de fichiers de synchronisation).</string>
     <string name="device_id_title">ID de l\'appareil</string>
-	<string name="windows_compatibility">Compatibilité de Windows</string>
     <string name="windows_decimal_symbol">Symbole décimal de Windows</string> 
     <string name="windows_decimal_symbol_desc">La représentation de décimales dans Microsoft Windows. AVERTISSEMENT: Ce paramètre affecte la façon dont les données numériques est importé dans Epi Info 7.</string>
     <string name="windows_decimal_symbol_dialog_title">Symbole décimal de Windows</string>
@@ -211,6 +211,18 @@
 	<string name="img_chi_sq">Analyse de tendance linéaire</string>
 	<string name="img_open_epi">Plus de calculatrices à OpenEpi.com</string>
 	<string name="fab_alt_text">Ajouter des\ndonnées</string>
+	<string name="set_permissions">Définir les autorisations</string>
+	<string name="request_storage">Demande d\'autorisation: stockage</string>
+	<string name="storage_desc">Epi info stocke l\'accumulation des données de formulaires et les fichiers sync sur le système de fichiers Android, veuillez autoriser Epi Info à accéder au stockage de l\'appareil.</string>
+	<string name="request_location">Demande d\'autorisation: localization</string>
+	<string name="location_desc">Epi Info peut utiliser le GPS intégré de l\'appareil pour vous permettre de collecter des informations géographiques. Si vous envisagez de le faire, veuillez autoriser Epi Info à accéder à l\'emplacement de l\'appareil.</string>
+	<string name="request_mic">Demande d\'autorisation: microphone</string>
+	<string name="mic_desc">Epi Info peut utiliser le microphone intégré de l\'appareil pour vous permettre de capturer l\'audio avec vos données structurées, veuillez autoriser Epi Info à accéder au microphone de l\'appareil.</string>
+	<string name="request_camera">Demande d\'autorisation: caméra</string>
+	<string name="camera_desc">Epi Info peut utiliser la caméra intégré de l\'appareil pour vous permettre de capturer des photos et vidéos avec vos données structurées, veuillez autoriser Epi Info à accéder au caméra de l\'appareil.</string>
+	<string name="error_storage">Vous n\'avez pas autorisé Epi Info à accéder aux formulaires sur votre appareil. Veuillez accorder cette autorisation sur l\'écran de configuration de votre appareil.</string>
+	<string name="error_camera">Vous n\'avez pas autorisé Epi Info à accéder au caméra. Veuillez accorder cette autorisation sur l\'écran de configuration de votre appareil.</string>
+
 	<string-array name="yn_array">
         <item>&lt;pas sélectionné&gt;</item>
         <item>Oui</item>
@@ -220,6 +232,7 @@
         <item>Box</item>
         <item>FTP Sécurisé</item>
         <item>Microsoft Azure</item>
+		<item>CouchDB</item>
 		<item>API de Epi Info</item>
     </string-array>
 	

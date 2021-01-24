@@ -1,6 +1,11 @@
 package gov.cdc.epiinfo.interpreter;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.creativewidgetworks.goldparser.engine.Reduction;
+
+import gov.cdc.epiinfo.RecordList;
 
 public class Rule_Execute extends EnterRule
 {
@@ -11,7 +16,7 @@ public class Rule_Execute extends EnterRule
     {
     	super(pContext);
 
-    	this.ExecutionItem = this.ExtractIdentifier(pToken.get(2)).replace("\"", "").toString();
+    	this.ExecutionItem = this.ExtractIdentifier(pToken.get(2)).replace("\"", "");
     }
 
 
@@ -32,6 +37,38 @@ public class Rule_Execute extends EnterRule
             {
 
             }
+        }
+        else if (this.ExecutionItem.toLowerCase().contains("loadrecord"))
+        {
+            String[] params = this.ExecutionItem.substring(10).split("&");
+            String viewName = "";
+            if (params[0].split("=")[1].startsWith("_"))
+            {
+                viewName = params[0].split("=")[1].toLowerCase().trim();
+            }
+            else
+            {
+                viewName = params[0].split("=")[1].trim();
+            }
+            String varName = params[1].split("=")[0].trim();
+            String varValue = "";
+            if (params[1].split("=")[1].contains("["))
+            {
+                varValue = this.Context.CheckCodeInterface.GetValue(params[1].split("=")[1].replace("[","").replace("]","").trim()).toString();
+            }
+            else
+            {
+                varValue = params[1].split("=")[1].trim();
+            }
+
+
+            Intent recordList = new Intent((Activity)this.Context.CheckCodeInterface, RecordList.class);
+            recordList.putExtra("ViewName", viewName);
+            recordList.putExtra("CheckCodeQuery", varName + "='" + varValue + "'");
+
+
+            ((Activity)this.Context.CheckCodeInterface).startActivity(recordList);
+
         }
         else if (this.ExecutionItem.toLowerCase().equals("save"))
         {

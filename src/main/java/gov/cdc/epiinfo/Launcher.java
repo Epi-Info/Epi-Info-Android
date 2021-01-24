@@ -1,20 +1,19 @@
 package gov.cdc.epiinfo;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class Launcher extends Activity {
 
@@ -38,26 +37,44 @@ public class Launcher extends Activity {
 		if (u.getScheme().equals("file"))
 		{
 			fileName = new File(u.getPath()).getName();
-			try
-			{
-				FileInputStream in = new FileInputStream(u.getPath());
-				File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Questionnaires");
-				File outFile = new File(path,"/" + fileName);
+			if (fileName.toLowerCase().endsWith(".xml")) {
+				try {
+					FileInputStream in = new FileInputStream(u.getPath());
+					File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/EpiInfo/Questionnaires");
+					File outFile = new File(path, "/" + fileName);
 
-				if (!u.getPath().equals(outFile.getPath()))
-				{
-					FileOutputStream out = new FileOutputStream(outFile);
-					copyFile(in, out);
-					in.close();
-					in = null;
-					out.flush();
-					out.close();
-					out = null;
+					if (!u.getPath().equals(outFile.getPath())) {
+						FileOutputStream out = new FileOutputStream(outFile);
+						copyFile(in, out);
+						in.close();
+						in = null;
+						out.flush();
+						out.close();
+						out = null;
+					}
+				} catch (Exception ex) {
+
 				}
 			}
-			catch (Exception ex)
+			else if (fileName.toLowerCase().endsWith(".pre"))
 			{
+				try {
+					FileInputStream in = new FileInputStream(u.getPath());
+					File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/EpiInfo/Preload");
+					File outFile = new File(path, "/" + fileName.replace(".pre",".csv"));
 
+					if (!u.getPath().equals(outFile.getPath())) {
+						FileOutputStream out = new FileOutputStream(outFile);
+						copyFile(in, out);
+						in.close();
+						in = null;
+						out.flush();
+						out.close();
+						out = null;
+					}
+				} catch (Exception ex) {
+
+				}
 			}
 		}
 		else
@@ -70,22 +87,38 @@ public class Launcher extends Activity {
 			if (fileNameColumnId >= 0)
 				fileName = c.getString(fileNameColumnId);
 
-			try
-			{
-				InputStream s = getContentResolver().openInputStream(u);
-				File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Questionnaires");
-				File outFile = new File(path,"/" + fileName);
-				FileOutputStream out = new FileOutputStream(outFile);
-				copyFile(s, out);
-				s.close();
-				s = null;
-				out.flush();
-				out.close();
-				out = null;
-			}
-			catch (Exception ex)
-			{
+			if (fileName.toLowerCase().endsWith(".xml")) {
+				try {
+					InputStream s = getContentResolver().openInputStream(u);
+					File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/EpiInfo/Questionnaires");
+					File outFile = new File(path, "/" + fileName);
+					FileOutputStream out = new FileOutputStream(outFile);
+					copyFile(s, out);
+					s.close();
+					s = null;
+					out.flush();
+					out.close();
+					out = null;
+				} catch (Exception ex) {
 
+				}
+			}
+			else if (fileName.toLowerCase().endsWith(".pre"))
+			{
+				try {
+					InputStream s = getContentResolver().openInputStream(u);
+					File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/EpiInfo/Preload");
+					File outFile = new File(path, "/" + fileName.replace(".pre",".csv"));
+					FileOutputStream out = new FileOutputStream(outFile);
+					copyFile(s, out);
+					s.close();
+					s = null;
+					out.flush();
+					out.close();
+					out = null;
+				} catch (Exception ex) {
+
+				}
 			}
 		}
 
@@ -93,7 +126,9 @@ public class Launcher extends Activity {
 		String name = fileName.substring(0, idx);
 
 		Intent main = new Intent(this, MainActivity.class);
-		main.putExtra("ViewName", name);		
+		if (fileName.toLowerCase().endsWith(".xml")) {
+			main.putExtra("ViewName", name);
+		}
 		startActivity(main);
 
 

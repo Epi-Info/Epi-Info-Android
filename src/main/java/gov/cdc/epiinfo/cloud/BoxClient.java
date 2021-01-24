@@ -1,5 +1,6 @@
 package gov.cdc.epiinfo.cloud;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 
@@ -21,10 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStreamReader;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -42,6 +41,7 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 
 	private static final String clientId = "ekdhizskyvh5k6jro280rr4cc7m80bvh";
 	private static final String clientSecret = "a6cL20YpdqLQCov47OI3htHWgZ7PD2Q7";
+	private static final String redirectUri = "https://app.box.com/static/sync_redirect.html";
 
 	public static boolean isAuthenticated(Context context)
 	{
@@ -87,6 +87,7 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 			BoxConfig.IS_LOG_ENABLED = true;
 			BoxConfig.CLIENT_ID = clientId;
 			BoxConfig.CLIENT_SECRET = clientSecret;
+			BoxConfig.REDIRECT_URL = redirectUri;
 
 			if (tableName.startsWith("_"))
 			{
@@ -106,7 +107,7 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 		{
 			session = new BoxSession(context);
 			session.setSessionAuthListener(this);
-			session.authenticate();
+			session.authenticate(context);
 		}
 		catch (Exception ex)
 		{
@@ -173,31 +174,30 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 		return boxItems;
 	}
 
-	public JSONArray getData(boolean downloadImages, boolean downloadMedia, EpiDbHelper dbHelper)
-	{
-		try
-		{
+	@Override
+	public int getDailyTasks(Activity ctx, String deviceId) {
+		return -1;
+	}
+
+	public JSONArray getData(boolean downloadImages, boolean downloadMedia, EpiDbHelper dbHelper) {
+		try {
 			BoxApiFile fileApi = new BoxApiFile(session);
 			BoxApiFolder folderApi = new BoxApiFolder(session);
 
-			if (downloadImages)
-			{
+			if (downloadImages) {
 				getPhotoFolderStructure();
 				BoxIteratorItems photoFolderItems = folderApi.getItemsRequest(photoFolderId).send();
-				for (int x=0; x<photoFolderItems.size(); x++)
-				{
+				for (int x = 0; x < photoFolderItems.size(); x++) {
 					File f = new File("/sdcard/Download/EpiInfo/Images/" + photoFolderItems.get(x).getName());
 					f.createNewFile();
 					fileApi.getDownloadRequest(f, photoFolderItems.get(x).getId()).send();
 				}
 			}
 
-			if (downloadMedia)
-			{
+			if (downloadMedia) {
 				getMediaFolderStructure();
 				BoxIteratorItems mediaFolderItems = folderApi.getItemsRequest(mediaFolderId).send();
-				for (int x=0; x<mediaFolderItems.size(); x++)
-				{
+				for (int x = 0; x < mediaFolderItems.size(); x++) {
 					File f = new File("/sdcard/Download/EpiInfo/Media/" + mediaFolderItems.get(x).getName());
 					f.createNewFile();
 					fileApi.getDownloadRequest(f, mediaFolderItems.get(x).getId()).send();
@@ -206,46 +206,38 @@ public class BoxClient implements BoxAuthentication.AuthListener, ICloudClient {
 
 			getTableFolderStructure();
 			StringBuilder superbuilder = new StringBuilder();
-			ArrayList<MyBoxItem> folderItems = sort(folderApi.getItemsRequest(tableFolderId).setFields(BoxFolder.FIELD_ID,BoxFolder.FIELD_MODIFIED_AT).send());
-			for (int x=0; x < folderItems.size(); x++)
-			{
-				if (x==0)
-				{
+
+			BoxIteratorItems boxItems;
+			ArrayList<MyBoxItem> folderItems = new ArrayList<MyBoxItem>();
+			do {
+				boxItems = folderApi.getItemsRequest(tableFolderId).setLimit(750).setOffset(folderItems.size()).setFields(BoxFolder.FIELD_ID, BoxFolder.FIELD_MODIFIED_AT).send();
+				folderItems.addAll(sort(boxItems));
+			} while (folderItems.size() < boxItems.fullSize());
+
+			for (int x = 0; x < folderItems.size(); x++) {
+				if (x == 0) {
 					superbuilder.append("[");
 				}
-				StringBuilder builder = new StringBuilder();
+				ByteArrayOutputStream output = new ByteArrayOutputStream();
+				try {
+					fileApi.getDownloadRequest(output, folderItems.get(x).getId()).send();
+					String json = new String(output.toByteArray());
 
-				PipedOutputStream po = new PipedOutputStream();
-				PipedInputStream pi = new PipedInputStream(po);
+					dbHelper.SaveRecievedData(new JSONObject(json));
+					superbuilder.append(json);
+					if (x == folderItems.size() - 1) {
+						superbuilder.append("]");
+					} else {
+						superbuilder.append(",");
+					}
+				} catch (Exception ex) {
 
-				fileApi.getDownloadRequest(po, folderItems.get(x).getId()).send();
-				int i;
-				po.close();
-				InputStreamReader s = new InputStreamReader(pi);
-
-				//GZIPInputStream s = new GZIPInputStream(pi);
-				while ((i = s.read()) != -1)
-				{
-					builder.append((char)i);
-				}
-				pi.close();
-				s.close();
-
-				dbHelper.SaveRecievedData(new JSONObject(builder.toString()));
-				superbuilder.append(builder);
-				if (x==folderItems.size()-1)
-				{
-					superbuilder.append("]");
-				}
-				else
-				{
-					superbuilder.append(",");
+				} finally {
+					output.close();
 				}
 			}
 			return new JSONArray(superbuilder.toString());
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			return null;
 		}
 	}

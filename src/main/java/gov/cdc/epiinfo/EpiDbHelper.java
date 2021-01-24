@@ -29,6 +29,7 @@ import java.util.UUID;
 import gov.cdc.epiinfo.cloud.AzureClient;
 import gov.cdc.epiinfo.cloud.BoxClient;
 import gov.cdc.epiinfo.cloud.CloudFactory;
+import gov.cdc.epiinfo.cloud.CouchDbClient;
 import gov.cdc.epiinfo.cloud.EpiInfoCloudClient;
 import gov.cdc.epiinfo.cloud.ICloudClient;
 
@@ -121,6 +122,7 @@ public class EpiDbHelper {
 				}
 			}
 		}
+
 
 		@Override
 		public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
@@ -272,7 +274,7 @@ public class EpiDbHelper {
 
 		String guidValue = initialValues.get(GUID).toString();		
 
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), this, mCtx);
 
 
 		try {
@@ -280,6 +282,19 @@ public class EpiDbHelper {
 			initialValues.remove(GUID);
 
 			for (int x = 0; x < formMetadata.DataFields.size(); x++) {
+				if (formMetadata.DataFields.get(x).getType().equals("17") || formMetadata.DataFields.get(x).getType().equals("18") || formMetadata.DataFields.get(x).getType().equals("19"))
+				{
+					try {
+						int value = initialValues.getAsInteger(formMetadata.DataFields.get(x).getName());
+						if (value == 0) {
+							initialValues.remove(formMetadata.DataFields.get(x).getName());
+						}
+					}
+					catch (Exception ex)
+					{
+
+					}
+				}
 				if (formMetadata.DataFields.get(x).getType().equals("7")) {
 					String dateValue = initialValues.getAsString(formMetadata.DataFields.get(x).getName());
 					if (!dateValue.equals("")) {
@@ -312,7 +327,7 @@ public class EpiDbHelper {
 
 	private ArrayList<String> GetCloudData()
 	{
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), this, mCtx);
 		ArrayList<String> guids = new ArrayList<String>();
 		try
 		{
@@ -330,7 +345,7 @@ public class EpiDbHelper {
 						String column = columns.next();
 						Object value = row.get(column);
 
-						if (column.equals("id"))
+						if (column.equals("id") || column.equals("_id"))
 						{
 							guid = value.toString();
 						}
@@ -408,7 +423,7 @@ public class EpiDbHelper {
 							values.put(formMetadata.NumericFields.get(n).getName(), Double.POSITIVE_INFINITY);
 						}
 					}
-					if (cloudClient.getClass() != AzureClient.class) {
+					if (cloudClient.getClass() != AzureClient.class && cloudClient.getClass() != CouchDbClient.class) {
 						if (guid != null && guid != "") {
 							guids.add(guid);
 						}
@@ -522,8 +537,19 @@ public class EpiDbHelper {
 		return true;
 	}
 
+	public void AddTextColumn(String columnName) {
+		String statement = "ALTER TABLE " + DATABASE_TABLE + " ADD COLUMN ";
+
+		try {
+			mDb.execSQL(statement + columnName + " text null ");
+		} catch (Exception ex) {
+			int z = 5;
+			z++;
+		}
+	}
+
 	public int SendRecordToCloud(long id) {
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), this, mCtx);
 		Cursor c = fetchWhere_all(KEY_ROWID + "=" + id);
 		double totalSize = c.getCount();
 		if (totalSize < 1) {
@@ -543,7 +569,10 @@ public class EpiDbHelper {
 						if (formMetadata.DataFields.get(x).getListValues().size() > 100) {
 							initialValues.put(formMetadata.DataFields.get(x).getName(), c.getString(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
 						} else {
-							initialValues.put(formMetadata.DataFields.get(x).getName(), c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
+
+							if (c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())) > 0) {
+								initialValues.put(formMetadata.DataFields.get(x).getName(), c.getInt(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
+							}
 						}
 					} else if (formMetadata.DataFields.get(x).getType().equals("5")) {
 						initialValues.put(formMetadata.DataFields.get(x).getName(), c.getDouble(c.getColumnIndexOrThrow(formMetadata.DataFields.get(x).getName())));
@@ -689,7 +718,7 @@ public class EpiDbHelper {
 
 	public boolean deleteAllRecords()
 	{
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mCtx);
+		/*SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mCtx);
 		boolean allowCloudDeletion = sharedPref.getBoolean("cloud_deletion", false);
 		if (allowCloudDeletion)
 		{
@@ -702,8 +731,15 @@ public class EpiDbHelper {
 					new CloudRecordDeletor().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, guidValue);
 				}while (c.moveToNext());
 			}
+		}*/
+		try {
+			return mCtx.deleteDatabase(DATABASE_NAME);
+			//mDb.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
 		}
-		return mDb.delete(DATABASE_TABLE, null, null) > 0;
+		catch (Exception ex)
+		{
+			return false;
+		}
 	}
 
 	public Cursor fetchAllRecords() {
@@ -991,6 +1027,24 @@ public class EpiDbHelper {
 		return values;
 	}
 
+	public String getFieldValue(String field, String guid) throws SQLException {
+
+		String[] columns = new String[] {field};
+		String value = "";
+		Stack<String> stack = new Stack<String>();
+
+		Cursor mCursor = mDb.query(false, DATABASE_TABLE, columns, GUID + "= '" + guid + "'", null,
+				null, null, null, null);
+		if (mCursor != null) {
+			if (mCursor.moveToFirst())
+			{
+				value = mCursor.getString(0);
+			}
+		}
+		mCursor.close();
+		return value;
+	}
+
 	public Cursor getNumericValues(String field) throws SQLException {
 
 		String[] columns = new String[] {field};
@@ -1032,6 +1086,25 @@ public class EpiDbHelper {
 		return retVal;
 	}
 
+	public boolean resetSyncStatus() {
+
+		ContentValues args = new ContentValues();
+		args.put("_syncStatus", 0);
+		boolean retVal = mDb.update(DATABASE_TABLE, args, null, null) > 0;
+
+		return retVal;
+	}
+
+
+	public boolean updateRevision(String guid, String rev) {
+
+		ContentValues args = new ContentValues();
+		args.put("_rev", rev);
+		boolean retVal = mDb.update(DATABASE_TABLE, args, GUID + "= '" + guid + "'", null) > 0;
+
+		return retVal;
+	}
+
 	private class CloudRecordDeletor extends AsyncTask<String,Void, Integer>
 	{
 		@Override
@@ -1045,7 +1118,7 @@ public class EpiDbHelper {
 	private void deleteCloudRecord(String guidValue) {
 
 
-		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), mCtx);
+		ICloudClient cloudClient = CloudFactory.GetCloudClient(DATABASE_TABLE, formMetadata.GetSurveyId(), this, mCtx);
 
 
 		try {

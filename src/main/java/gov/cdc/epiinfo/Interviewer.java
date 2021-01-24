@@ -13,11 +13,11 @@ import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +35,9 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -419,7 +422,7 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 
 				layoutManager.ExecutePageAfterEvent(currentPageIndex);
 
-				if (layoutManager.RequiredFieldsComplete(currentPageIndex) && !navigatedByCheckCode)
+				if (!navigatedByCheckCode && layoutManager.RequiredFieldsComplete(currentPageIndex))
 				{
 					if (currentPageIndex < formMetadata.PageCount - 1)
 					{
@@ -565,11 +568,6 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 		MenuItem mnuSave = menu.add(5000, 9001, 1, R.string.menu_save);
 		mnuSave.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		mnuSave.setIcon(R.drawable.content_save);
-
-		/*MenuItem mnuExit = menu.add(5000, 9004, 0, R.string.menu_exit);
-		mnuExit.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		mnuExit.setIcon(android.R.drawable.ic_menu_close_clear_cancel);*/
-
 		
 		MenuItem mnuLocate = menu.add(5000, 9002, 0, R.string.menu_locate);
 		mnuLocate.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -578,6 +576,10 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 		MenuItem mnuBarcode = menu.add(5000, 9003, 2, R.string.menu_barcode);
 		mnuBarcode.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 		mnuBarcode.setIcon(R.drawable.barcode);
+
+		MenuItem mnuExit = menu.add(5000, 9004, 3, R.string.menu_exit_no_save);
+		mnuExit.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+		mnuExit.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
 
 		return true;
 	}		
@@ -736,12 +738,36 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 
 	public void StartCamera(ImageView v)
 	{
-		currentImageView = v;
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		currentImageFileName = String.format("/sdcard/Download/EpiInfo/Images/%d.jpg", System.currentTimeMillis());
-		Uri fileName = Uri.fromFile(new File(currentImageFileName));
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileName);
-		startActivityForResult(intent, 0);
+		try {
+			currentImageView = v;
+			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+			Uri fileName = null;
+			currentImageFileName = String.format("/sdcard/Download/EpiInfo/Images/%d.jpg", System.currentTimeMillis());
+
+			if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT){
+				fileName = Uri.fromFile(new File(currentImageFileName));
+			}
+			else
+			{
+				fileName = FileProvider.getUriForFile(this,
+						this.getString(R.string.file_provider_authority),
+						new File(currentImageFileName));
+			}
+
+
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, fileName);
+			startActivityForResult(intent, 0);
+		}
+		catch (SecurityException se)
+		{
+			Alert(getString(R.string.error_camera));
+		}
+		catch (Exception ex)
+		{
+
+		}
 	}
 
 	@Override
@@ -877,8 +903,15 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 		File file = new File(filePath, "/EpiInfo/Questionnaires/" + fileName);
 
 		if (file.exists()) {
-			Uri path = Uri.fromFile(file);
+			//Uri path = Uri.fromFile(file);
+
+			Uri path = FileProvider.getUriForFile(this,
+					this.getString(R.string.file_provider_authority),
+					file);
+
 			Intent fileIntent = new Intent(Intent.ACTION_VIEW);
+			fileIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
 			if (fileName.toLowerCase().contains(".pdf"))
 				fileIntent.setDataAndType(path, "application/pdf");
 			else if (fileName.toLowerCase().contains(".png"))
@@ -897,11 +930,12 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 				fileIntent.setDataAndType(path, "video/x-msvideo");
 			else if (fileName.toLowerCase().contains(".wmv"))
 				fileIntent.setDataAndType(path, "video/x-ms-wmv");
-			fileIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 			try {
 				startActivity(fileIntent);
 			} catch (Exception e) {
-				//
+				int x=5;
+				x++;
 			}
 		}
 	}
@@ -1353,6 +1387,16 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 				View control = this.layoutManager.GetView(s);
 				int id = control.getId();
 				control.setVisibility(View.GONE);
+				if (control.getTag() != null)
+				{
+					try {
+						((View) control.getTag()).setVisibility(View.GONE);
+					}
+					catch (Exception ex)
+					{
+
+					}
+				}
 
 				try
 				{
@@ -1361,7 +1405,8 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 				}
 				catch (Exception ex)
 				{
-
+					int w=5;
+					w++;
 				}
 
 				if (this.layoutManager.groupedItems.containsKey(id))
@@ -1381,7 +1426,8 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 						}
 						catch (Exception ex)
 						{
-
+							int w=5;
+							w++;
 						}
 					}
 				}
@@ -1631,6 +1677,16 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 				View control = this.layoutManager.GetView(s);
 				int id = control.getId();
 				control.setVisibility(View.VISIBLE);
+				if (control.getTag() != null)
+				{
+					try {
+						((View) control.getTag()).setVisibility(View.VISIBLE);
+					}
+					catch (Exception ex)
+					{
+
+					}
+				}
 
 				try
 				{
@@ -1715,23 +1771,21 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 	private void exit()
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.exit_form))       
-		.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+		builder.setMessage(getString(R.string.exit_form))
+				.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		})
-		.setCancelable(true)       
-		.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() 
-		{           
-			public void onClick(DialogInterface dialog, int id) 
-			{                
-				dialog.cancel();           
-				Interviewer.super.onBackPressed();
-			}       
-		});
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				})
+				.setCancelable(true)
+				.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+						Interviewer.super.onBackPressed();
+					}
+				});
 		builder.create();
 		builder.show();
 	}
@@ -1739,7 +1793,10 @@ public class Interviewer extends AppCompatActivity implements ICheckCodeHost
 	@Override
 	public void onBackPressed()
 	{
-		exit();
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		if (!sharedPref.getBoolean("prevent_back", false)) {
+			exit();
+		}
 	}
 
 

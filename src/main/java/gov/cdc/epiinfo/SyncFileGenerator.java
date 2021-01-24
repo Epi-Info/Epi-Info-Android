@@ -9,11 +9,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.core.app.NotificationCompat;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,7 +64,7 @@ public class SyncFileGenerator {
 		Calendar cal = Calendar.getInstance();
 		this.id = (cal.get(Calendar.HOUR_OF_DAY) * 10000) + (cal.get(Calendar.MINUTE) * 100) + cal.get(Calendar.SECOND);
 
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx)
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx,"3034500")
 		.setSmallIcon(R.drawable.ic_archive)
 		.setLargeIcon(logo)
 		.setContentTitle("Generating sync file (" + viewName + ")")
@@ -76,7 +78,7 @@ public class SyncFileGenerator {
 
 	private void ShowProgress(int pct)
 	{
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx)
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx,"3034500")
 		.setSmallIcon(R.drawable.ic_archive)
 		.setLargeIcon(logo)
 		.setContentTitle("Generating sync file (" + viewName + ")");
@@ -119,7 +121,7 @@ public class SyncFileGenerator {
 				dbHelper.close();
 			}
 			
-			NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx);
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx,"3034500");
 			builder.setLargeIcon(logo);
 			
 			if (recordCount == -1)
@@ -340,7 +342,7 @@ public class SyncFileGenerator {
 							}
 							else if (dataFields.get(x).getType().equals("12"))
 							{
-								if (cursor.getInt(cursor.getColumnIndexOrThrow(dataFields.get(x).getName())) > 0)
+								if (cursor.getInt(cursor.getColumnIndexOrThrow(dataFields.get(x).getName())) > -1)
 								{
 									int rawRadioVal = cursor.getInt(cursor.getColumnIndexOrThrow(dataFields.get(x).getName()));
 									int radioVal = rawRadioVal % 1000;
@@ -488,7 +490,7 @@ public class SyncFileGenerator {
 		setupAesCipher(password);
 		try
 		{
-			byte[] plainText = xml.getBytes("UTF-8");
+			byte[] plainText = xml.getBytes(StandardCharsets.UTF_8);
 			byte[] result= _aesCipher.doFinal(plainText);
 			return Base64.encode(result);
 		}

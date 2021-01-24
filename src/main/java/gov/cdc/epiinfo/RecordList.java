@@ -35,8 +35,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -50,6 +48,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -144,24 +145,31 @@ public class RecordList extends AppCompatActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null)
 		{
-			try
-			{
+			try {
 				viewName = extras.getString("ViewName");
-				if (extras.containsKey("FKEY"))
-				{
+				if (extras.containsKey("FKEY")) {
 					fkeyGuid = extras.getString("FKEY");
 				}
-				if (extras.containsKey("ShouldReturnToParent"))
-				{
+				if (extras.containsKey("ShouldReturnToParent")) {
 					shouldReturnToParent = extras.getBoolean("ShouldReturnToParent");
 				}
-				formMetadata = new FormMetadata("EpiInfo/Questionnaires/"+ viewName +".xml", this);
+				formMetadata = new FormMetadata("EpiInfo/Questionnaires/" + viewName + ".xml", this);
 				AppManager.AddFormMetadata(viewName, formMetadata);
 				mDbHelper = new EpiDbHelper(this, formMetadata, viewName);
 				mDbHelper.open();
 				AppManager.SetCurrentDatabase(mDbHelper);
 
-				fillData();
+				if (extras.containsKey("SearchQuery")) {
+					searchByDeepLink(extras.getString("SearchQuery"));
+				}
+				else if (extras.containsKey("CheckCodeQuery"))
+				{
+					searchByCheckCode(extras.getString("CheckCodeQuery"));
+				}
+				else
+				{
+					fillData();
+				}
 			}
 			catch (Exception ex)
 			{
@@ -555,7 +563,7 @@ public class RecordList extends AppCompatActivity {
 			if (mNotesCursor.getCount() == 1)
 			{
 				mNotesCursor.moveToFirst();
-				editRecord(mNotesCursor.getLong(0));
+				editRecord(mNotesCursor.getLong(0), false);
 			}
 			else if (mNotesCursor.getCount() < 1)
 			{
@@ -579,6 +587,80 @@ public class RecordList extends AppCompatActivity {
 
 	}
 
+	private void searchByDeepLink(String query)
+	{
+		try
+		{
+			mDbHelper.fetchTopOne();
+
+			String fieldName1 = formMetadata.DataFields.get(0).getName();
+			mNotesCursor = mDbHelper.fetchWhere(fieldName1, query);
+
+			if (mNotesCursor.getCount() == 1)
+			{
+				mNotesCursor.moveToFirst();
+				editRecord(mNotesCursor.getLong(0), true);
+			}
+			else if (mNotesCursor.getCount() < 1)
+			{
+				Toast.makeText(this, R.string.no_matching_records, Toast.LENGTH_LONG).show();
+			}
+			else
+			{
+				if (mnuSearch != null && searchView != null)
+				{
+					mnuSearch.expandActionView();
+					searchView.setQuery(query, true);
+					searchView.clearFocus();
+				}
+			}
+
+		}
+		catch (Exception ex)
+		{
+			int x=5;
+			x++;
+		}
+
+	}
+
+	private void searchByCheckCode(String query)
+	{
+		try
+		{
+			mDbHelper.fetchTopOne();
+
+			String fieldName1 = formMetadata.DataFields.get(0).getName();
+			mNotesCursor = mDbHelper.fetchWhere(fieldName1, query);
+
+			if (mNotesCursor.getCount() == 1)
+			{
+				mNotesCursor.moveToFirst();
+				editRecord(mNotesCursor.getLong(0), false);
+			}
+			else if (mNotesCursor.getCount() < 1)
+			{
+				Toast.makeText(this, R.string.no_matching_records, Toast.LENGTH_LONG).show();
+			}
+			else
+			{
+				if (mnuSearch != null && searchView != null)
+				{
+					mnuSearch.expandActionView();
+					searchView.setQuery(query, true);
+					searchView.clearFocus();
+				}
+			}
+
+		}
+		catch (Exception ex)
+		{
+			int x=5;
+			x++;
+		}
+
+	}
+
 	private void doCloudSync()
 	{
 		Toast.makeText(self, getString(R.string.cloud_sync_started), Toast.LENGTH_LONG).show();
@@ -595,7 +677,7 @@ public class RecordList extends AppCompatActivity {
 			Calendar cal = Calendar.getInstance();
 			this.id = (cal.get(Calendar.HOUR_OF_DAY) * 10000) + (cal.get(Calendar.MINUTE) * 100) + cal.get(Calendar.SECOND);
 
-			NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
 			.setSmallIcon(android.R.drawable.stat_notify_sync)
 			.setLargeIcon(logo)
 			.setContentTitle(String.format(getString(R.string.cloud_sync_progress), viewName));
@@ -620,7 +702,7 @@ public class RecordList extends AppCompatActivity {
 
 		private void ShowProgress(int pct)
 		{
-			NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
 			.setSmallIcon(android.R.drawable.stat_notify_sync)
 			.setLargeIcon(logo)
 			.setContentTitle(String.format(getString(R.string.cloud_sync_progress), viewName));
@@ -644,7 +726,7 @@ public class RecordList extends AppCompatActivity {
 
 			if (status > -1)
 			{
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
 				.setSmallIcon(R.drawable.ic_cloud_done)
 				.setLargeIcon(logo)
 				.setContentTitle(String.format(getString(R.string.cloud_sync_complete), viewName))
@@ -664,7 +746,7 @@ public class RecordList extends AppCompatActivity {
 			}
 			else
 			{
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
 				.setSmallIcon(R.drawable.ic_sync_problem)
 				.setLargeIcon(logo)
 				.setContentTitle(String.format(getString(R.string.cloud_sync_failed), viewName))
@@ -776,7 +858,7 @@ public class RecordList extends AppCompatActivity {
 		new PreCompiledLoader().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, i);
 	}
 
-	private void editRecord(long id)
+	private void editRecord(long id, boolean deepLinked)
 	{
 		Cursor c = mDbHelper.fetchRecord(id);
 		AppManager.SetCurrentDatabase(mDbHelper);
@@ -798,6 +880,12 @@ public class RecordList extends AppCompatActivity {
 
 		i.putExtra(EpiDbHelper.KEY_ROWID, id);
 		i.putExtra(EpiDbHelper.GUID, c.getString(c.getColumnIndexOrThrow(EpiDbHelper.GUID)));
+
+		if (deepLinked)
+		{
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		}
+
 		for (int x=0;x<formMetadata.DataFields.size();x++)
 		{
 			if (formMetadata.DataFields.get(x).getType().equals("10") || formMetadata.DataFields.get(x).getType().equals("11") || formMetadata.DataFields.get(x).getType().equals("12") || formMetadata.DataFields.get(x).getType().equals("98") || formMetadata.DataFields.get(x).getType().equals("18"))
@@ -851,13 +939,18 @@ public class RecordList extends AppCompatActivity {
 
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
-		editRecord(id);
+		editRecord(id, false);
 	}
 
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
+
+		if (this.getIntent().getExtras().containsKey("CheckCodeQuery"))
+		{
+			finish();
+		}
 
 		if (resultCode == -500)
 		{
@@ -951,8 +1044,9 @@ public class RecordList extends AppCompatActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mDbHelper.deleteAllRecords();
-				fillData();
+//				fillData();
 				dialog.dismiss();
+				exit();
 			}
 		})
 		.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {

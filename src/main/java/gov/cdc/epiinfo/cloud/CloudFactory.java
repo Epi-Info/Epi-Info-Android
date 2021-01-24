@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import gov.cdc.epiinfo.EpiDbHelper;
+
 public class CloudFactory {
 
-	public static ICloudClient GetCloudClient(String tableName, String surveyId, Context context)
+	public static ICloudClient GetCloudClient(String tableName, String surveyId, EpiDbHelper dbHelper, Context context)
 	{
 		ICloudClient cloudClient;
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -22,6 +24,10 @@ public class CloudFactory {
 		else if (serviceProvider.equals("EIWS"))
 		{
 			cloudClient = new EpiInfoCloudClient(surveyId, context);
+		}
+		else if (serviceProvider.equals("Couch"))
+		{
+			cloudClient = new CouchDbClient(tableName, dbHelper, context);
 		}
 		else
 		{

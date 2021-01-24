@@ -1,6 +1,7 @@
 package gov.cdc.epiinfo.cloud;
 
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -38,18 +39,25 @@ public class EpiInfoCloudClient implements ICloudClient {
 		this.surveyId = surveyId;
 	}
 
+
+	@Override
+	public int getDailyTasks(Activity ctx, String deviceId) {
+		return -1;
+	}
+
 	public JSONArray getData(boolean downloadImages, boolean downloadMedia, EpiDbHelper dbHelper) {
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-		String serviceUrl = sharedPref.getString("sftp_url", "");
+		String serviceUrl = sharedPref.getString("sftp_url", "") + "/api/SurveyResponse";
+		String bearer = sharedPref.getString("EPI-INFO-API-TOKEN","");
 
 		StringBuilder builder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
 
 		HttpGet httpGet = new HttpGet(serviceUrl);
-		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-type", "application/json");
+		httpGet.setHeader("Accept", "*/*");
 		httpGet.setHeader("SurveyId", surveyId);
+		httpGet.setHeader("Authorization", "Bearer " + bearer);
 
 
 		try {
@@ -77,14 +85,16 @@ public class EpiInfoCloudClient implements ICloudClient {
 	private boolean saveRecord(ContentValues values)
 	{
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-		String serviceUrl = sharedPref.getString("sftp_url", "");
+		String serviceUrl = sharedPref.getString("sftp_url", "") + "/api/SurveyResponse";
+		String bearer = sharedPref.getString("EPI-INFO-API-TOKEN","");
 
 		HttpClient client = new DefaultHttpClient();
 
 		HttpPut httpPut = new HttpPut(serviceUrl);
-		httpPut.setHeader("Accept", "application/json");
+		httpPut.setHeader("Accept", "*/*");
 		httpPut.setHeader("Content-type", "application/json");
 		httpPut.setHeader("SurveyId", surveyId);
+		httpPut.setHeader("Authorization", "Bearer " + bearer);
 
 		JSONObject jsonObject = new JSONObject();
 		try {
@@ -124,7 +134,8 @@ public class EpiInfoCloudClient implements ICloudClient {
 		}
 
 		try {
-			StatusLine statusLine = client.execute(httpPut).getStatusLine();
+			HttpResponse response = client.execute(httpPut);
+			StatusLine statusLine = response.getStatusLine();
 			int status = statusLine.getStatusCode();
 			return (status == 201 || status == 200);
 		} catch (Exception e) {

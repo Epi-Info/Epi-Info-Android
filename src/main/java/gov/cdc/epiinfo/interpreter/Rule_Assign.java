@@ -124,7 +124,7 @@ public class Rule_Assign extends EnterRule
 		{
 			if (((Rule_Value)value).Id != null)
 			{
-				if (((Rule_Value)value).Id.toLowerCase().contains("sysdeviceid") || ((Rule_Value)value).Id.toLowerCase().contains("syskmlregion") || ((Rule_Value)value).Id.toLowerCase().contains("sysaltitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslatitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslongitude") || ((Rule_Value)value).Id.toLowerCase().contains("sysbarcode") || ((Rule_Value)value).Id.toLowerCase().contains("sysaudio") || ((Rule_Value)value).Id.toLowerCase().contains("sysvideo"))
+				if (((Rule_Value)value).Id.toLowerCase().contains("sysdeviceid") || ((Rule_Value)value).Id.toLowerCase().contains("syskmlregion") || ((Rule_Value)value).Id.toLowerCase().contains("sysgpsaccuracy") || ((Rule_Value)value).Id.toLowerCase().contains("sysaltitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslatitude") || ((Rule_Value)value).Id.toLowerCase().contains("syslongitude") || ((Rule_Value)value).Id.toLowerCase().contains("sysbarcode") || ((Rule_Value)value).Id.toLowerCase().contains("sysaudio") || ((Rule_Value)value).Id.toLowerCase().contains("sysvideo"))
 				{
 					result = ((Rule_Value)value).Id;
 				}
@@ -147,14 +147,7 @@ public class Rule_Assign extends EnterRule
 				{
 					result = var.Value;
 				}
-				else if (result != null)
-				{
-					var.Value = result;
-				}
-				else
-				{
-					var.Value = null;
-				}
+				else var.Value = result;
 
 				if (var.VariableScope == VariableScope.Permanent)
 				{

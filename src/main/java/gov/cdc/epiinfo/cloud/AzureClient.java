@@ -1,6 +1,7 @@
 package gov.cdc.epiinfo.cloud;
 
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -41,6 +42,11 @@ public class AzureClient implements ICloudClient {
 		{
 			this.tableName = tableName.replaceFirst("_", "");
 		}
+	}
+
+	@Override
+	public int getDailyTasks(Activity ctx, String deviceId) {
+		return -1;
 	}
 
 	public JSONArray getData(boolean downloadImages, boolean downloadMedia, EpiDbHelper dbHelper) {

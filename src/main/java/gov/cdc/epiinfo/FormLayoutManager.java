@@ -15,6 +15,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import androidx.core.content.FileProvider;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -140,7 +141,7 @@ public class FormLayoutManager {
 			}
 			else if (field.getType().equals("21"))
 			{
-				field.setId(AddGroup(layout, field.getPrompt(), field.getX(), field.getY(), field.getFieldFontSize(), field.getFieldWidth(), field.getPagePosition(), field.getList(), true));
+				field.setId(AddGroup(layout, field.getPrompt(), field.getX(), field.getY(), field.getFieldFontSize(), field.getFieldWidth(), field.getPagePosition(), field.getList(), true, null));
 			}
 			else if (field.getType().equals("5"))
 			{
@@ -148,11 +149,11 @@ public class FormLayoutManager {
 			}
 			else if (field.getType().equals("7"))
 			{
-				field.setId(AddDateField(layout, field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getIsReadOnly(), field.getPromptFontSize(), field.getFieldFontSize(), field.getLowerDate(), field.getUpperDate()));
+				field.setId(AddDateField(layout, field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getIsReadOnly(), field.getPromptFontSize(), field.getFieldFontSize(), field.getLowerDate(), field.getUpperDate(), field.getIsRequired() ));
 			}
 			else if (field.getType().equals("8"))
 			{
-				field.setId(AddTimeField(layout, field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getIsReadOnly(), field.getPromptFontSize(), field.getFieldFontSize()));
+				field.setId(AddTimeField(layout, field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getIsReadOnly(), field.getPromptFontSize(), field.getFieldFontSize(), field.getIsRequired()));
 			}
 			else if (field.getType().equals("10"))
 			{
@@ -372,10 +373,12 @@ public class FormLayoutManager {
 		}
 		myLayout.addView(tv);
 
+		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase(), tv);
+
 		return fieldCounter;
 	}
 
-	public int AddGroup(ViewGroup myLayout, String text, double x, double y, double fieldFontSize, double fieldWidth, int pagePosition, String[] list, boolean assignId)
+	public int AddGroup(ViewGroup myLayout, String text, double x, double y, double fieldFontSize, double fieldWidth, int pagePosition, String[] list, boolean assignId, View linkedView)
 	{
 		if (assignId)
 		{
@@ -393,8 +396,8 @@ public class FormLayoutManager {
 		else
 		{
 			RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams((int)Math.round(formWidth * fieldWidth * 0.98), 2);
-			params1.leftMargin = (int)Math.round(formWidth * x);
-			params1.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight) + (fieldFontSize * 1.8) + 6);//3);
+			//params1.leftMargin = (int)Math.round(formWidth * x);
+			//params1.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight) + (fieldFontSize * 1.8) + 6);//3);
 			v1.setLayoutParams(params1);
 		}
 		v1.setBackgroundColor(0xFF42638c);
@@ -414,8 +417,8 @@ public class FormLayoutManager {
 		else
 		{
 			params2 = new RelativeLayout.LayoutParams((int)Math.round(formWidth * fieldWidth * 0.98), LayoutParams.WRAP_CONTENT);
-			params2.leftMargin = (int)Math.round(formWidth * x);
-			params2.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
+			//params2.leftMargin = (int)Math.round(formWidth * x);
+			//params2.topMargin = (int)Math.round(formHeight * y + (pagePosition * formHeight));
 		}
 
 		tv.setLayoutParams(params2);
@@ -451,6 +454,11 @@ public class FormLayoutManager {
 
 		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase(), tv);
 		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase() + "|prompt", v1);
+
+		if (linkedView != null)
+		{
+			linkedView.setTag(tv);
+		}
 
 		groupedItems.put(fieldCounter, list);
 
@@ -518,7 +526,7 @@ public class FormLayoutManager {
 		return fieldCounter;
 	}
 
-	public int AddTimeField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, boolean isReadOnly, double promptFontSize, double fieldFontSize)
+	public int AddTimeField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, boolean isReadOnly, double promptFontSize, double fieldFontSize, boolean isRequired)
 	{
 		fieldCounter++;
 		View label = AddLabel(myLayout, prompt, promptX, promptY, pagePosition, promptFontSize);
@@ -547,6 +555,11 @@ public class FormLayoutManager {
 		edt.setEnabled(false);
 		edt.setId(fieldCounter);
 		edt.setTag(formMetadata.Fields.get(fieldCounter).getName().toLowerCase());
+
+		if (isRequired)
+		{
+			requiredViewIds.add(fieldCounter);
+		}
 
 		if (!this.useAbsolutePos)
 		{
@@ -640,7 +653,7 @@ public class FormLayoutManager {
 		return fieldCounter;
 	}
 
-	public int AddDateField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, boolean isReadOnly, double promptFontSize, double fieldFontSize, Date lowerDate, Date upperDate)
+	public int AddDateField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, boolean isReadOnly, double promptFontSize, double fieldFontSize, Date lowerDate, Date upperDate, boolean isRequired)
 	{
 		fieldCounter++;
 		View label = AddLabel(myLayout, prompt, promptX, promptY, pagePosition, promptFontSize);
@@ -670,6 +683,11 @@ public class FormLayoutManager {
 		edt.setEnabled(false);
 		edt.setId(fieldCounter);
 		edt.setTag(formMetadata.Fields.get(fieldCounter).getName().toLowerCase());
+
+		if (isRequired)
+		{
+			requiredViewIds.add(fieldCounter);
+		}
 
 		if (!this.useAbsolutePos)
 		{
@@ -1077,15 +1095,30 @@ public class FormLayoutManager {
 
 	public void RecordVideo(TextView v)
 	{
-		File path = new File("/sdcard/Download/EpiInfo/Media/");
-		path.mkdirs();
-		String fileName = "/sdcard/Download/EpiInfo/Media/" + UUID.randomUUID().toString() + ".mp4";
-		Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-		v.setText(fileName);
-		if (takeVideoIntent.resolveActivity(container.getPackageManager()) != null) {
-			Uri file = Uri.fromFile(new File(fileName));
-			takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-			container.startActivityForResult(takeVideoIntent, 1);
+		try {
+			File path = new File("/sdcard/Download/EpiInfo/Media/");
+			path.mkdirs();
+			String fileName = "/sdcard/Download/EpiInfo/Media/" + UUID.randomUUID().toString() + ".mp4";
+			Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+			v.setText(fileName);
+			if (takeVideoIntent.resolveActivity(container.getPackageManager()) != null) {
+				//Uri file = Uri.fromFile(new File(fileName));
+
+				Uri file = FileProvider.getUriForFile(container,
+						container.getString(R.string.file_provider_authority),
+						new File(fileName));
+				takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, file);
+				container.startActivityForResult(takeVideoIntent, 1);
+			}
+		}
+		catch (SecurityException se)
+		{
+			((RecordEditor)container).Alert(container.getString(R.string.error_camera));
+		}
+		catch (Exception ex)
+		{
+			int x=5;
+			x++;
 		}
 	}
 
@@ -1669,16 +1702,19 @@ public class FormLayoutManager {
 	{
 		fieldCounter++;
 
-		AddGroup(myLayout, prompt,x,y,promptFontSize, fieldWidth, pagePosition, new String[]{}, false);
-		LinearLayout layout1 = new LinearLayout(container);
 		RadioGroup layout2 = new RadioGroup(container);
+		AddGroup(myLayout, prompt,x,y,promptFontSize, fieldWidth, pagePosition, new String[]{}, false, layout2);
+		LinearLayout layout1 = new LinearLayout(container);
+
 
 		layout2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		if (useAbsolutePos) {
-			params.leftMargin = (int) Math.round(formWidth * x);
-			params.topMargin = (int) Math.round(formHeight * y + (pagePosition * formHeight));
+			((RelativeLayout.LayoutParams)layout2.getLayoutParams()).leftMargin = (int) Math.round(formWidth * x);
+			//((RelativeLayout.LayoutParams)layout2.getLayoutParams()).topMargin = (int) Math.round(formHeight * y + (pagePosition * formHeight));
+			//params.leftMargin = (int) Math.round(formWidth * x);
+			//params.topMargin = (int) Math.round(formHeight * y + (pagePosition * formHeight));
 		}
 		layout1.setOrientation(LinearLayout.VERTICAL);
 

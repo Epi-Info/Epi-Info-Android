@@ -1,28 +1,31 @@
 package gov.cdc.epiinfo.analysis;
 
-import gov.cdc.epiinfo.EpiDbHelper;
-import gov.cdc.epiinfo.FormMetadata;
-import gov.cdc.epiinfo.R;
-import gov.cdc.epiinfo.R.string;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Environment;
+import androidx.core.content.FileProvider;
+import androidx.core.view.MenuItemCompat;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.widget.Toast;
+import gov.cdc.epiinfo.EpiDbHelper;
+import gov.cdc.epiinfo.FormMetadata;
+import gov.cdc.epiinfo.R;
+import gov.cdc.epiinfo.etc.ShareProvider;
 
 public class CsvFileGenerator {
 
@@ -31,14 +34,21 @@ public class CsvFileGenerator {
 	private EpiDbHelper mDbHelper;
 	private FormMetadata formMetadata;
 	private String viewName;
+	private String nowString;
+	private MenuItem menuItem;
 
-	public void Generate(Context ctx, EpiDbHelper mDbHelper, FormMetadata formMetadata, String viewName)
+	public void Generate(Context ctx, EpiDbHelper mDbHelper, FormMetadata formMetadata, String viewName, MenuItem menuItem)
 	{
 		this.ctx = ctx;
 		this.mDbHelper = mDbHelper;
 		this.formMetadata = formMetadata;
 		this.viewName = viewName;
-		
+		this.menuItem = menuItem;
+
+		Calendar cal = Calendar.getInstance();
+		nowString = "_" + cal.get(Calendar.YEAR) + String.format("%02d", cal.get(Calendar.MONTH) + 1) + String.format("%02d", cal.get(Calendar.DATE)) + String.format("%02d", cal.get(Calendar.HOUR)) + String.format("%02d", cal.get(Calendar.MINUTE));
+
+
 		Toast.makeText(ctx, ctx.getString(R.string.please_wait), Toast.LENGTH_LONG).show();
 		new Generator().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -47,39 +57,61 @@ public class CsvFileGenerator {
 	{
 		
 		@Override
-		protected void onPostExecute(Boolean success)
-		{
-			if (success)
-			{
-				File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Temp/" + viewName + ".csv");
+		protected void onPostExecute(Boolean success) {
+			if (success) {
+				File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/EpiInfo/Temp/" + viewName + nowString + ".csv");
 
-				if(file.exists())              
-				{                 
-					Uri path = Uri.fromFile(file);                  
-					Intent csvIntent = new Intent(Intent.ACTION_VIEW);                 
-					csvIntent.setDataAndType(path, "text/csv");                 
-					csvIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);          
-					
-					try                 
-					{                     
-						ctx.startActivity(csvIntent);                 
-					}                 
-					catch(Exception e)                 
-					{                     
-						AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-						builder.setMessage(ctx.getString(R.string.analysis_no_sheets))       
-						.setCancelable(false)       
-						.setPositiveButton(ctx.getString(R.string.ok), new DialogInterface.OnClickListener() 
-						{           
-							public void onClick(DialogInterface dialog, int id) 
-							{                
-								dialog.cancel();           
-							}       
-						});
-						builder.create();
-						builder.show();
-					}             
-				} 
+				if (file.exists()) {
+
+					if (menuItem == null) {
+						Uri path;
+
+						if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+							path = Uri.fromFile(file);
+						} else {
+							path = FileProvider.getUriForFile(ctx,
+									ctx.getString(R.string.file_provider_authority),
+									file);
+						}
+
+						Intent fileIntent = new Intent(Intent.ACTION_VIEW);
+						fileIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						fileIntent.setDataAndType(path, "text/csv");
+
+						try {
+							ctx.startActivity(fileIntent);
+						} catch (Exception e) {
+							AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+							builder.setMessage(ctx.getString(R.string.analysis_no_sheets))
+									.setCancelable(false)
+									.setPositiveButton(ctx.getString(R.string.ok), new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface dialog, int id) {
+											dialog.cancel();
+										}
+									});
+							builder.create();
+							builder.show();
+						}
+					} else {
+						ShareProvider shareActionProvider = new ShareProvider(ctx);
+						Intent shareIntent = new Intent(Intent.ACTION_SEND);
+						shareIntent.setType("text/csv");
+
+						Uri path;
+
+						if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+							path = Uri.fromFile(file);
+						} else {
+							path = FileProvider.getUriForFile(ctx,
+									ctx.getString(R.string.file_provider_authority),
+									file);
+						}
+
+						shareIntent.putExtra(Intent.EXTRA_STREAM, path);
+						shareActionProvider.setShareIntent(shareIntent);
+						MenuItemCompat.setActionProvider(menuItem, shareActionProvider);
+					}
+				}
 			}
 		}
 
@@ -94,7 +126,7 @@ public class CsvFileGenerator {
 				path.mkdirs();
 				File tempPath = new File(path, "/EpiInfo/Temp/");
 				tempPath.mkdirs();
-				fileWriter = new FileWriter(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Temp/" + viewName + ".csv");
+				fileWriter = new FileWriter(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Temp/" + viewName + nowString + ".csv");
 				Cursor c = mDbHelper.fetchWhere_all(null);
 				if (c.moveToFirst())
 				{

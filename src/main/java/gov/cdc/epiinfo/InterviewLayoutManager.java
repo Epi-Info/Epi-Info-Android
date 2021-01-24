@@ -49,6 +49,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.core.content.FileProvider;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -145,7 +147,7 @@ public class InterviewLayoutManager {
 			}
 			else if (field.getType().equals("21"))
 			{
-				field.setId(AddGroup(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getFieldFontSize(), field.getFieldWidth(), field.getPagePosition(), field.getList(), true));
+				field.setId(AddGroup(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getFieldFontSize(), field.getFieldWidth(), field.getPagePosition(), field.getList(), true, null));
 			}
 			else if (field.getType().equals("5"))
 			{
@@ -157,7 +159,7 @@ public class InterviewLayoutManager {
 			}
 			else if (field.getType().equals("8"))
 			{
-				field.setId(AddTimeField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getPromptFontSize(), field.getFieldFontSize(), field.getIsReadOnly()));
+				field.setId(AddTimeField(pages.get(field.getPageName()), field.getPrompt(), field.getX(), field.getY(), field.getPromptX(), field.getPromptY(), field.getFieldWidth(), field.getFieldHeight(), field.getPagePosition(), field.getPromptFontSize(), field.getFieldFontSize(), field.getIsRequired(), field.getIsReadOnly()));
 			}
 			else if (field.getType().equals("10"))
 			{
@@ -446,10 +448,12 @@ public class InterviewLayoutManager {
 		}
 		myLayout.addView(tv);
 
+		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase(), tv);
+
 		return fieldCounter;
 	}
 
-	public int AddGroup(ViewGroup myLayout, String text, double x, double y, double fieldFontSize, double fieldWidth, int pagePosition, String[] list, boolean assignId)
+	public int AddGroup(ViewGroup myLayout, String text, double x, double y, double fieldFontSize, double fieldWidth, int pagePosition, String[] list, boolean assignId, View linkedView)
 	{
 		if (assignId)
 		{
@@ -524,6 +528,11 @@ public class InterviewLayoutManager {
 		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase(), tv);
 		controlsByName.put(formMetadata.Fields.get(fieldCounter).getName().toLowerCase() + "|prompt", v1);
 
+		if (linkedView != null)
+		{
+			linkedView.setTag(tv);
+		}
+
 		groupedItems.put(fieldCounter, list);
 
 		return fieldCounter;
@@ -590,7 +599,7 @@ public class InterviewLayoutManager {
 		return fieldCounter;
 	}
 
-	public int AddTimeField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, double promptFontSize, double fieldFontSize, boolean isReadOnly)
+	public int AddTimeField(ViewGroup myLayout, String prompt, double x, double y, double promptX, double promptY, double fieldWidth, double fieldHeight, int pagePosition, double promptFontSize, double fieldFontSize, boolean isRequired, boolean isReadOnly)
 	{
 		fieldCounter++;
 		View label = AddLabel(myLayout, prompt, promptX, promptY, pagePosition, promptFontSize);
@@ -683,6 +692,11 @@ public class InterviewLayoutManager {
 		
 		if (!isReadOnly)
 		horzLayout.addView(eraseButton);
+
+		if (isRequired)
+		{
+			requiredViews.put(fieldCounter,myLayout);
+		}
 
 		final ImageButton myEraseButton = eraseButton;
 
@@ -891,7 +905,8 @@ public class InterviewLayoutManager {
 		}
 		catch (Exception ex)
 		{
-
+			int x=5;
+			x++;
 		}
 	}
 
@@ -1158,15 +1173,31 @@ public class InterviewLayoutManager {
 
 	public void RecordVideo(TextView v)
 	{
-		File path = new File("/sdcard/Download/EpiInfo/Media/");
-		path.mkdirs();
-		String fileName = "/sdcard/Download/EpiInfo/Media/" + UUID.randomUUID().toString() + ".mp4";
-		Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-		v.setText(fileName);
-		if (takeVideoIntent.resolveActivity(container.getPackageManager()) != null) {
-			Uri file = Uri.fromFile(new File(fileName));
-			takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-			container.startActivityForResult(takeVideoIntent, 1);
+		try {
+			File path = new File("/sdcard/Download/EpiInfo/Media/");
+			path.mkdirs();
+			String fileName = "/sdcard/Download/EpiInfo/Media/" + UUID.randomUUID().toString() + ".mp4";
+			Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+			v.setText(fileName);
+			if (takeVideoIntent.resolveActivity(container.getPackageManager()) != null) {
+				//Uri file = Uri.fromFile(new File(fileName));
+
+				Uri file = FileProvider.getUriForFile(container,
+						container.getString(R.string.file_provider_authority),
+						new File(fileName));
+
+				takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, file);
+				container.startActivityForResult(takeVideoIntent, 1);
+			}
+		}
+		catch (SecurityException se)
+		{
+			((Interviewer)container).Alert(container.getString(R.string.error_camera));
+		}
+		catch (Exception ex)
+		{
+			int x=5;
+			x++;
 		}
 	}
 
@@ -2266,9 +2297,9 @@ public class InterviewLayoutManager {
 	{
 		fieldCounter++;
 
-		AddGroup(myLayout, prompt,x,y,promptFontSize, fieldWidth, pagePosition, new String[]{}, false);
-		LinearLayout layout1 = new LinearLayout(container);
 		RadioGroup layout2 = new RadioGroup(container);
+		AddGroup(myLayout, prompt,x,y,promptFontSize, fieldWidth, pagePosition, new String[]{}, false, layout2);
+		LinearLayout layout1 = new LinearLayout(container);
 
 		layout2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 

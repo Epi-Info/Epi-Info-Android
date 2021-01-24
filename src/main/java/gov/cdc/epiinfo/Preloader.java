@@ -167,6 +167,13 @@ public class Preloader {
 												initialValues.put(strHeader, dataRow[i]);
 											}
 										}
+										else
+										{
+											if (formMetadata.GetFieldType(strHeader) == 5)
+											{
+												initialValues.put(strHeader, Double.POSITIVE_INFINITY);
+											}
+										}
 									}
 								}
 							}

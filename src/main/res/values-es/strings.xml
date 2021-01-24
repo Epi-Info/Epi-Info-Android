@@ -20,6 +20,7 @@
     <string name="menu_export_all">Exportar todas las bases de datos</string>
 	<string name="menu_search">Buscar</string>
 	<string name="menu_exit">Salida</string>
+	<string name="menu_exit_no_save">Salir sin guardar</string>
 	<string name="ok">OK</string>
 	<string name="yes">Sí</string>
 	<string name="no">No</string>
@@ -214,6 +215,26 @@
 	<string name="img_open_epi">Más calculaciones en OpenEpi.com</string>
 	<string name="fab_alt_text">Agregar\ndatos</string>
 	<string name="build_number">Número de versión</string>
+	<string name="set_permissions">Establecer Permisos</string>
+	<string name="request_storage">Solicitando permiso: almacenamiento</string>
+	<string name="storage_desc">Epi Info almacena formularios de recopilación de datos y archivos de sincronización en el sistema de archivos de Android. Otorgue permiso a Epi Info para accesar el almacenamiento del dispositivo.</string>
+	<string name="request_location">Solicitando permiso: ubicación</string>
+	<string name="location_desc">Epi Info puede utilizar el GPS incorporado al dispositivo para permitirle recopilar información geográfica. Si planea hacer esto, otorgue permiso a Epi Info para accesar a la ubicación del dispositivo.</string>
+	<string name="request_mic">Solicitando permiso: micrófono</string>
+	<string name="mic_desc">Epi Info puede utilizar el micrófono incorporado al dispositivo para permitirle capturar audio junto con sus datos estructurados. Si planea recopilar este tipo de datos, otorgue permiso a Epi Info para accesar al micrófono del dispositivo.</string>
+	<string name="request_camera">Solicitando permiso: cámara</string>
+	<string name="camera_desc">Epi Info puede utilizar la cámara incorporada al dispositivo para permitirle capturar fotos y videos junto con sus datos estructurados. Si planea tomar fotos o videos, otorgue permiso a Epi Info para accesar a la cámara del dispositivo.</string>
+	<string name="error_storage">No ha otorgado permiso de Epi Info para accesar los formularios en su dispositivo. Por favor, conceda este permiso desde la configuración de la aplicación en su dispositivo.</string>
+	<string name="error_camera">No ha concedido permiso a Epi Info para accesar la cámara. Por favor, conceda este permiso desde la configuración de la aplicación en su dispositivo.</string>
+
+
+
+	<string name="menu_daily_download">Descarga las tareas de hoy</string>
+	<string name="cloud_download_schedule">Recuperando las tareas de hoy. Por favor espera...</string>
+	<string name="cloud_download_schedule_complete">Se recuperó con éxito las tareas de hoy (%s)</string>
+	<string name="cloud_download_schedule_failed">Error al recuperar tareas del servidor</string>
+
+
 	<string-array name="yn_array">
         <item>&lt;No Seleccionado&gt;</item>
         <item>Sí</item>
@@ -223,6 +244,7 @@
         <item>Box</item>
         <item>FTP Seguro</item>
         <item>Microsoft Azure</item>
+		<item>CouchDB</item>
 		<item>API de Epi Info</item>
     </string-array>
 </resources>

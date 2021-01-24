@@ -19,8 +19,11 @@
     <string name="menu_cloud_sync">Sync with Cloud</string>
     <string name="menu_sync_file">Create Sync File</string>
     <string name="menu_export_all">Export all databases</string>
+    <string name="menu_daily_download">Download today\'s tasks</string>
+    <string name="menu_login">Log in to server</string>
     <string name="menu_search">Search</string>
     <string name="menu_exit">Exit</string>
+    <string name="menu_exit_no_save">Exit without saving</string>
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -59,7 +62,7 @@
     <string name="record_count" formatted="false">Records (%s)</string>
     <string name="loading_form">Loading Form</string>
     <string name="please_wait">Please wait&#8230;</string>
-    <string name="confirm_delete_all">This will delete all data associated with this form. Are you sure?</string>
+    <string name="confirm_delete_all">This will delete ALL data associated with this form, including ones currently invisible on this screen. Are you absolutely sure?</string>
     <string name="configure_cloud">Cloud synchronization has not been configured. Configure it now?</string>
     <string name="cloud_sync_started">Syncing with Cloud. Please check notification area for updates.</string>
     <string name="cloud_sync_progress" formatted="false">Syncing with Cloud (%s)</string>
@@ -69,23 +72,27 @@
     <string name="cloud_sync_complete_detail">Data was successfully synced with the cloud.</string>
     <string name="cloud_sync_failed" formatted="false">Sync failed (%s)</string>
     <string name="cloud_sync_failed_detail">Error syncing with cloud service. Please try again.</string>
+    <string name="cloud_download_schedule">Retrieving today\'s tasks. Please wait...</string>
+    <string name="cloud_download_schedule_complete">Successfully retrieved today\'s tasks (%s)</string>
+    <string name="cloud_download_schedule_failed">Failed to retrieve tasks from the server</string>
     <string name="sync_file_password">Set Password</string>
     <string name="sync_file_started">Creating sync file. Please check notification area for updates.</string>
     <string name="set_default_form">Set this form as default</string>
     <string name="exit_default_form">Exit default mode</string>
     <string name="box_signin">Sign in to Box account</string>
     <string name="box_signout">Logout from Box</string>
-    
+    <string name="sure">Are you sure?</string>
+
     <string name="statcalc_btn1">Sample Size: Population Survey</string>
-	<string name="statcalc_btn2">Sample Size: Unmatched Case-Control</string>
-	<string name="statcalc_btn3">Sample Size: Cohort / Cross Sectional</string>
-	<string name="statcalc_btn4">2 x 2 Tables</string>
-	<string name="statcalc_btn5">Matched Pair Case Control</string>
-	<string name="statcalc_btn6">Analysis of Linear Trend</string>
-	<string name="statcalc_btn7">Poisson</string>		
-	<string name="statcalc_btn8">Binomial</string>
-	<string name="statcalc_btn9">More calculators at OpenEpi.com</string>
-    
+    <string name="statcalc_btn2">Sample Size: Unmatched Case-Control</string>
+    <string name="statcalc_btn3">Sample Size: Cohort / Cross Sectional</string>
+    <string name="statcalc_btn4">2 x 2 Tables</string>
+    <string name="statcalc_btn5">Matched Pair Case Control</string>
+    <string name="statcalc_btn6">Analysis of Linear Trend</string>
+    <string name="statcalc_btn7">Poisson</string>
+    <string name="statcalc_btn8">Binomial</string>
+    <string name="statcalc_btn9">More calculators at OpenEpi.com</string>
+
     <string name="statcalc_pop_srv_desc">Population survey or descriptive study using random (not cluster) sampling</string>
     <string name="statcalc_unmatched_desc">Unmatched Case-Control Study</string>
     <string name="statcalc_cohort_desc">Unmatched Cohort / Cross-Sectional Study</string>
@@ -133,7 +140,7 @@
     <string name="statcalc_numerator">Numerator:</string>
     <string name="statcalc_total_obs">Total observations:</string>
     <string name="statcalc_exp_pct">Expected percentage:</string>
-    
+
     <string name="analysis_add_freq">Add Frequency Gadget</string>
     <string name="analysis_add_means">Add Means Gadget</string>
     <string name="analysis_add_2x2">Add 2x2 Gadget</string>
@@ -155,7 +162,7 @@
     <string name="analysis_lat">Latitude Field:</string>
     <string name="analysis_long">Longitude Field:</string>
     <string name="analysis_no_sheets">Please download a spreadsheet viewer app such as Google Sheets to view the line list.</string>
-    
+
     <string name="form_layout">Form Layout</string>
     <string name="form_layout_ei7">Form elements are positioned and sized consistent with their Epi Info 7 Form Designer counterparts.</string>
     <string name="form_layout_ei7_title">Same as Epi Info 7</string>
@@ -209,11 +216,11 @@
     <string name="device_id">Provide a unique ID for this device (used for sync file names).</string>
     <string name="device_id_title">Device ID</string>
     <string name="sync_file_pref">Sync Files</string>
-    <string name="windows_decimal_symbol">Windows decimal symbol</string> 
+    <string name="windows_decimal_symbol">Windows decimal symbol</string>
     <string name="windows_decimal_symbol_desc">The representation of decimal points in Microsoft Windows. WARNING: This setting affects the way numeric data is imported into Epi Info 7.</string>
     <string name="windows_decimal_symbol_dialog_title">Windows decimal symbol</string>
     <string name="windows_decimal_symbol_dialog">Please specify the symbol that Windows is using to represent decimal points</string>
-    <string name="sync_file_page_size">Sync file size</string> 
+    <string name="sync_file_page_size">Sync file size</string>
     <string name="sync_file_page_size_desc">The maximum number of records each sync file should contain.</string>
     <string name="sync_file_page_size_dialog_title">Sync file size</string>
     <string name="sync_file_page_size_dialog">Please specify the number of records</string>
@@ -226,8 +233,21 @@
     <string name="img_open_epi">More calculators at OpenEpi.com</string>
     <string name="fab_alt_text">Add data</string>
     <string name="build_number">Build number</string>
-    <string name="version_name">1.3.4</string>
-    
+    <string name="file_provider_authority" translatable="false">gov.cdc.epiinfo.fileprovider</string>
+    <string name="set_permissions">Set Permissions</string>
+    <string name="request_storage">Requesting permission: storage</string>
+    <string name="storage_desc">Epi Info stores data collection forms and sync files on the Android file system. Please grant Epi Info permission to access the device storage.</string>
+    <string name="request_location">Requesting permission: location</string>
+    <string name="location_desc">Epi Info can utilize the device\'s built-in GPS to allow you to collect geographic information. If you plan to do this, please grant Epi Info permission to access the device location.</string>
+    <string name="request_mic">Requesting permission: microphone</string>
+    <string name="mic_desc">Epi Info can utilize the device\'s built-in microphone to allow you to capture audio along with your structured data. If you plan to collect this type of data, please grant Epi Info permission to access the device\'s microphone.</string>
+    <string name="request_camera">Requesting permission: camera</string>
+    <string name="camera_desc">Epi Info can utilize the device\'s built-in camera to allow you to capture photos and videos along with your structured data. If you plan to take photos or videos, please grant Epi Info permission to access the device\'s camera.</string>
+    <string name="error_storage">You have not granted Epi Info permission to access forms on your device. Please grant this permission from your device\'s Settings app.</string>
+    <string name="error_camera">You have not granted Epi Info permission to access the camera. Please grant this permission from your device\'s Settings app.</string>
+
+    <string name="version_name">1.5.4</string>
+
     <string-array name="yn_array">
         <item>&lt;Not Selected&gt;</item>
         <item>Yes</item>
@@ -237,12 +257,14 @@
         <item>Box</item>
         <item>Secure FTP</item>
         <item>Microsoft Azure</item>
+        <item>CouchDB</item>
         <item>Epi Info API</item>
     </string-array>
     <string-array name="cloud_service_codes">
         <item>Box</item>
         <item>SFTP</item>
         <item>Microsoft Azure</item>
+        <item>Couch</item>
         <item>EIWS</item>
     </string-array>
     <string-array name="confidence_levels">

@@ -35,6 +35,11 @@
             android:summary="@string/reverse_order"
             android:title="@string/reverse_order_title" 
         />
+        <SwitchPreference
+            android:key="prevent_back"
+            android:summary="Prevent accidental return to Record List without saving data in a form."
+            android:title="Disable back button in form"
+            />
     </PreferenceCategory>
     <PreferenceCategory 
         android:title="@string/cloud_sync"
@@ -96,6 +101,12 @@
             android:key="cloud_deletion"
             android:summary="@string/cloud_sync_del"
             android:title="@string/cloud_sync_del_title"/>
+        <Preference android:title="Reset sync flag"
+            android:key="cloud_reset"
+            android:summary="WARNING: Pushing this button will reset all records to un-synced status"/>
+        <Preference android:title="Reset authentication state"
+            android:key="auth_reset"
+            android:summary="Clear the cache of potentially stale authentication data"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/samples_title"

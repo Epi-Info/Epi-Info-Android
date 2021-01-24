@@ -16,13 +16,6 @@
 
 package com.google.zxing.integration.android;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -34,6 +27,13 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>A utility class which helps ease integration with Barcode Scanner via {@link Intent}s. This is a simple
@@ -374,9 +374,9 @@ public class IntentIntegrator {
       @Override
       public void onClick(DialogInterface dialogInterface, int i) {
         String packageName;
-        if (targetApplications.contains(BS_PACKAGE)) {
+        if (targetApplications.contains(BSPLUS_PACKAGE)) {
           // Prefer to suggest download of BS if it's anywhere in the list
-          packageName = BS_PACKAGE;
+          packageName = BSPLUS_PACKAGE;
         } else {
           // Otherwise, first option:
           packageName = targetApplications.get(0);

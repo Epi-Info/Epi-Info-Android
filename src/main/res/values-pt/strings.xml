@@ -18,6 +18,7 @@
     <string name="menu_cloud_sync">Sincr. em Nuvem</string>
     <string name="menu_sync_file">Criar arquivo de sincronização</string>
     <string name="menu_export_all">Exportar todos os bancos de dados</string>
+    <string name="menu_exit_no_save">Sair sem salvar</string>
     <string name="menu_search">Pesquisar</string>
     <string name="ok">OK</string>
     <string name="yes">Sim</string>
@@ -204,6 +205,20 @@
     <string name="windows_decimal_symbol_dialog_title">Ajuste do ponto decimal</string>
     <string name="windows_decimal_symbol_dialog">A representação de pontos decimais no Microsoft Windows</string>
 	<string name="build_number">Número da versão</string>
+
+    <string name = "set_permissions">Definir permissões</string>
+    <string name = "request_storage">Solicitando permissão: storage</string>
+    <string name = "storage_desc">O Epi Info armazena formulários de coleta de dados e arquivos de sincronização no sistema de arquivos do Android. Conceda permissão ao Epi Info para acessar o armazenamento do dispositivo.</string>
+    <string name = "request_location">Solicitando permissão: location</string>
+    <string name = "location_desc">O Epi Info pode usar o GPS embutido no dispositivo para permitir a coleta de informações geográficas. Se você planeja fazer isso, dê permissão ao Epi Info para acessar o local do dispositivo.</string>
+    <string name = "request_mic">Solicitando permissão: microfone</string>
+    <string name = "mic_desc">O Epi Info pode usar o microfone embutido do dispositivo para capturar áudio junto com seus dados estruturados. Se você planeja coletar esse tipo de dados, dê permissão ao Epi Info para acessar o microfone do dispositivo.</string>
+    <string name = "request_camera">Solicitando permissão: camera</string>
+    <string name = "camera_desc">O Epi Info pode usar a câmera integrada para capturar fotos e vídeos junto com seus dados estruturados. Se você planeja tirar fotos ou vídeos, dê permissão ao Epi Info para acessar a câmera do dispositivo.</string>
+    <string name = "error_storage">Você não concedeu permissão ao Epi Info para acessar os formulários em seu dispositivo. Por favor conceda esta permissão a partir da configuração da aplicação no seu dispositivo.</string>
+    <string name = "error_camera">Você não concedeu permissão ao Epi Info para acessar a câmera. Por favor conceda esta permissão a partir da configuração da aplicação no seu dispositivo.</string>
+
+
 	<string-array name="yn_array">
         <item>&lt;Não Selecionado&gt;</item>
         <item>Sim</item>
@@ -213,6 +228,7 @@
         <item>Box</item>
         <item>FTP Seguro</item>
         <item>Microsoft Azure</item>
+        <item>CouchDB</item>
         <item>API de Epi Info</item>
     </string-array>
 </resources>

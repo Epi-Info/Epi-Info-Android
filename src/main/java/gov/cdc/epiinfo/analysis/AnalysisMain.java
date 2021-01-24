@@ -3,7 +3,8 @@ package gov.cdc.epiinfo.analysis;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import gov.cdc.epiinfo.DeviceManager;
 import gov.cdc.epiinfo.EpiDbHelper;
 import gov.cdc.epiinfo.FormMetadata;
 import gov.cdc.epiinfo.R;
+import gov.cdc.epiinfo.etc.ShareProvider;
 
 
 public class AnalysisMain extends AppCompatActivity {
@@ -67,23 +69,32 @@ public class AnalysisMain extends AppCompatActivity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
+
+		MenuItem mnuShare = menu.add(0,0,0,"Share");
+		mnuShare.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		new CsvFileGenerator().Generate(this, dbHelper, view, viewName, mnuShare);
+		ShareProvider shareActionProvider = new ShareProvider(this);
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.setType("text/csv");
+		shareActionProvider.setShareIntent(shareIntent);
+		MenuItemCompat.setActionProvider(mnuShare,shareActionProvider);
         
-        MenuItem mnuFreq = menu.add(0, 0, 0, R.string.analysis_add_freq);
+        MenuItem mnuFreq = menu.add(0, 1, 1, R.string.analysis_add_freq);
         mnuFreq.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         
-        MenuItem mnuMeans = menu.add(0, 1,1, R.string.analysis_add_means);
+        MenuItem mnuMeans = menu.add(0, 2,2, R.string.analysis_add_means);
         mnuMeans.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
                 
-        MenuItem mnu2x2 = menu.add(0, 2,2, R.string.analysis_add_2x2);
+        MenuItem mnu2x2 = menu.add(0, 3,3, R.string.analysis_add_2x2);
         mnu2x2.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         
-        MenuItem mnuMap = menu.add(0, 3,3, R.string.analysis_add_map);
+        MenuItem mnuMap = menu.add(0, 4,4, R.string.analysis_add_map);
         mnuMap.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         
-        MenuItem mnuChart1 = menu.add(0, 4,4, R.string.analysis_add_chart_pie);
+        MenuItem mnuChart1 = menu.add(0, 5,5, R.string.analysis_add_chart_pie);
         mnuChart1.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         
-        MenuItem mnuList = menu.add(0, 5,5, R.string.analysis_view_list);
+        MenuItem mnuList = menu.add(0, 6,6, R.string.analysis_view_list);
         mnuList.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         
         return true;
@@ -98,28 +109,28 @@ public class AnalysisMain extends AppCompatActivity {
         case android.R.id.home:
         	this.onBackPressed();
         	return true;
-        case 0:
+        case 1:
             AddFrequencyGadget();
             GoToBottom();
             return true;
-        case 1:
+        case 2:
         	AddMeansGadget();
         	GoToBottom();
         	return true;
-        case 2:
+        case 3:
         	Add2x2Gadget();
         	GoToBottom();        	
         	return true;
-        case 3:
+        case 4:
         	AddMapGadget();
         	GoToBottom();
         	return true;
-        case 4:
+        case 5:
             AddPieChartGadget();
             GoToBottom();
             return true;
-        case 5:
-        	new CsvFileGenerator().Generate(this, dbHelper, view, viewName);
+        case 6:
+        	new CsvFileGenerator().Generate(this, dbHelper, view, viewName, null);
         	return true;
         }
         

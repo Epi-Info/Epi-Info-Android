@@ -2,23 +2,24 @@ package gov.cdc.epiinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -51,6 +56,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import gov.cdc.epiinfo.analysis.AnalysisMain;
+import gov.cdc.epiinfo.cloud.CloudFactory;
+import gov.cdc.epiinfo.cloud.LoginActivity;
 import gov.cdc.epiinfo.etc.ExtFilter;
 import gov.cdc.epiinfo.statcalc.StatCalcMain;
 
@@ -109,7 +116,45 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 		}
 	}
 
+	private boolean checkPermissions()
+	{
+		if (ContextCompat.checkSelfPermission(this,
+				android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
+
+			Intent permissions = new Intent(this, Permissions.class);
+			permissions.putExtra("PermissionType",Permissions.WRITE_EXTERNAL_STORAGE);
+			startActivityForResult(permissions,Permissions.WRITE_EXTERNAL_STORAGE);
+			return false;
+		}
+		else
+        {
+            return true;
+        }
+	}
+
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+
+		if (requestCode == Permissions.WRITE_EXTERNAL_STORAGE)
+		{
+			SetupFileSystem();
+		}
+	}
+
+	private void createNotificationChannel()
+	{
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+		{
+			NotificationChannel channel = new NotificationChannel("3034500","Epi Info", NotificationManager.IMPORTANCE_DEFAULT);
+			channel.setDescription("Epi Info system notifications");
+			NotificationManager notificationManager = getSystemService(NotificationManager.class);
+			notificationManager.createNotificationChannel(channel);
+		}
+	}
+
+		@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -118,6 +163,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 			LoadActivity(SplashScreen.class);
 			splashShown = true;
 		}
+
+		boolean havePermission = checkPermissions();
+		createNotificationChannel();
 
 		setContentView(R.layout.entry); 
 
@@ -223,114 +271,130 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 			}
 		});
 
-		try
-		{
-			File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			path.mkdirs();
-			File syncPath = new File(path, "/EpiInfo/SyncFiles/");
-			File quesPath = new File(path, "/EpiInfo/Questionnaires/");
-			File imgPath = new File(path, "/EpiInfo/Images/");
-			File preloadPath = new File(path, "/EpiInfo/Preload/");
-			syncPath.mkdirs();
-			quesPath.mkdirs();
-			imgPath.mkdirs();
-			preloadPath.mkdirs();
-
-			File handshakeFile = new File(path, "/EpiInfo/Handshake.xml");
-			FileWriter handshakeFileWriter = new FileWriter(handshakeFile);        
-			BufferedWriter handshakeOut = new BufferedWriter(handshakeFileWriter);        
-			handshakeOut.write(GetHandshakeContents());        
-			handshakeOut.close(); 
-
-		}
-		catch (Exception ex)
-		{
-
-		}
-
-		if (sharedPref.getBoolean("sample_forms", true))
-		{
-			GetSampleForm();
-		}
-		AssetManager assetManager = getAssets();     
-		try 
-		{          
-			String fileName = "EpiGrammar.cgt";         
-			File destinationFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/" + fileName);
-			InputStream in = assetManager.open(fileName);         
-			FileOutputStream f = new FileOutputStream(destinationFile);          
-			byte[] buffer = new byte[1024];         
-			int len1 = 0;         
-			while ((len1 = in.read(buffer)) > 0) 
-			{             
-				f.write(buffer, 0, len1);         
-			}         
-			f.close();     
-		} 
-		catch (Exception e) 
-		{         
-
-		}
-
-		try 
-		{          
-			String fileName = "displayMetrics.xml";   
-			File outputDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			File outputFile = new File(outputDirectory + "/EpiInfo/" + fileName);
-
-			if(outputFile.exists() == false)
-			{
-				android.util.DisplayMetrics displayMetrics = new android.util.DisplayMetrics();
-				getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-				BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-
-				writer.write("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n");
-
-				writer.write("<displayMetrics ");
-
-				writer.write("xdpi=\"" + Float.toString(displayMetrics.xdpi) + "\" ");
-				writer.write("ydpi=\"" + Float.toString(displayMetrics.ydpi) + "\" ");
-				writer.write("widthPixels=\"" + Integer.toString(displayMetrics.widthPixels) + "\" ");
-				writer.write("heightPixels=\"" + Integer.toString(displayMetrics.heightPixels) + "\" ");
-
-				writer.write("/>");
-
-				writer.close();
-			}
-		} 
-		catch (Exception e) { }
-
-		try
-		{
-			File temp = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Temp");
-			deleteDirectory(temp);
-		}
-		catch (Exception ex)
-		{
-
-		}
-
-		new Preloader().Load(this);
-
-		loadDefaults();
-
-		Bundle extras = getIntent().getExtras();
-		if (extras != null && extras.containsKey("ViewName"))
-		{
-			String viewName = extras.getString("ViewName");
-			Intent recordList = new Intent(this, RecordList.class);
-			recordList.putExtra("ViewName", viewName);
-			startActivity(recordList);
-		}
-		else if (!AppManager.getDefaultForm().equals(""))
-		{
-			Intent recordList = new Intent(this, RecordList.class);
-			recordList.putExtra("ViewName", AppManager.getDefaultForm());
-			startActivity(recordList);
-			finish();
-		}
+		if (havePermission) {
+            SetupFileSystem();
+        }
 	}
+
+	private void SetupFileSystem()
+    {
+        try
+        {
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            path.mkdirs();
+            File syncPath = new File(path, "/EpiInfo/SyncFiles/");
+            File quesPath = new File(path, "/EpiInfo/Questionnaires/");
+            File imgPath = new File(path, "/EpiInfo/Images/");
+            File preloadPath = new File(path, "/EpiInfo/Preload/");
+            syncPath.mkdirs();
+            quesPath.mkdirs();
+            imgPath.mkdirs();
+            preloadPath.mkdirs();
+
+            File handshakeFile = new File(path, "/EpiInfo/Handshake.xml");
+            FileWriter handshakeFileWriter = new FileWriter(handshakeFile);
+            BufferedWriter handshakeOut = new BufferedWriter(handshakeFileWriter);
+            handshakeOut.write(GetHandshakeContents());
+            handshakeOut.close();
+
+        }
+        catch (Exception ex)
+        {
+        	int x=5;
+        	x++;
+        }
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPref.getBoolean("sample_forms", true))
+        {
+            GetSampleForm();
+        }
+        AssetManager assetManager = getAssets();
+        try
+        {
+            String fileName = "EpiGrammar.cgt";
+            File destinationFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/" + fileName);
+            InputStream in = assetManager.open(fileName);
+            FileOutputStream f = new FileOutputStream(destinationFile);
+            byte[] buffer = new byte[1024];
+            int len1 = 0;
+            while ((len1 = in.read(buffer)) > 0)
+            {
+                f.write(buffer, 0, len1);
+            }
+            f.close();
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        try
+        {
+            String fileName = "displayMetrics.xml";
+            File outputDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File outputFile = new File(outputDirectory + "/EpiInfo/" + fileName);
+
+            if(outputFile.exists() == false)
+            {
+                android.util.DisplayMetrics displayMetrics = new android.util.DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+
+                writer.write("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n");
+
+                writer.write("<displayMetrics ");
+
+                writer.write("xdpi=\"" + displayMetrics.xdpi + "\" ");
+                writer.write("ydpi=\"" + displayMetrics.ydpi + "\" ");
+                writer.write("widthPixels=\"" + displayMetrics.widthPixels + "\" ");
+                writer.write("heightPixels=\"" + displayMetrics.heightPixels + "\" ");
+
+                writer.write("/>");
+
+                writer.close();
+            }
+        }
+        catch (Exception e) { }
+
+        try
+        {
+            File temp = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/EpiInfo/Temp");
+            deleteDirectory(temp);
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        new Preloader().Load(this);
+
+        loadDefaults();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("ViewName"))
+        {
+            String viewName = extras.getString("ViewName");
+            Intent recordList = new Intent(this, RecordList.class);
+            recordList.putExtra("ViewName", viewName);
+
+			if (extras.containsKey("SearchQuery"))
+			{
+				String searchQuery = extras.getString("SearchQuery");
+				recordList.putExtra("SearchQuery", searchQuery);
+			}
+
+            startActivity(recordList);
+        }
+        else if (!AppManager.getDefaultForm().equals(""))
+        {
+            Intent recordList = new Intent(this, RecordList.class);
+            recordList.putExtra("ViewName", AppManager.getDefaultForm());
+            startActivity(recordList);
+            finish();
+        }
+    }
 
 
 	@Override
@@ -504,103 +568,116 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 	}
 
 	private Dialog showViewDialog()
-	{		
-		File basePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		File quesPath = new File(basePath + "/EpiInfo/Questionnaires");
+	{
+		if (ContextCompat.checkSelfPermission(this,
+				android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
 
-		String[] files = quesPath.list(new ExtFilter("xml","_"));
-		if (files != null)
-		{			
-			String[] spinnerList = new String[files.length];
-			for (int x=0;x<files.length;x++)
-			{
-				int idx = files[x].indexOf(".");
-				spinnerList[x] = files[x].substring(0, idx);
-			}
+			Alert(getString(R.string.error_storage));
+		}
+		else {
 
-			Dialog viewDialog = new Dialog(this);
-			viewDialog.setTitle(getString(R.string.available_forms));
-			viewDialog.setContentView(R.layout.view_dialog);
-			viewDialog.setCancelable(true);
+			File basePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+			File quesPath = new File(basePath + "/EpiInfo/Questionnaires");
 
-			Spinner viewSpinner = viewDialog.findViewById(R.id.cbxViewField);
-			viewSpinner.setPrompt(getString(R.string.select_form));
-
-
-			ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, spinnerList);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			viewSpinner.setAdapter(adapter);        
-			self = this;
-
-			final Spinner mySpinner = viewSpinner;
-			final Dialog myDialog = viewDialog;    	
-			final Intent recordList = new Intent(this, RecordList.class);
-
-			Button btnSet = viewDialog.findViewById(R.id.btnSet);
-			btnSet.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-
-					recordList.putExtra("ViewName", mySpinner.getSelectedItem().toString());
-					startActivity(recordList);
-
-					myDialog.dismiss();				
+			String[] files = quesPath.list(new ExtFilter("xml", "_"));
+			if (files != null) {
+				String[] spinnerList = new String[files.length];
+				for (int x = 0; x < files.length; x++) {
+					int idx = files[x].indexOf(".");
+					spinnerList[x] = files[x].substring(0, idx);
 				}
-			});
 
-			return viewDialog;
+				Dialog viewDialog = new Dialog(this);
+				viewDialog.setTitle(getString(R.string.available_forms));
+				viewDialog.setContentView(R.layout.view_dialog);
+				viewDialog.setCancelable(true);
+
+				Spinner viewSpinner = viewDialog.findViewById(R.id.cbxViewField);
+				viewSpinner.setPrompt(getString(R.string.select_form));
+
+
+				ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, spinnerList);
+				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				viewSpinner.setAdapter(adapter);
+				self = this;
+
+				final Spinner mySpinner = viewSpinner;
+				final Dialog myDialog = viewDialog;
+				final Intent recordList = new Intent(this, RecordList.class);
+
+				Button btnSet = viewDialog.findViewById(R.id.btnSet);
+				btnSet.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+
+						recordList.putExtra("ViewName", mySpinner.getSelectedItem().toString());
+						startActivity(recordList);
+
+						myDialog.dismiss();
+					}
+				});
+
+				return viewDialog;
+			}
 		}
 		return null;
 	}
 
 	private Dialog showViewDialogForAnalysis()
-	{		
-		File basePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		File quesPath = new File(basePath + "/EpiInfo/Questionnaires");
+	{
+		if (ContextCompat.checkSelfPermission(this,
+				android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
 
-		String[] files = quesPath.list(new ExtFilter("xml",null));
-		if (files != null)
-		{			
-			String[] spinnerList = new String[files.length];
-			for (int x=0;x<files.length;x++)
-			{
-				int idx = files[x].indexOf(".");
-				spinnerList[x] = files[x].substring(0, idx);
-			}
+			Alert(getString(R.string.error_storage));
+		}
+		else {
+			File basePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+			File quesPath = new File(basePath + "/EpiInfo/Questionnaires");
 
-			Dialog viewDialog = new Dialog(this);
-			viewDialog.setTitle(getString(R.string.available_forms));
-			viewDialog.setContentView(R.layout.view_dialog_for_analysis);
-			viewDialog.setCancelable(true);
-
-			Spinner viewSpinner = viewDialog.findViewById(R.id.cbxAnalysisViewField);
-			viewSpinner.setPrompt(getString(R.string.select_form));
-
-
-			ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, spinnerList);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			viewSpinner.setAdapter(adapter);        
-			self = this;
-
-			final Spinner analysisSpinner = viewSpinner;
-			final Dialog analysisDialog = viewDialog;
-			final Intent analysis = new Intent(this, AnalysisMain.class);
-
-			Button btnSet = viewDialog.findViewById(R.id.btnAnalysisSet);
-			btnSet.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-
-					analysis.putExtra("ViewName", analysisSpinner.getSelectedItem().toString());
-					startActivity(analysis);
-
-					analysisDialog.dismiss();				
+			String[] files = quesPath.list(new ExtFilter("xml", null));
+			if (files != null) {
+				String[] spinnerList = new String[files.length];
+				for (int x = 0; x < files.length; x++) {
+					int idx = files[x].indexOf(".");
+					spinnerList[x] = files[x].substring(0, idx);
 				}
-			});
 
-			return viewDialog;
+				Dialog viewDialog = new Dialog(this);
+				viewDialog.setTitle(getString(R.string.available_forms));
+				viewDialog.setContentView(R.layout.view_dialog_for_analysis);
+				viewDialog.setCancelable(true);
+
+				Spinner viewSpinner = viewDialog.findViewById(R.id.cbxAnalysisViewField);
+				viewSpinner.setPrompt(getString(R.string.select_form));
+
+
+				ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, spinnerList);
+				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				viewSpinner.setAdapter(adapter);
+				self = this;
+
+				final Spinner analysisSpinner = viewSpinner;
+				final Dialog analysisDialog = viewDialog;
+				final Intent analysis = new Intent(this, AnalysisMain.class);
+
+				Button btnSet = viewDialog.findViewById(R.id.btnAnalysisSet);
+				btnSet.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+
+						analysis.putExtra("ViewName", analysisSpinner.getSelectedItem().toString());
+						startActivity(analysis);
+
+						analysisDialog.dismiss();
+					}
+				});
+
+				return viewDialog;
+			}
 		}
 		return null;
 	}
@@ -612,13 +689,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 		mnuSave.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 		mnuSave.setIcon(android.R.drawable.ic_menu_preferences);
 
-		MenuItem mnuExport = menu.add(8000, 6003, 1, R.string.menu_export_all);
+		MenuItem mnuLogin = menu.add(8000, 6006, 1, R.string.menu_login);
+		mnuLogin.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        MenuItem mnuDownload = menu.add(8000, 6005, 2, R.string.menu_daily_download);
+        mnuDownload.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+		MenuItem mnuExport = menu.add(8000, 6003, 3, R.string.menu_export_all);
 		mnuExport.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 		
-		MenuItem mnuCloud = menu.add(8000, 6004, 2, R.string.menu_cloud_sync);
+		MenuItem mnuCloud = menu.add(8000, 6004, 4, R.string.menu_cloud_sync);
 		mnuCloud.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-		MenuItem mnuHelp = menu.add(8000, 6002, 3, R.string.menu_help);
+		MenuItem mnuHelp = menu.add(8000, 6002, 5, R.string.menu_help);
 		mnuHelp.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
 		return true;
@@ -627,23 +710,37 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()) {
-		case 6001:
-			ShowSettings();
-			return true;
-		case 6002:
-			Uri uriUrl = Uri.parse("http://epiinfoandroid.codeplex.com/documentation");
-			startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
-			return true;
-		case 6003:
-			showDialog(44);
-			return true;
-		case 6004:
-			doCloudSync();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        switch (item.getItemId()) {
+            case 6001:
+                ShowSettings();
+                return true;
+            case 6002:
+                Uri uriUrl = Uri.parse("http://epiinfoandroid.codeplex.com/documentation");
+                startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
+                return true;
+            case 6003:
+                showDialog(44);
+                return true;
+            case 6004:
+                doCloudSync();
+                return true;
+            case 6005:
+				Toast.makeText(self, getString(R.string.cloud_download_schedule), Toast.LENGTH_LONG).show();
+				new AsyncDailyDownloader().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                return true;
+			case 6006:
+				startActivityForResult(new Intent(self, LoginActivity.class),11097);
+				return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+	private int GetDailyTasks()
+    {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String deviceid = sharedPref.getString("device_id", "");
+		return CloudFactory.GetCloudClient("","", null,this).getDailyTasks(this,deviceid);
+    }
 
 	private String GetHandshakeContents()
 	{
@@ -830,6 +927,40 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 		return passwordDialog;
 	}
 
+	private class AsyncDailyDownloader extends AsyncTask<Void,Double, Integer> {
+
+		@Override
+		protected Integer doInBackground(Void... params) {
+
+			return GetDailyTasks();
+		}
+
+
+		@Override
+		protected void onPostExecute(Integer count) {
+
+			int msgId = new Random().nextInt(Integer.MAX_VALUE);
+
+			if (count > -1) {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
+						.setSmallIcon(R.drawable.ic_cloud_done)
+						.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+						.setContentTitle(String.format(getString(R.string.cloud_download_schedule_complete), count.toString()));
+
+				NotificationManager notificationManager = (NotificationManager) self.getSystemService(Context.NOTIFICATION_SERVICE);
+				notificationManager.notify(msgId, builder.build());
+			} else {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
+						.setSmallIcon(R.drawable.ic_sync_problem)
+						.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+						.setContentTitle(getString(R.string.cloud_download_schedule_failed));
+
+				NotificationManager notificationManager = (NotificationManager) self.getSystemService(Context.NOTIFICATION_SERVICE);
+				notificationManager.notify(msgId, builder.build());
+			}
+		}
+	}
+
 	private class AsyncExporter extends AsyncTask<String,Double, Boolean>
 	{
 
@@ -887,7 +1018,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 			int msgId = new Random().nextInt(Integer.MAX_VALUE);
 
 			if (status > 0) {
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
 						.setSmallIcon(R.drawable.ic_cloud_done)
 						.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
 						.setContentTitle(String.format(getString(R.string.cloud_sync_complete), formName))
@@ -896,7 +1027,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 				NotificationManager notificationManager = (NotificationManager) self.getSystemService(Context.NOTIFICATION_SERVICE);
 				notificationManager.notify(msgId, builder.build());
 			} else if (status != -99 && status != 0) {
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(self)
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(self,"3034500")
 						.setSmallIcon(R.drawable.ic_sync_problem)
 						.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
 						.setContentTitle(String.format(getString(R.string.cloud_sync_failed),  formName))
