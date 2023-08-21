@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"瀏覽首頁"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"向上瀏覽"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"更多選項"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"完成"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"查看全部"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"選擇應用程式"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"關閉"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"開啟"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt +"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl +"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"Delete 鍵"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Enter 鍵"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Fn +"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta +"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift +"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"空格鍵"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym +"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu +"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"搜尋…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"清除查詢"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"搜尋查詢"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"搜尋"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"提交查詢"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"語音搜尋"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"分享對象"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"與「<ns1:g id="APPLICATION_NAME">%s</ns1:g>」分享"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"收合"</string>
+    <string name="blocked_ip_error_message">您正嘗試從管理員未核准的位置登入 Box。請聯絡您的管理員以解決此問題。</string>
+    <string name="boxsdk_Authenticating">驗證中</string>
+    <string name="boxsdk_Authentication_fail">驗證失敗</string>
+    <string name="boxsdk_Authentication_fail_forbidden">請您的管理員授權這部裝置。</string>
+    <string name="boxsdk_Authentication_fail_url_mismatch">重新導向 URL 無效</string>
+    <string name="boxsdk_Go_back">返回</string>
+    <string name="boxsdk_Please_wait">請稍候…</string>
+    <string name="boxsdk_Security_Warning">安全警告</string>
+    <string name="boxsdk_Select_an_account_to_use">選擇要使用的帳戶</string>
+    <string name="boxsdk_There_are_problems_with_the_security_certificate_for_this_site">此網站的安全憑證發生問題。</string>
+    <string name="boxsdk_Use_a_different_account">選擇其他帳戶</string>
+    <string description="" name="boxsdk_alert_dialog_cancel">取消</string>
+    <string description="" name="boxsdk_alert_dialog_ok">提交</string>
+    <string description="" name="boxsdk_alert_dialog_password">密碼</string>
+    <string description="" name="boxsdk_alert_dialog_text_entry">此網站或應用程式需要驗證。</string>
+    <string description="" name="boxsdk_alert_dialog_username">使用者名稱</string>
+    <string description="OK on buttons" name="boxsdk_button_ok">確定</string>
+    <string description="OK on buttons" name="boxsdk_button_okay">確定</string>
+    <string description="size with abbreviation for bytes used in folder list" name="boxsdk_bytes">%4.0f B</string>
+    <string name="boxsdk_common_name">一般名稱：</string>
+    <string name="boxsdk_details">詳細資料</string>
+    <string name="boxsdk_error_fatal_refresh">您已登出。</string>
+    <string name="boxsdk_error_network_connection">無法偵測網路連線</string>
+    <string name="boxsdk_error_terms_of_service">您的管理員已變更服務條款。您必須登入並接受服務條款才能繼續。</string>
+    <string name="boxsdk_expires_on">到期時間：</string>
+    <string description="size in binary gigabyte  1024 * 1024 mbytes used in folder list" name="boxsdk_gigabytes">%4.1f GB</string>
+    <string name="boxsdk_issued_by">核發者：</string>
+    <string name="boxsdk_issued_on">核發日期：</string>
+    <string name="boxsdk_issued_to">核發給：</string>
+    <string description="size in binary kilobytes  1024 bytes used in folder list" name="boxsdk_kilobytes">%4.1f KB</string>
+    <string description="size in binary megabyte  1024 * 1024 kbytes used in folder list" name="boxsdk_megabytes">%4.1f MB</string>
+    <string name="boxsdk_no_offline_access">無離線存取</string>
+    <string name="boxsdk_no_offline_access_detail">我們無法偵測到網路連線。</string>
+    <string name="boxsdk_no_offline_access_todo">若要登入，請連線至 WiFi 或行動數據網路。</string>
+    <string name="boxsdk_org_name">組織名稱：</string>
+    <string name="boxsdk_org_unit">組織單位：</string>
+    <string name="boxsdk_ssl_error_details">檢視詳細資料</string>
+    <string name="boxsdk_ssl_error_warning_DATE_INVALID">憑證日期無效。</string>
+    <string name="boxsdk_ssl_error_warning_EXPIRED">憑證已到期。</string>
+    <string name="boxsdk_ssl_error_warning_ID_MISMATCH">主機名稱不相符。</string>
+    <string name="boxsdk_ssl_error_warning_INVALID">發生一般性錯誤。</string>
+    <string name="boxsdk_ssl_error_warning_NOT_YET_VALID">憑證尚未生效。</string>
+    <string name="boxsdk_ssl_error_warning_UNTRUSTED">憑證授權單位不受信任。</string>
+    <string name="boxsdk_ssl_should_not_proceed">請勿繼續執行，尤其是當您從未在此網站上看過此警告時。</string>
+    <string description="size in binary terabyte  1024 * 1024 gbytes used in folder list" name="boxsdk_terabytes">%4.1f TB</string>
+    <string name="boxsdk_unable_to_connect">無法連線</string>
+    <string name="boxsdk_unable_to_connect_detail">無法連線至您的網路。</string>
+    <string name="boxsdk_unable_to_connect_todo">檢查您的網路連線，然後再試一次。</string>
+    <string name="boxsdk_validity_period">有效期：</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"啟用"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"您必須啟用 Google Play 服務，才能執行「<ns1:g id="APP_NAME">%1$s</ns1:g>」。"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"啟用 Google Play 服務"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"安裝"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"您的裝置並未安裝 Google Play 服務，因此無法執行「<ns1:g id="APP_NAME">%1$s</ns1:g>」。"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"取得 Google Play 服務"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play 服務可用性"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play 服務發生錯誤"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」無法存取 Google Play 服務，請再試一次。"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"您的裝置不支援 Google Play 服務，因此無法執行「<ns1:g id="APP_NAME">%1$s</ns1:g>」。"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"更新"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"您必須更新 Google Play 服務，才能執行「<ns1:g id="APP_NAME">%1$s</ns1:g>」。"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"更新 Google Play 服務"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"執行「<ns1:g id="APP_NAME">%1$s</ns1:g>」所需的 Google Play 服務正在更新。"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"必須使用新版 Google Play 服務。該服務稍後就會自動更新。"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"在手機上開啟"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"登入"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"使用 Google 帳戶登入"</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"搜尋"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

@@ -1,0 +1,753 @@
+gov/cdc/epiinfo/analysis/MapViewer.java
+ gov.cdc.epiinfo.analysis.MapViewer
+ gov.cdc.epiinfo.analysis.MapViewer$1
+ gov.cdc.epiinfo.analysis.MapViewer$2
+ gov.cdc.epiinfo.analysis.MapViewer$3
+ gov.cdc.epiinfo.analysis.MapViewer$4
+ gov.cdc.epiinfo.analysis.MapViewer$WaitAndRender
+gov/cdc/epiinfo/AppManager.java
+ gov.cdc.epiinfo.AppManager
+goldengine/java/ParseResultConstants.java
+ goldengine.java.ParseResultConstants
+gov/cdc/epiinfo/cloud/LoginActivity.java
+ gov.cdc.epiinfo.cloud.LoginActivity
+ gov.cdc.epiinfo.cloud.LoginActivity$1
+ gov.cdc.epiinfo.cloud.LoginActivity$TokenRefresher
+gov/cdc/epiinfo/interpreter/Rule_Hide.java
+ gov.cdc.epiinfo.interpreter.Rule_Hide
+gov/cdc/epiinfo/Interviewer.java
+ gov.cdc.epiinfo.Interviewer
+ gov.cdc.epiinfo.Interviewer$1
+ gov.cdc.epiinfo.Interviewer$10
+ gov.cdc.epiinfo.Interviewer$2
+ gov.cdc.epiinfo.Interviewer$3
+ gov.cdc.epiinfo.Interviewer$4
+ gov.cdc.epiinfo.Interviewer$5
+ gov.cdc.epiinfo.Interviewer$6
+ gov.cdc.epiinfo.Interviewer$7
+ gov.cdc.epiinfo.Interviewer$8
+ gov.cdc.epiinfo.Interviewer$9
+gov/cdc/epiinfo/interpreter/Cmd_If.java
+ gov.cdc.epiinfo.interpreter.Cmd_If
+gov/cdc/epiinfo/interpreter/functions/Rule_Strlen.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Strlen
+gov/cdc/epiinfo/interpreter/Cmd_Hide.java
+ gov.cdc.epiinfo.interpreter.Cmd_Hide
+gov/cdc/epiinfo/statcalc/calculators/Unmatched.java
+ gov.cdc.epiinfo.statcalc.calculators.Unmatched
+goldengine/java/RecordIDConstants.java
+ goldengine.java.RecordIDConstants
+gov/cdc/epiinfo/interpreter/Func_Substring.java
+ gov.cdc.epiinfo.interpreter.Func_Substring
+gov/cdc/epiinfo/interpreter/Rule_NegateExp.java
+ gov.cdc.epiinfo.interpreter.Rule_NegateExp
+com/creativewidgetworks/goldparser/engine/Parser.java
+ com.creativewidgetworks.goldparser.engine.Parser
+ com.creativewidgetworks.goldparser.engine.Parser$1
+gov/cdc/epiinfo/Launcher.java
+ gov.cdc.epiinfo.Launcher
+gov/cdc/epiinfo/interpreter/functions/Rule_CurrentUser.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_CurrentUser
+com/creativewidgetworks/goldparser/util/Extractor.java
+ com.creativewidgetworks.goldparser.util.Extractor
+goldengine/java/LookAheadStream.java
+ goldengine.java.LookAheadStream
+goldengine/java/Reduction.java
+ goldengine.java.Reduction
+gov/cdc/epiinfo/interpreter/Rule_CompareExp.java
+ gov.cdc.epiinfo.interpreter.Rule_CompareExp
+ gov.cdc.epiinfo.interpreter.Rule_CompareExp$1
+com/creativewidgetworks/goldparser/engine/LRStateList.java
+ com.creativewidgetworks.goldparser.engine.LRStateList
+gov/cdc/epiinfo/interpreter/functions/Rule_Validate.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Validate
+gov/cdc/epiinfo/etc/TextUtils.java
+ gov.cdc.epiinfo.etc.TextUtils
+gov/cdc/epiinfo/interpreter/Rule_Dialog.java
+ gov.cdc.epiinfo.interpreter.Rule_Dialog
+gov/cdc/epiinfo/interpreter/Rule_FunctionCall.java
+ gov.cdc.epiinfo.interpreter.Rule_FunctionCall
+ gov.cdc.epiinfo.interpreter.Rule_FunctionCall$1
+ gov.cdc.epiinfo.interpreter.Rule_FunctionCall$Function_Enum
+gov/cdc/epiinfo/analysis/cWorkingTable.java
+ gov.cdc.epiinfo.analysis.cWorkingTable
+ gov.cdc.epiinfo.analysis.cWorkingTable$DBReadExecute
+gov/cdc/epiinfo/interpreter/functions/Rule_Rnd.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Rnd
+com/creativewidgetworks/goldparser/engine/enums/AdvanceMode.java
+ com.creativewidgetworks.goldparser.engine.enums.AdvanceMode
+gov/cdc/epiinfo/MainActivity.java
+ gov.cdc.epiinfo.MainActivity
+ gov.cdc.epiinfo.MainActivity$1
+ gov.cdc.epiinfo.MainActivity$2
+ gov.cdc.epiinfo.MainActivity$3
+ gov.cdc.epiinfo.MainActivity$4
+ gov.cdc.epiinfo.MainActivity$5
+ gov.cdc.epiinfo.MainActivity$6
+ gov.cdc.epiinfo.MainActivity$7
+ gov.cdc.epiinfo.MainActivity$8
+ gov.cdc.epiinfo.MainActivity$AsyncDailyDownloader
+ gov.cdc.epiinfo.MainActivity$AsyncExporter
+ gov.cdc.epiinfo.MainActivity$CloudSynchronizer
+gov/cdc/epiinfo/etc/PBKDF2.java
+ gov.cdc.epiinfo.etc.PBKDF2
+com/creativewidgetworks/goldparser/engine/enums/ParseResult.java
+ com.creativewidgetworks.goldparser.engine.enums.ParseResult
+gov/cdc/epiinfo/interpreter/Rule_Context.java
+ gov.cdc.epiinfo.interpreter.Rule_Context
+ gov.cdc.epiinfo.interpreter.Rule_Context$1
+ gov.cdc.epiinfo.interpreter.Rule_Context$LevelEnum
+gov/cdc/epiinfo/interpreter/Rule_Highlight.java
+ gov.cdc.epiinfo.interpreter.Rule_Highlight
+gov/cdc/epiinfo/DeviceManager.java
+ gov.cdc.epiinfo.DeviceManager
+gov/cdc/epiinfo/interpreter/Func_Trunc.java
+ gov.cdc.epiinfo.interpreter.Func_Trunc
+com/creativewidgetworks/goldparser/parser/Scope.java
+ com.creativewidgetworks.goldparser.parser.Scope
+com/creativewidgetworks/goldparser/engine/Group.java
+ com.creativewidgetworks.goldparser.engine.Group
+gov/cdc/epiinfo/analysis/SharedResources.java
+ gov.cdc.epiinfo.analysis.SharedResources
+gov/cdc/epiinfo/interpreter/Rule_Record_Checkcode_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Record_Checkcode_Statement
+gov/cdc/epiinfo/statcalc/ChiSquareActivity.java
+ gov.cdc.epiinfo.statcalc.ChiSquareActivity
+ gov.cdc.epiinfo.statcalc.ChiSquareActivity$LocalTextWatcher
+gov/cdc/epiinfo/interpreter/functions/Rule_Seconds.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Seconds
+gov/cdc/epiinfo/RecordEditor.java
+ gov.cdc.epiinfo.RecordEditor
+ gov.cdc.epiinfo.RecordEditor$1
+ gov.cdc.epiinfo.RecordEditor$2
+ gov.cdc.epiinfo.RecordEditor$3
+ gov.cdc.epiinfo.RecordEditor$4
+ gov.cdc.epiinfo.RecordEditor$5
+ gov.cdc.epiinfo.RecordEditor$6
+ gov.cdc.epiinfo.RecordEditor$7
+ gov.cdc.epiinfo.RecordEditor$8
+gov/cdc/epiinfo/interpreter/Rule_Disable.java
+ gov.cdc.epiinfo.interpreter.Rule_Disable
+gov/cdc/epiinfo/analysis/PieChartView.java
+ gov.cdc.epiinfo.analysis.PieChartView
+ gov.cdc.epiinfo.analysis.PieChartView$1
+ gov.cdc.epiinfo.analysis.PieChartView$2
+gov/cdc/epiinfo/interpreter/Variable.java
+ gov.cdc.epiinfo.interpreter.Variable
+gov/cdc/epiinfo/interpreter/Cmd_Empty.java
+ gov.cdc.epiinfo.interpreter.Cmd_Empty
+gov/cdc/epiinfo/statcalc/etc/CCResult.java
+ gov.cdc.epiinfo.statcalc.etc.CCResult
+gov/cdc/epiinfo/interpreter/functions/Rule_DateDiff.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_DateDiff
+gov/cdc/epiinfo/statcalc/calculators/Poisson.java
+ gov.cdc.epiinfo.statcalc.calculators.Poisson
+gov/cdc/epiinfo/interpreter/Cmd_Unhide.java
+ gov.cdc.epiinfo.interpreter.Cmd_Unhide
+gov/cdc/epiinfo/interpreter/functions/Rule_Trunc.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Trunc
+gov/cdc/epiinfo/LauncherXML.java
+ gov.cdc.epiinfo.LauncherXML
+goldengine/java/VariableList.java
+ goldengine.java.VariableList
+gov/cdc/epiinfo/interpreter/ICommand.java
+ gov.cdc.epiinfo.interpreter.ICommand
+gov/cdc/epiinfo/etc/CustomView.java
+ gov.cdc.epiinfo.etc.CustomView
+gov/cdc/epiinfo/statcalc/calculators/SharedResources.java
+ gov.cdc.epiinfo.statcalc.calculators.SharedResources
+com/creativewidgetworks/goldparser/engine/enums/CGTRecord.java
+ com.creativewidgetworks.goldparser.engine.enums.CGTRecord
+com/creativewidgetworks/goldparser/util/FormatHelper.java
+ com.creativewidgetworks.goldparser.util.FormatHelper
+gov/cdc/epiinfo/interpreter/Rule_Assign.java
+ gov.cdc.epiinfo.interpreter.Rule_Assign
+ gov.cdc.epiinfo.interpreter.Rule_Assign$1
+gov/cdc/epiinfo/interpreter/Rule_Call.java
+ gov.cdc.epiinfo.interpreter.Rule_Call
+com/creativewidgetworks/goldparser/engine/enums/LRActionType.java
+ com.creativewidgetworks.goldparser.engine.enums.LRActionType
+com/creativewidgetworks/goldparser/engine/FAEdge.java
+ com.creativewidgetworks.goldparser.engine.FAEdge
+goldengine/java/GOLDParser.java
+ goldengine.java.GOLDParser
+gov/cdc/epiinfo/analysis/FrequencyView.java
+ gov.cdc.epiinfo.analysis.FrequencyView
+ gov.cdc.epiinfo.analysis.FrequencyView$1
+ gov.cdc.epiinfo.analysis.FrequencyView$2
+gov/cdc/epiinfo/interpreter/Rule_AndExp.java
+ gov.cdc.epiinfo.interpreter.Rule_AndExp
+gov/cdc/epiinfo/interpreter/functions/Rule_Sin.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Sin
+goldengine/java/Token.java
+ goldengine.java.Token
+com/creativewidgetworks/goldparser/parser/GOLDParser.java
+ com.creativewidgetworks.goldparser.parser.GOLDParser
+ com.creativewidgetworks.goldparser.parser.GOLDParser$1
+gov/cdc/epiinfo/interpreter/Cmd_GoTo.java
+ gov.cdc.epiinfo.interpreter.Cmd_GoTo
+gov/cdc/epiinfo/interpreter/functions/Rule_Cos.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Cos
+com/google/zxing/integration/android/IntentResult.java
+ com.google.zxing.integration.android.IntentResult
+goldengine/java/SimpleDatabase.java
+ goldengine.java.SimpleDatabase
+gov/cdc/epiinfo/interpreter/functions/Rule_Ln.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Ln
+gov/cdc/epiinfo/interpreter/functions/Rule_Minute.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Minute
+gov/cdc/epiinfo/etc/AudioProcessor.java
+ gov.cdc.epiinfo.etc.AudioProcessor
+gov/cdc/epiinfo/etc/CustomCheckBox.java
+ gov.cdc.epiinfo.etc.CustomCheckBox
+gov/cdc/epiinfo/interpreter/IFunction.java
+ gov.cdc.epiinfo.interpreter.IFunction
+gov/cdc/epiinfo/SyncFileGenerator.java
+ gov.cdc.epiinfo.SyncFileGenerator
+ gov.cdc.epiinfo.SyncFileGenerator$1
+ gov.cdc.epiinfo.SyncFileGenerator$AsyncGenerator
+gov/cdc/epiinfo/interpreter/Cmd_Disable.java
+ gov.cdc.epiinfo.interpreter.Cmd_Disable
+gov/cdc/epiinfo/interpreter/CSymbolTable.java
+ gov.cdc.epiinfo.interpreter.CSymbolTable
+gov/cdc/epiinfo/cloud/IBoxActivity.java
+ gov.cdc.epiinfo.cloud.IBoxActivity
+goldengine/java/FAState.java
+ goldengine.java.FAState
+gov/cdc/epiinfo/GeoLocation.java
+ gov.cdc.epiinfo.GeoLocation
+ gov.cdc.epiinfo.GeoLocation$1
+ gov.cdc.epiinfo.GeoLocation$GeoSearchTask
+gov/cdc/epiinfo/Permissions.java
+ gov.cdc.epiinfo.Permissions
+ gov.cdc.epiinfo.Permissions$1
+gov/cdc/epiinfo/Preloader.java
+ gov.cdc.epiinfo.Preloader
+ gov.cdc.epiinfo.Preloader$1
+ gov.cdc.epiinfo.Preloader$AsyncLoader
+gov/cdc/epiinfo/interpreter/CommandFactory.java
+ gov.cdc.epiinfo.interpreter.CommandFactory
+gov/cdc/epiinfo/interpreter/functions/Rule_NumToTime.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_NumToTime
+com/creativewidgetworks/goldparser/util/ResourceHelper.java
+ com.creativewidgetworks.goldparser.util.ResourceHelper
+gov/cdc/epiinfo/statcalc/UnmatchedActivity.java
+ gov.cdc.epiinfo.statcalc.UnmatchedActivity
+ gov.cdc.epiinfo.statcalc.UnmatchedActivity$1
+ gov.cdc.epiinfo.statcalc.UnmatchedActivity$2
+ gov.cdc.epiinfo.statcalc.UnmatchedActivity$3
+gov/cdc/epiinfo/analysis/ExactOR.java
+ gov.cdc.epiinfo.analysis.ExactOR
+gov/cdc/epiinfo/KmlLoader.java
+ gov.cdc.epiinfo.KmlLoader
+ gov.cdc.epiinfo.KmlLoader$1
+ gov.cdc.epiinfo.KmlLoader$LoadTask
+gov/cdc/epiinfo/interpreter/Rule_PowExp.java
+ gov.cdc.epiinfo.interpreter.Rule_PowExp
+gov/cdc/epiinfo/cloud/EpiInfoCloudClient.java
+ gov.cdc.epiinfo.cloud.EpiInfoCloudClient
+ gov.cdc.epiinfo.cloud.EpiInfoCloudClient$HttpDelete
+ gov.cdc.epiinfo.cloud.EpiInfoCloudClient$HttpPatch
+com/creativewidgetworks/goldparser/engine/Production.java
+ com.creativewidgetworks.goldparser.engine.Production
+gov/cdc/epiinfo/InterviewLayoutManager.java
+ gov.cdc.epiinfo.InterviewLayoutManager
+ gov.cdc.epiinfo.InterviewLayoutManager$1
+ gov.cdc.epiinfo.InterviewLayoutManager$10
+ gov.cdc.epiinfo.InterviewLayoutManager$11
+ gov.cdc.epiinfo.InterviewLayoutManager$12
+ gov.cdc.epiinfo.InterviewLayoutManager$12$1
+ gov.cdc.epiinfo.InterviewLayoutManager$12$2
+ gov.cdc.epiinfo.InterviewLayoutManager$13
+ gov.cdc.epiinfo.InterviewLayoutManager$14
+ gov.cdc.epiinfo.InterviewLayoutManager$15
+ gov.cdc.epiinfo.InterviewLayoutManager$16
+ gov.cdc.epiinfo.InterviewLayoutManager$17
+ gov.cdc.epiinfo.InterviewLayoutManager$18
+ gov.cdc.epiinfo.InterviewLayoutManager$19
+ gov.cdc.epiinfo.InterviewLayoutManager$2
+ gov.cdc.epiinfo.InterviewLayoutManager$20
+ gov.cdc.epiinfo.InterviewLayoutManager$21
+ gov.cdc.epiinfo.InterviewLayoutManager$22
+ gov.cdc.epiinfo.InterviewLayoutManager$23
+ gov.cdc.epiinfo.InterviewLayoutManager$24
+ gov.cdc.epiinfo.InterviewLayoutManager$25
+ gov.cdc.epiinfo.InterviewLayoutManager$26
+ gov.cdc.epiinfo.InterviewLayoutManager$27
+ gov.cdc.epiinfo.InterviewLayoutManager$28
+ gov.cdc.epiinfo.InterviewLayoutManager$29
+ gov.cdc.epiinfo.InterviewLayoutManager$3
+ gov.cdc.epiinfo.InterviewLayoutManager$30
+ gov.cdc.epiinfo.InterviewLayoutManager$31
+ gov.cdc.epiinfo.InterviewLayoutManager$32
+ gov.cdc.epiinfo.InterviewLayoutManager$33
+ gov.cdc.epiinfo.InterviewLayoutManager$34
+ gov.cdc.epiinfo.InterviewLayoutManager$35
+ gov.cdc.epiinfo.InterviewLayoutManager$4
+ gov.cdc.epiinfo.InterviewLayoutManager$5
+ gov.cdc.epiinfo.InterviewLayoutManager$6
+ gov.cdc.epiinfo.InterviewLayoutManager$7
+ gov.cdc.epiinfo.InterviewLayoutManager$8
+ gov.cdc.epiinfo.InterviewLayoutManager$8$1
+ gov.cdc.epiinfo.InterviewLayoutManager$8$2
+ gov.cdc.epiinfo.InterviewLayoutManager$9
+gov/cdc/epiinfo/etc/CustomTextView.java
+ gov.cdc.epiinfo.etc.CustomTextView
+gov/cdc/epiinfo/cloud/AzureClient.java
+ gov.cdc.epiinfo.cloud.AzureClient
+ gov.cdc.epiinfo.cloud.AzureClient$HttpDelete
+ gov.cdc.epiinfo.cloud.AzureClient$HttpPatch
+gov/cdc/epiinfo/cloud/SecureFTPClient.java
+ gov.cdc.epiinfo.cloud.SecureFTPClient
+ gov.cdc.epiinfo.cloud.SecureFTPClient$FtpItem
+gov/cdc/epiinfo/interpreter/Cmd_Assign.java
+ gov.cdc.epiinfo.interpreter.Cmd_Assign
+gov/cdc/epiinfo/interpreter/Rule_Program.java
+ gov.cdc.epiinfo.interpreter.Rule_Program
+goldengine/java/ParserException.java
+ goldengine.java.ParserException
+gov/cdc/epiinfo/analysis/Statistic_Struct.java
+ gov.cdc.epiinfo.analysis.Statistic_Struct
+gov/cdc/epiinfo/LauncherPRE.java
+ gov.cdc.epiinfo.LauncherPRE
+gov/cdc/epiinfo/FormLayoutManager.java
+ gov.cdc.epiinfo.FormLayoutManager
+ gov.cdc.epiinfo.FormLayoutManager$1
+ gov.cdc.epiinfo.FormLayoutManager$10
+ gov.cdc.epiinfo.FormLayoutManager$11
+ gov.cdc.epiinfo.FormLayoutManager$12
+ gov.cdc.epiinfo.FormLayoutManager$12$1
+ gov.cdc.epiinfo.FormLayoutManager$12$2
+ gov.cdc.epiinfo.FormLayoutManager$13
+ gov.cdc.epiinfo.FormLayoutManager$14
+ gov.cdc.epiinfo.FormLayoutManager$15
+ gov.cdc.epiinfo.FormLayoutManager$16
+ gov.cdc.epiinfo.FormLayoutManager$17
+ gov.cdc.epiinfo.FormLayoutManager$18
+ gov.cdc.epiinfo.FormLayoutManager$19
+ gov.cdc.epiinfo.FormLayoutManager$2
+ gov.cdc.epiinfo.FormLayoutManager$20
+ gov.cdc.epiinfo.FormLayoutManager$21
+ gov.cdc.epiinfo.FormLayoutManager$22
+ gov.cdc.epiinfo.FormLayoutManager$23
+ gov.cdc.epiinfo.FormLayoutManager$24
+ gov.cdc.epiinfo.FormLayoutManager$25
+ gov.cdc.epiinfo.FormLayoutManager$26
+ gov.cdc.epiinfo.FormLayoutManager$3
+ gov.cdc.epiinfo.FormLayoutManager$4
+ gov.cdc.epiinfo.FormLayoutManager$5
+ gov.cdc.epiinfo.FormLayoutManager$6
+ gov.cdc.epiinfo.FormLayoutManager$7
+ gov.cdc.epiinfo.FormLayoutManager$8
+ gov.cdc.epiinfo.FormLayoutManager$8$1
+ gov.cdc.epiinfo.FormLayoutManager$8$2
+ gov.cdc.epiinfo.FormLayoutManager$9
+gov/cdc/epiinfo/statcalc/etc/Ref.java
+ gov.cdc.epiinfo.statcalc.etc.Ref
+com/creativewidgetworks/goldparser/engine/Position.java
+ com.creativewidgetworks.goldparser.engine.Position
+gov/cdc/epiinfo/analysis/CsvFileGenerator.java
+ gov.cdc.epiinfo.analysis.CsvFileGenerator
+ gov.cdc.epiinfo.analysis.CsvFileGenerator$1
+ gov.cdc.epiinfo.analysis.CsvFileGenerator$Generator
+ gov.cdc.epiinfo.analysis.CsvFileGenerator$Generator$1
+com/creativewidgetworks/goldparser/engine/Symbol.java
+ com.creativewidgetworks.goldparser.engine.Symbol
+ com.creativewidgetworks.goldparser.engine.Symbol$1
+gov/cdc/epiinfo/interpreter/Rule_Field_Checkcode_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Field_Checkcode_Statement
+ gov.cdc.epiinfo.interpreter.Rule_Field_Checkcode_Statement$1
+gov/cdc/epiinfo/interpreter/Rule_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Statement
+gov/cdc/epiinfo/interpreter/Rule_Begin_Before_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Begin_Before_Statement
+gov/cdc/epiinfo/statcalc/BinomialActivity.java
+ gov.cdc.epiinfo.statcalc.BinomialActivity
+ gov.cdc.epiinfo.statcalc.BinomialActivity$1
+ gov.cdc.epiinfo.statcalc.BinomialActivity$2
+ gov.cdc.epiinfo.statcalc.BinomialActivity$LowerLimitProcessor
+ gov.cdc.epiinfo.statcalc.BinomialActivity$UpperLimitProcessor
+gov/cdc/epiinfo/interpreter/Rule_Define.java
+ gov.cdc.epiinfo.interpreter.Rule_Define
+gov/cdc/epiinfo/interpreter/functions/Rule_SendSMS.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_SendSMS
+gov/cdc/epiinfo/statcalc/etc/ChiSquareResult.java
+ gov.cdc.epiinfo.statcalc.etc.ChiSquareResult
+gov/cdc/epiinfo/interpreter/Rule_Enable.java
+ gov.cdc.epiinfo.interpreter.Rule_Enable
+gov/cdc/epiinfo/EpiDbHelper.java
+ gov.cdc.epiinfo.EpiDbHelper
+ gov.cdc.epiinfo.EpiDbHelper$1
+ gov.cdc.epiinfo.EpiDbHelper$CloudRecordCreator
+ gov.cdc.epiinfo.EpiDbHelper$CloudRecordDeletor
+ gov.cdc.epiinfo.EpiDbHelper$CloudRecordUpdator
+ gov.cdc.epiinfo.EpiDbHelper$DatabaseHelper
+gov/cdc/epiinfo/etc/DateButton.java
+ gov.cdc.epiinfo.etc.DateButton
+gov/cdc/epiinfo/interpreter/Cmd_Statements.java
+ gov.cdc.epiinfo.interpreter.Cmd_Statements
+gov/cdc/epiinfo/statcalc/PoissonActivity.java
+ gov.cdc.epiinfo.statcalc.PoissonActivity
+ gov.cdc.epiinfo.statcalc.PoissonActivity$1
+ gov.cdc.epiinfo.statcalc.PoissonActivity$2
+gov/cdc/epiinfo/interpreter/Rule_Expression.java
+ gov.cdc.epiinfo.interpreter.Rule_Expression
+goldengine/java/EntryContentConstants.java
+ goldengine.java.EntryContentConstants
+gov/cdc/epiinfo/interpreter/Rule_AddExp.java
+ gov.cdc.epiinfo.interpreter.Rule_AddExp
+ gov.cdc.epiinfo.interpreter.Rule_AddExp$1
+gov/cdc/epiinfo/interpreter/VariableCollection.java
+ gov.cdc.epiinfo.interpreter.VariableCollection
+gov/cdc/epiinfo/statcalc/calculators/MatchedPair.java
+ gov.cdc.epiinfo.statcalc.calculators.MatchedPair
+gov/cdc/epiinfo/interpreter/functions/Rule_Year.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Year
+goldengine/java/SymbolTypeConstants.java
+ goldengine.java.SymbolTypeConstants
+gov/cdc/epiinfo/AppSettings.java
+ gov.cdc.epiinfo.AppSettings
+gov/cdc/epiinfo/statcalc/calculators/TwoByTwo.java
+ gov.cdc.epiinfo.statcalc.calculators.TwoByTwo
+ gov.cdc.epiinfo.statcalc.calculators.TwoByTwo$Nums
+ gov.cdc.epiinfo.statcalc.calculators.TwoByTwo$Table
+gov/cdc/epiinfo/interpreter/Rule_ConcatExp.java
+ gov.cdc.epiinfo.interpreter.Rule_ConcatExp
+gov/cdc/epiinfo/cloud/BoxClient.java
+ gov.cdc.epiinfo.cloud.BoxClient
+ gov.cdc.epiinfo.cloud.BoxClient$MyBoxItem
+gov/cdc/epiinfo/interpreter/functions/Rule_Abs.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Abs
+com/creativewidgetworks/goldparser/parser/ProcessRule.java
+ com.creativewidgetworks.goldparser.parser.ProcessRule
+com/creativewidgetworks/goldparser/engine/CGT.java
+ com.creativewidgetworks.goldparser.engine.CGT
+ com.creativewidgetworks.goldparser.engine.CGT$1
+com/creativewidgetworks/goldparser/engine/FAState.java
+ com.creativewidgetworks.goldparser.engine.FAState
+gov/cdc/epiinfo/interpreter/Func_Round.java
+ gov.cdc.epiinfo.interpreter.Func_Round
+gov/cdc/epiinfo/analysis/BlankFragment.java
+ gov.cdc.epiinfo.analysis.BlankFragment
+gov/cdc/epiinfo/interpreter/functions/Rule_TxtToNum.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_TxtToNum
+gov/cdc/epiinfo/interpreter/functions/Rule_Day.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Day
+gov/cdc/epiinfo/interpreter/Rule_Begin_After_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Begin_After_Statement
+goldengine/java/ActionConstants.java
+ goldengine.java.ActionConstants
+gov/cdc/epiinfo/interpreter/Cmd_Enable.java
+ gov.cdc.epiinfo.interpreter.Cmd_Enable
+goldengine/java/Symbol.java
+ goldengine.java.Symbol
+gov/cdc/epiinfo/interpreter/Func_Multiply.java
+ gov.cdc.epiinfo.interpreter.Func_Multiply
+gov/cdc/epiinfo/statcalc/CohortActivity.java
+ gov.cdc.epiinfo.statcalc.CohortActivity
+ gov.cdc.epiinfo.statcalc.CohortActivity$1
+ gov.cdc.epiinfo.statcalc.CohortActivity$2
+ gov.cdc.epiinfo.statcalc.CohortActivity$3
+ gov.cdc.epiinfo.statcalc.CohortActivity$4
+gov/cdc/epiinfo/statcalc/PopulationSurveyActivity.java
+ gov.cdc.epiinfo.statcalc.PopulationSurveyActivity
+ gov.cdc.epiinfo.statcalc.PopulationSurveyActivity$1
+gov/cdc/epiinfo/interpreter/Rule_Statements.java
+ gov.cdc.epiinfo.interpreter.Rule_Statements
+com/creativewidgetworks/goldparser/engine/LRAction.java
+ com.creativewidgetworks.goldparser.engine.LRAction
+gov/cdc/epiinfo/interpreter/CheckCodeProcessor.java
+ gov.cdc.epiinfo.interpreter.CheckCodeProcessor
+gov/cdc/epiinfo/interpreter/functions/Rule_Month.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Month
+gov/cdc/epiinfo/SettingsFragment.java
+ gov.cdc.epiinfo.SettingsFragment
+ gov.cdc.epiinfo.SettingsFragment$1
+ gov.cdc.epiinfo.SettingsFragment$1$1
+ gov.cdc.epiinfo.SettingsFragment$1$2
+ gov.cdc.epiinfo.SettingsFragment$10
+ gov.cdc.epiinfo.SettingsFragment$2
+ gov.cdc.epiinfo.SettingsFragment$3
+ gov.cdc.epiinfo.SettingsFragment$4
+ gov.cdc.epiinfo.SettingsFragment$5
+ gov.cdc.epiinfo.SettingsFragment$6
+ gov.cdc.epiinfo.SettingsFragment$7
+ gov.cdc.epiinfo.SettingsFragment$8
+ gov.cdc.epiinfo.SettingsFragment$9
+ gov.cdc.epiinfo.SettingsFragment$CloudResetter
+gov/cdc/epiinfo/BuildConfig.java
+ gov.cdc.epiinfo.BuildConfig
+com/creativewidgetworks/goldparser/util/ConsoleDriver.java
+ com.creativewidgetworks.goldparser.util.ConsoleDriver
+gov/cdc/epiinfo/interpreter/Rule_CheckCodeBlock.java
+ gov.cdc.epiinfo.interpreter.Rule_CheckCodeBlock
+ gov.cdc.epiinfo.interpreter.Rule_CheckCodeBlock$1
+gov/cdc/epiinfo/statcalc/calculators/PopulationSurvey.java
+ gov.cdc.epiinfo.statcalc.calculators.PopulationSurvey
+gov/cdc/epiinfo/interpreter/Rule_Subroutine_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Subroutine_Statement
+com/creativewidgetworks/goldparser/engine/enums/EntryType.java
+ com.creativewidgetworks.goldparser.engine.enums.EntryType
+gov/cdc/epiinfo/interpreter/FunctionFactory.java
+ gov.cdc.epiinfo.interpreter.FunctionFactory
+gov/cdc/epiinfo/etc/ImageProcessor.java
+ gov.cdc.epiinfo.etc.ImageProcessor
+ gov.cdc.epiinfo.etc.ImageProcessor$1
+ gov.cdc.epiinfo.etc.ImageProcessor$BitmapProcessor
+gov/cdc/epiinfo/interpreter/functions/Rule_TxtToDate.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_TxtToDate
+gov/cdc/epiinfo/interpreter/functions/Rule_Months.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Months
+com/creativewidgetworks/goldparser/engine/enums/SymbolType.java
+ com.creativewidgetworks.goldparser.engine.enums.SymbolType
+gov/cdc/epiinfo/analysis/AnalysisMain.java
+ gov.cdc.epiinfo.analysis.AnalysisMain
+ gov.cdc.epiinfo.analysis.AnalysisMain$1
+goldengine/java/LRActionTable.java
+ goldengine.java.LRActionTable
+gov/cdc/epiinfo/interpreter/Rule_DefineVariables_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_DefineVariables_Statement
+com/creativewidgetworks/goldparser/engine/ParserException.java
+ com.creativewidgetworks.goldparser.engine.ParserException
+gov/cdc/epiinfo/interpreter/Rule_Execute.java
+ gov.cdc.epiinfo.interpreter.Rule_Execute
+com/creativewidgetworks/goldparser/engine/GroupList.java
+ com.creativewidgetworks.goldparser.engine.GroupList
+gov/cdc/epiinfo/interpreter/functions/Rule_Days.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Days
+gov/cdc/epiinfo/interpreter/Rule_Clear.java
+ gov.cdc.epiinfo.interpreter.Rule_Clear
+gov/cdc/epiinfo/interpreter/IInterpreter.java
+ gov.cdc.epiinfo.interpreter.IInterpreter
+gov/cdc/epiinfo/statcalc/calculators/ChiSquare.java
+ gov.cdc.epiinfo.statcalc.calculators.ChiSquare
+gov/cdc/epiinfo/etc/ShareProvider.java
+ gov.cdc.epiinfo.etc.ShareProvider
+gov/cdc/epiinfo/statcalc/calculators/Binomial.java
+ gov.cdc.epiinfo.statcalc.calculators.Binomial
+gov/cdc/epiinfo/interpreter/EnterRule.java
+ gov.cdc.epiinfo.interpreter.EnterRule
+ gov.cdc.epiinfo.interpreter.EnterRule$1
+ gov.cdc.epiinfo.interpreter.EnterRule$Rule_Enum
+gov/cdc/epiinfo/interpreter/Func_Empty.java
+ gov.cdc.epiinfo.interpreter.Func_Empty
+gov/cdc/epiinfo/interpreter/functions/Rule_Minutes.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Minutes
+gov/cdc/epiinfo/interpreter/CSymbol.java
+ gov.cdc.epiinfo.interpreter.CSymbol
+ gov.cdc.epiinfo.interpreter.CSymbol$DataType
+ gov.cdc.epiinfo.interpreter.CSymbol$VariableScope
+gov/cdc/epiinfo/interpreter/Rule_Geocode.java
+ gov.cdc.epiinfo.interpreter.Rule_Geocode
+goldengine/java/VariableType.java
+ goldengine.java.VariableType
+gov/cdc/epiinfo/RecordList.java
+ gov.cdc.epiinfo.RecordList
+ gov.cdc.epiinfo.RecordList$1
+ gov.cdc.epiinfo.RecordList$2
+ gov.cdc.epiinfo.RecordList$3
+ gov.cdc.epiinfo.RecordList$4
+ gov.cdc.epiinfo.RecordList$5
+ gov.cdc.epiinfo.RecordList$6
+ gov.cdc.epiinfo.RecordList$7
+ gov.cdc.epiinfo.RecordList$8
+ gov.cdc.epiinfo.RecordList$9
+ gov.cdc.epiinfo.RecordList$CloudSynchronizer
+ gov.cdc.epiinfo.RecordList$PreCompiledLoader
+gov/cdc/epiinfo/interpreter/Rule_View_Checkcode_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_View_Checkcode_Statement
+com/google/zxing/integration/android/IntentIntegrator.java
+ com.google.zxing.integration.android.IntentIntegrator
+ com.google.zxing.integration.android.IntentIntegrator$1
+gov/cdc/epiinfo/interpreter/Util.java
+ gov.cdc.epiinfo.interpreter.Util
+gov/cdc/epiinfo/statcalc/etc/TableResults.java
+ gov.cdc.epiinfo.statcalc.etc.TableResults
+gov/cdc/epiinfo/LauncherLink.java
+ gov.cdc.epiinfo.LauncherLink
+gov/cdc/epiinfo/etc/ExtFilter.java
+ gov.cdc.epiinfo.etc.ExtFilter
+gov/cdc/epiinfo/interpreter/CheckCodeEngine.java
+ gov.cdc.epiinfo.interpreter.CheckCodeEngine
+gov/cdc/epiinfo/etc/CustomListAdapter.java
+ gov.cdc.epiinfo.etc.CustomListAdapter
+ gov.cdc.epiinfo.etc.CustomListAdapter$1
+ gov.cdc.epiinfo.etc.CustomListAdapter$CloudSynchronizer
+gov/cdc/epiinfo/interpreter/Rule_Value.java
+ gov.cdc.epiinfo.interpreter.Rule_Value
+ gov.cdc.epiinfo.interpreter.Rule_Value$1
+com/creativewidgetworks/goldparser/parser/SystemConsole.java
+ com.creativewidgetworks.goldparser.parser.SystemConsole
+gov/cdc/epiinfo/interpreter/functions/Rule_Round.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Round
+gov/cdc/epiinfo/interpreter/Rule_UnHide.java
+ gov.cdc.epiinfo.interpreter.Rule_UnHide
+gov/cdc/epiinfo/statcalc/calculators/Strat2x2.java
+ gov.cdc.epiinfo.statcalc.calculators.Strat2x2
+gov/cdc/epiinfo/analysis/TwoByTwoView.java
+ gov.cdc.epiinfo.analysis.TwoByTwoView
+ gov.cdc.epiinfo.analysis.TwoByTwoView$1
+ gov.cdc.epiinfo.analysis.TwoByTwoView$2
+ gov.cdc.epiinfo.analysis.TwoByTwoView$3
+gov/cdc/epiinfo/interpreter/Rule_ExprList.java
+ gov.cdc.epiinfo.interpreter.Rule_ExprList
+gov/cdc/epiinfo/cloud/CloudFactory.java
+ gov.cdc.epiinfo.cloud.CloudFactory
+gov/cdc/epiinfo/etc/VerticalLabelView.java
+ gov.cdc.epiinfo.etc.VerticalLabelView
+com/creativewidgetworks/goldparser/engine/LRState.java
+ com.creativewidgetworks.goldparser.engine.LRState
+goldengine/java/FAEdge.java
+ goldengine.java.FAEdge
+gov/cdc/epiinfo/interpreter/functions/Rule_NumToDate.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_NumToDate
+com/creativewidgetworks/goldparser/engine/enums/ParseMessage.java
+ com.creativewidgetworks.goldparser.engine.enums.ParseMessage
+gov/cdc/epiinfo/SplashScreen.java
+ gov.cdc.epiinfo.SplashScreen
+ gov.cdc.epiinfo.SplashScreen$1
+gov/cdc/epiinfo/interpreter/ICheckCodeHost.java
+ gov.cdc.epiinfo.interpreter.ICheckCodeHost
+gov/cdc/epiinfo/analysis/OddsAndRisk.java
+ gov.cdc.epiinfo.analysis.OddsAndRisk
+gov/cdc/epiinfo/interpreter/functions/Rule_Uppercase.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Uppercase
+com/creativewidgetworks/goldparser/engine/FAStateList.java
+ com.creativewidgetworks.goldparser.engine.FAStateList
+gov/cdc/epiinfo/interpreter/functions/Rule_Second.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Second
+com/creativewidgetworks/goldparser/engine/CharacterRange.java
+ com.creativewidgetworks.goldparser.engine.CharacterRange
+gov/cdc/epiinfo/interpreter/Rule_CheckCodeBlocks.java
+ gov.cdc.epiinfo.interpreter.Rule_CheckCodeBlocks
+gov/cdc/epiinfo/cloud/ICloudClient.java
+ gov.cdc.epiinfo.cloud.ICloudClient
+gov/cdc/epiinfo/interpreter/functions/Rule_GetCoordinates.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_GetCoordinates
+gov/cdc/epiinfo/interpreter/Rule_Begin_Click_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Begin_Click_Statement
+gov/cdc/epiinfo/analysis/MeansView.java
+ gov.cdc.epiinfo.analysis.MeansView
+ gov.cdc.epiinfo.analysis.MeansView$1
+ gov.cdc.epiinfo.analysis.MeansView$2
+gov/cdc/epiinfo/interpreter/functions/Rule_Hour.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Hour
+gov/cdc/epiinfo/interpreter/Rule_Always.java
+ gov.cdc.epiinfo.interpreter.Rule_Always
+gov/cdc/epiinfo/Saver.java
+ gov.cdc.epiinfo.Saver
+goldengine/java/GPMessageConstants.java
+ goldengine.java.GPMessageConstants
+gov/cdc/epiinfo/interpreter/Func_Add.java
+ gov.cdc.epiinfo.interpreter.Func_Add
+com/creativewidgetworks/goldparser/engine/CharacterSet.java
+ com.creativewidgetworks.goldparser.engine.CharacterSet
+gov/cdc/epiinfo/statcalc/calculators/Cohort.java
+ gov.cdc.epiinfo.statcalc.calculators.Cohort
+gov/cdc/epiinfo/FormMetadata.java
+ gov.cdc.epiinfo.FormMetadata
+gov/cdc/epiinfo/etc/Base64.java
+ gov.cdc.epiinfo.etc.Base64
+gov/cdc/epiinfo/interpreter/Rule_Page_Checkcode_Statement.java
+ gov.cdc.epiinfo.interpreter.Rule_Page_Checkcode_Statement
+gov/cdc/epiinfo/interpreter/Rule_If_Then_Else_End.java
+ gov.cdc.epiinfo.interpreter.Rule_If_Then_Else_End
+gov/cdc/epiinfo/Field.java
+ gov.cdc.epiinfo.Field
+gov/cdc/epiinfo/interpreter/functions/Rule_Hours.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Hours
+gov/cdc/epiinfo/interpreter/Rule_GoTo.java
+ gov.cdc.epiinfo.interpreter.Rule_GoTo
+com/creativewidgetworks/goldparser/parser/Variable.java
+ com.creativewidgetworks.goldparser.parser.Variable
+gov/cdc/epiinfo/interpreter/functions/Rule_Exp_Func.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Exp_Func
+com/creativewidgetworks/goldparser/engine/enums/LRConflict.java
+ com.creativewidgetworks.goldparser.engine.enums.LRConflict
+gov/cdc/epiinfo/statcalc/TwoByTwoActivity.java
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$1
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$10
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$11
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$12
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$13
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$14
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$15
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$16
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$17
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$18
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$19
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$2
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$20
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$21
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$3
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$4
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$5
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$6
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$7
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$8
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$9
+ gov.cdc.epiinfo.statcalc.TwoByTwoActivity$SummaryProcessor
+gov/cdc/epiinfo/interpreter/Rule_MultExp.java
+ gov.cdc.epiinfo.interpreter.Rule_MultExp
+ gov.cdc.epiinfo.interpreter.Rule_MultExp$1
+gov/cdc/epiinfo/interpreter/functions/Rule_Tan.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Tan
+gov/cdc/epiinfo/statcalc/MatchedPairActivity.java
+ gov.cdc.epiinfo.statcalc.MatchedPairActivity
+ gov.cdc.epiinfo.statcalc.MatchedPairActivity$1
+ gov.cdc.epiinfo.statcalc.MatchedPairActivity$2
+ gov.cdc.epiinfo.statcalc.MatchedPairActivity$3
+ gov.cdc.epiinfo.statcalc.MatchedPairActivity$4
+com/creativewidgetworks/goldparser/engine/ProductionList.java
+ com.creativewidgetworks.goldparser.engine.ProductionList
+gov/cdc/epiinfo/LineListFragment.java
+ gov.cdc.epiinfo.LineListFragment
+gov/cdc/epiinfo/interpreter/Rule_UnHighlight.java
+ gov.cdc.epiinfo.interpreter.Rule_UnHighlight
+gov/cdc/epiinfo/interpreter/Cmd_Dialog.java
+ gov.cdc.epiinfo.interpreter.Cmd_Dialog
+gov/cdc/epiinfo/cloud/CouchDbClient.java
+ gov.cdc.epiinfo.cloud.CouchDbClient
+ gov.cdc.epiinfo.cloud.CouchDbClient$1
+com/creativewidgetworks/goldparser/engine/enums/EndingMode.java
+ com.creativewidgetworks.goldparser.engine.enums.EndingMode
+goldengine/java/LRAction.java
+ goldengine.java.LRAction
+gov/cdc/epiinfo/statcalc/StatCalcMain.java
+ gov.cdc.epiinfo.statcalc.StatCalcMain
+ gov.cdc.epiinfo.statcalc.StatCalcMain$1
+ gov.cdc.epiinfo.statcalc.StatCalcMain$2
+ gov.cdc.epiinfo.statcalc.StatCalcMain$3
+ gov.cdc.epiinfo.statcalc.StatCalcMain$4
+ gov.cdc.epiinfo.statcalc.StatCalcMain$5
+ gov.cdc.epiinfo.statcalc.StatCalcMain$6
+ gov.cdc.epiinfo.statcalc.StatCalcMain$7
+ gov.cdc.epiinfo.statcalc.StatCalcMain$8
+ gov.cdc.epiinfo.statcalc.StatCalcMain$9
+gov/cdc/epiinfo/interpreter/Rule_NotExp.java
+ gov.cdc.epiinfo.interpreter.Rule_NotExp
+goldengine/java/SymbolList.java
+ goldengine.java.SymbolList
+gov/cdc/epiinfo/interpreter/Cmd_Clear.java
+ gov.cdc.epiinfo.interpreter.Cmd_Clear
+gov/cdc/epiinfo/interpreter/functions/Rule_Log.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Log
+gov/cdc/epiinfo/interpreter/functions/Rule_Substring.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Substring
+gov/cdc/epiinfo/interpreter/Operator_Enum.java
+ gov.cdc.epiinfo.interpreter.Operator_Enum
+com/creativewidgetworks/goldparser/engine/Entry.java
+ com.creativewidgetworks.goldparser.engine.Entry
+com/creativewidgetworks/goldparser/engine/CharacterSetList.java
+ com.creativewidgetworks.goldparser.engine.CharacterSetList
+com/creativewidgetworks/goldparser/engine/SymbolList.java
+ com.creativewidgetworks.goldparser.engine.SymbolList
+com/creativewidgetworks/goldparser/engine/Token.java
+ com.creativewidgetworks.goldparser.engine.Token
+gov/cdc/epiinfo/interpreter/functions/Rule_Years.java
+ gov.cdc.epiinfo.interpreter.functions.Rule_Years
+com/creativewidgetworks/goldparser/engine/Reduction.java
+ com.creativewidgetworks.goldparser.engine.Reduction
+goldengine/java/Rule.java
+ goldengine.java.Rule

@@ -1,0 +1,2 @@
+include 'AppCode'
+rootProject.name = "Epi Info"

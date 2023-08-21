@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"ホームに戻る"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"前に戻る"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"その他のオプション"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"完了"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"すべて表示"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"アプリの選択"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"OFF"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"ON"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"Delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"Space"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"検索…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"検索キーワードを削除"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"検索キーワード"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"検索"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"検索キーワードを送信"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"音声検索"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"共有"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g>と共有"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"折りたたむ"</string>
+    <string name="blocked_ip_error_message">管理者に承認されていない場所からBoxにログインしようとしています。この問題を解決するには、管理者に問い合わせてください。</string>
+    <string name="boxsdk_Authenticating">認証中</string>
+    <string name="boxsdk_Authentication_fail">認証に失敗しました</string>
+    <string name="boxsdk_Authentication_fail_forbidden">このデバイスを認証するには、管理者にお問い合わせください。</string>
+    <string name="boxsdk_Authentication_fail_url_mismatch">このリダイレクトURLは無効です</string>
+    <string name="boxsdk_Go_back">戻る</string>
+    <string name="boxsdk_Please_wait">お待ちください…</string>
+    <string name="boxsdk_Security_Warning">セキュリティ警告</string>
+    <string name="boxsdk_Select_an_account_to_use">使用するアカウントを選択</string>
+    <string name="boxsdk_There_are_problems_with_the_security_certificate_for_this_site">このサイトのセキュリティ証明書には問題があります。</string>
+    <string name="boxsdk_Use_a_different_account">別のアカウントを使用</string>
+    <string description="" name="boxsdk_alert_dialog_cancel">キャンセル</string>
+    <string description="" name="boxsdk_alert_dialog_ok">送信</string>
+    <string description="" name="boxsdk_alert_dialog_password">パスワード</string>
+    <string description="" name="boxsdk_alert_dialog_text_entry">このウェブサイトまたはアプリケーションは、認証を要求しています。</string>
+    <string description="" name="boxsdk_alert_dialog_username">ユーザー名</string>
+    <string description="OK on buttons" name="boxsdk_button_ok">OK</string>
+    <string description="OK on buttons" name="boxsdk_button_okay">OK</string>
+    <string description="size with abbreviation for bytes used in folder list" name="boxsdk_bytes">%4.0fバイト</string>
+    <string name="boxsdk_common_name">共通名:</string>
+    <string name="boxsdk_details">詳細</string>
+    <string name="boxsdk_error_fatal_refresh">ログアウトしました。</string>
+    <string name="boxsdk_error_network_connection">ネットワーク接続を検出できません</string>
+    <string name="boxsdk_error_terms_of_service">管理者によってTOSが変更されました。ログインして、TOSを承認してください。</string>
+    <string name="boxsdk_expires_on">有効期限:</string>
+    <string description="size in binary gigabyte  1024 * 1024 mbytes used in folder list" name="boxsdk_gigabytes">%4.1f GB</string>
+    <string name="boxsdk_issued_by">発行者:</string>
+    <string name="boxsdk_issued_on">発行日:</string>
+    <string name="boxsdk_issued_to">発行先:</string>
+    <string description="size in binary kilobytes  1024 bytes used in folder list" name="boxsdk_kilobytes">%4.1f KB</string>
+    <string description="size in binary megabyte  1024 * 1024 kbytes used in folder list" name="boxsdk_megabytes">%4.1f MB</string>
+    <string name="boxsdk_no_offline_access">オフラインアクセスがありません</string>
+    <string name="boxsdk_no_offline_access_detail">ネットワーク接続を検出できませんでした。</string>
+    <string name="boxsdk_no_offline_access_todo">ログインするにはWiFiまたはモバイルデータネットワークに接続してください。</string>
+    <string name="boxsdk_org_name">組織名:</string>
+    <string name="boxsdk_org_unit">組織ユニット:</string>
+    <string name="boxsdk_ssl_error_details">詳細を表示</string>
+    <string name="boxsdk_ssl_error_warning_DATE_INVALID">証明書の日付が無効です。</string>
+    <string name="boxsdk_ssl_error_warning_EXPIRED">証明書が有効期限切れです。</string>
+    <string name="boxsdk_ssl_error_warning_ID_MISMATCH">ホスト名が一致しません。</string>
+    <string name="boxsdk_ssl_error_warning_INVALID">一般的なエラーが発生しました。</string>
+    <string name="boxsdk_ssl_error_warning_NOT_YET_VALID">証明書がまだ有効ではありません。</string>
+    <string name="boxsdk_ssl_error_warning_UNTRUSTED">証明書の発行元を信頼できません。</string>
+    <string name="boxsdk_ssl_should_not_proceed">特に、このサイトで初めてこの警告が表示された場合は続行しないでください。</string>
+    <string description="size in binary terabyte  1024 * 1024 gbytes used in folder list" name="boxsdk_terabytes">%4.1f TB</string>
+    <string name="boxsdk_unable_to_connect">接続できません</string>
+    <string name="boxsdk_unable_to_connect_detail">ネットワークに接続できませんでした。</string>
+    <string name="boxsdk_unable_to_connect_todo">ネットワーク接続を確認してから、もう一度やり直してください。</string>
+    <string name="boxsdk_validity_period">有効期間:</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"有効にする"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>の実行には、Google Play開発者サービスの有効化が必要です。"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play開発者サービスの有効化"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"インストール"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」の実行には Google Play 開発者サービスが必要ですが、お使いのデバイスにはインストールされていません。"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Google Play開発者サービスの入手"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play 開発者サービスの利用"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play開発者サービスのエラー"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」で Google Play 開発者サービスに問題が発生しています。もう一度お試しください。"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」の実行には Google Play 開発者サービスが必要ですが、お使いのデバイスではサポートされていません。"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"更新"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>の実行にはGoogle Play開発者サービスの更新が必要です。"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Google Play開発者サービスの更新"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>の実行にはGoogle Play開発者サービスが必要ですが、このサービスは現在更新中です。"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Google Play開発者サービスの新しいバージョンが必要です。まもなく自動更新されます。"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"スマートフォンで開く"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"ログイン"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Googleにログイン"</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"検索"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

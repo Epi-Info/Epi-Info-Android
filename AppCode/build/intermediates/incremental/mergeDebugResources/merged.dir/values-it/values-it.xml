@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Portami a casa"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Torna indietro"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Altre opzioni"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Fine"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Mostra tutto"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Scelta di un\'app"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"OFF"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"ON"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"ALT +"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"CTRL +"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"CANC"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"INVIO"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"FUNZIONE +"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"META +"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"MAIUSC +"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"SPAZIO"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"SYM +"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"MENU +"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Cerca…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Cancella query"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Query di ricerca"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Cerca"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Invia query"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Ricerca vocale"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Condividi con"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Condividi tramite <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Comprimi"</string>
+    <string name="blocked_ip_error_message">Stai tentando di accedere a Box da una posizione che non è stata approvata dal tuo amministratore. Parla con l\'amministratore per risolvere il problema.</string>
+    <string name="boxsdk_Authenticating">Autenticazione</string>
+    <string name="boxsdk_Authentication_fail">Autenticazione non riuscita</string>
+    <string name="boxsdk_Authentication_fail_forbidden">Per autorizzare il dispositivo, contatta l\'amministratore.</string>
+    <string name="boxsdk_Authentication_fail_url_mismatch">URL di reindirizzamento non valido</string>
+    <string name="boxsdk_Go_back">Torna indietro</string>
+    <string name="boxsdk_Please_wait">Attendi…</string>
+    <string name="boxsdk_Security_Warning">Avviso di protezione</string>
+    <string name="boxsdk_Select_an_account_to_use">Seleziona un account da utilizzare</string>
+    <string name="boxsdk_There_are_problems_with_the_security_certificate_for_this_site">Si sono verificati problemi con il certificato di protezione per questo sito.</string>
+    <string name="boxsdk_Use_a_different_account">Usa un altro account</string>
+    <string description="" name="boxsdk_alert_dialog_cancel">Annulla</string>
+    <string description="" name="boxsdk_alert_dialog_ok">Invia</string>
+    <string description="" name="boxsdk_alert_dialog_password">Password</string>
+    <string description="" name="boxsdk_alert_dialog_text_entry">Il sito Web o l\'applicazione richiede l\'autenticazione.</string>
+    <string description="" name="boxsdk_alert_dialog_username">Nome utente</string>
+    <string description="OK on buttons" name="boxsdk_button_ok">OK</string>
+    <string description="OK on buttons" name="boxsdk_button_okay">OK</string>
+    <string description="size with abbreviation for bytes used in folder list" name="boxsdk_bytes">%4.0f byte</string>
+    <string name="boxsdk_common_name">nome comune:</string>
+    <string name="boxsdk_details">Dettagli</string>
+    <string name="boxsdk_error_fatal_refresh">Sei stato disconnesso.</string>
+    <string name="boxsdk_error_network_connection">Impossibile rilevare una connessione di rete</string>
+    <string name="boxsdk_error_terms_of_service">Il tuo amministratore ha modificato le Condizioni di servizio. Per continuare, devi effettuare l\'accesso e accettare le Condizioni di servizio.</string>
+    <string name="boxsdk_expires_on">scade in data:</string>
+    <string description="size in binary gigabyte  1024 * 1024 mbytes used in folder list" name="boxsdk_gigabytes">%4.1f GB</string>
+    <string name="boxsdk_issued_by">rilasciato da:</string>
+    <string name="boxsdk_issued_on">rilasciato in data:</string>
+    <string name="boxsdk_issued_to">rilasciato a:</string>
+    <string description="size in binary kilobytes  1024 bytes used in folder list" name="boxsdk_kilobytes">%4.1f KB</string>
+    <string description="size in binary megabyte  1024 * 1024 kbytes used in folder list" name="boxsdk_megabytes">%4.1f MB</string>
+    <string name="boxsdk_no_offline_access">Nessun accesso offline</string>
+    <string name="boxsdk_no_offline_access_detail">Impossibile rilevare una connessione di rete.</string>
+    <string name="boxsdk_no_offline_access_todo">Per accedere, effettua la connessione a una rete Wi-Fi o a una rete dati mobile.</string>
+    <string name="boxsdk_org_name">nome organizzazione:</string>
+    <string name="boxsdk_org_unit">unità organizzativa:</string>
+    <string name="boxsdk_ssl_error_details">Visualizza dettagli</string>
+    <string name="boxsdk_ssl_error_warning_DATE_INVALID">Data del certificato non valida.</string>
+    <string name="boxsdk_ssl_error_warning_EXPIRED">Certificato scaduto.</string>
+    <string name="boxsdk_ssl_error_warning_ID_MISMATCH">Nome host non corrispondente.</string>
+    <string name="boxsdk_ssl_error_warning_INVALID">Si è verificato un errore generico.</string>
+    <string name="boxsdk_ssl_error_warning_NOT_YET_VALID">Il certificato non è ancora valido.</string>
+    <string name="boxsdk_ssl_error_warning_UNTRUSTED">L\'autorità di certificazione non è attendibile.</string>
+    <string name="boxsdk_ssl_should_not_proceed">È consigliabile non continuare, soprattutto se per questo sito non è mai stato visualizzato un avviso simile prima d\'ora.</string>
+    <string description="size in binary terabyte  1024 * 1024 gbytes used in folder list" name="boxsdk_terabytes">%4.1f TB</string>
+    <string name="boxsdk_unable_to_connect">Impossibile connettersi</string>
+    <string name="boxsdk_unable_to_connect_detail">Non è stato possibile stabilire la connessione alla tua rete.</string>
+    <string name="boxsdk_unable_to_connect_todo">Verifica la tua connessione di rete e riprova.</string>
+    <string name="boxsdk_validity_period">periodo di validità:</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Attiva"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non funzionerà se non attivi Google Play Services."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Attiva Google Play Services"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Installa"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"L\'app <ns1:g id="APP_NAME">%1$s</ns1:g> non funzionerà senza Google Play Services, non presente sul tuo dispositivo."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Installa Google Play Services"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Disponibilità di Google Play Services"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Errore Google Play Services"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g> sta riscontrando problemi con Google Play Services. Riprova."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non funzionerà senza Google Play Services, non supportati dal tuo dispositivo."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Aggiorna"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non funzionerà se non aggiorni Google Play Services."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Aggiorna Google Play Services"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non funzionerà senza Google Play Services, attualmente in fase di aggiornamento."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"È richiesta una nuova versione di Google Play Services. L\'aggiornamento automatico verrà eseguito a breve."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Apri sul telefono"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Accedi"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Accedi con Google"</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Cerca"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

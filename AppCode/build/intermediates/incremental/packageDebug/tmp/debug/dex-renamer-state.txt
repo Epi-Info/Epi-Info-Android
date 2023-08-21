@@ -1,0 +1,7 @@
+#Thu Mar 24 12:56:50 EDT 2022
+base.1=C\:\\epi-info-android\\Epi-Info-Android\\AppCode\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
+path.1=classes.dex
+base.0=C\:\\epi-info-android\\Epi-Info-Android\\AppCode\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=classes.dex

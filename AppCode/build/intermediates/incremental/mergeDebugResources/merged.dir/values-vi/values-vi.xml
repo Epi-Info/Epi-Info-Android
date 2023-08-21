@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="yn_array">
+        <item>&lt;Không được lựa chọn></item>
+        <item>Có</item>
+        <item>Không</item>
+    </string-array>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Chỉ đường về nhà"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Di chuyển lên"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Tùy chọn khác"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Xong"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Xem tất cả"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Chọn một ứng dụng"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"TẮT"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"BẬT"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"space"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Tìm kiếm…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Xóa truy vấn"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Truy vấn tìm kiếm"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Tìm kiếm"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Gửi truy vấn"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Tìm kiếm bằng giọng nói"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Chia sẻ với"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Chia sẻ với <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Thu gọn"</string>
+    <string name="admin_password">Mật khẩu quản trị</string>
+    <string name="admin_pwd">Khóa cài đặt ứng dụng của bạn sử dụng mật khẩu quản trị.</string>
+    <string name="admin_pwd_title">Mật khẩu quản trị</string>
+    <string name="analysis">Phân tích</string>
+    <string name="analysis_add_2x2">Thêm công cụ nhỏ 2x2 </string>
+    <string name="analysis_add_freq">Thêm tần số </string>
+    <string name="analysis_add_map">Thêm công cụ nhỏ bản đồ</string>
+    <string name="analysis_add_means">Thêm trung bình</string>
+    <string name="analysis_field">Trường:</string>
+    <string name="analysis_freq">Tần số</string>
+    <string name="analysis_lat">Trường vĩ độ:</string>
+    <string name="analysis_long">Trường kinh độ:</string>
+    <string name="analysis_max">Lớn nhất:</string>
+    <string name="analysis_mean">Trung bình:</string>
+    <string name="analysis_med">Trung vị:</string>
+    <string name="analysis_min">Nhỏ nhất:</string>
+    <string name="analysis_obs">Quan sát:</string>
+    <string name="analysis_outcome">Kết quả đầu ra</string>
+    <string name="analysis_select">&lt;Lựa chọn></string>
+    <string name="analysis_std">Độ lệch chuẩn:</string>
+    <string name="analysis_total">Tổng số:</string>
+    <string name="analysis_var">Phương sai:</string>
+    <string name="app_name">Epi Info</string>
+    <string name="available_forms">Các biểu mẫu có sẵn</string>
+    <string name="barcode_settings">Cài đặt mã vạch</string>
+    <string name="cloud_sync">Đồng bộ mây dữ liệu</string>
+    <string name="cloud_sync_app_key">Cung cấp các cửa sổ dịch vụ chìa khóa ứng dụng Azure để sử dụng cho đồng bộ số liệu. </string>
+    <string name="cloud_sync_app_key_dialog">Cung cấp chìa khóa (case sensitive)</string>
+    <string name="cloud_sync_app_key_dialog_title">Chìa khóa ứng dụng</string>
+    <string name="cloud_sync_app_key_title">Chìa khóa ứng dụng của Azure. </string>
+    <string formatted="false" name="cloud_sync_complete">Hoàn thành Sync (%s)</string>
+    <string name="cloud_sync_complete_detail">Số liệu đã được đồng bộ với mây dữ liệu thành công.</string>
+    <string name="cloud_sync_del">Cho phép xóa bản ghi tại chỗ để truyền mây dữ liệu.</string>
+    <string name="cloud_sync_del_title">Xóa số liệu mây</string>
+    <string formatted="false" name="cloud_sync_failed">Không đồng bộ được(%s)</string>
+    <string name="cloud_sync_failed_detail">Lỗi dịch vụ đồng bộ với dịch vụ mây dữ liệu. Hãy làm lại.</string>
+    <string formatted="false" name="cloud_sync_progress">Đồng bộ mây dữ liệu(%s)</string>
+    <string name="cloud_sync_receiving">Đang nhận…</string>
+    <string name="cloud_sync_save">Khởi động mây dữ liệu đồng bộ cho một bản ghi khi nó được lưu lại.</string>
+    <string name="cloud_sync_save_title">Lưu đồng bộ</string>
+    <string name="cloud_sync_sending">Đang gửi / đang cập nhật…</string>
+    <string name="cloud_sync_srv_name">Cung cấp các cửa số tên dịch vụ cho di động của Azure để sử dụng cho đồng bộ số liệu. </string>
+    <string name="cloud_sync_srv_name_dialog">Cung cấp tên dịch vụ</string>
+    <string name="cloud_sync_srv_name_dialog_title">Tên dịch vụ di động</string>
+    <string name="cloud_sync_srv_name_title">Dịch vụ phần mềm cho di động của Azure. </string>
+    <string name="cloud_sync_started">Đang đồng bộ mây dữ liệu. Hãy kiểm tra các khu vực thông báo để được cập nhật </string>
+    <string name="cloud_sync_up_down">Số liệu đươc tải lên phần mây dữ liệu và cho những người sử dụng khác/’số liệu được tải về từ mây dữ liệu. CẢNH BÁO: Người sử dụng này có thể tình cờ tải lên cho những người sử dụng khác/’số liệu khác.</string>
+    <string name="cloud_sync_up_down_title">Tải số liệu lên và tải số liệu về</string>
+    <string name="cloud_sync_up_only">Số liệu chỉ được tải lên phần mây. Người sử dụng này sẽ không nhìn thấy những người sử dụng khác/’số liệu khác.</string>
+    <string name="cloud_sync_up_only_title">Chỉ tải số liệu lên phần mây dữ liệu </string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Bật"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> sẽ không hoạt động nếu bạn không bật dịch vụ của Google Play."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Bật dịch vụ của Google Play"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Cài đặt"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> sẽ không chạy nếu không có dịch vụ của Google Play. Thiết bị của bạn bị thiếu dịch vụ này."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Cài đặt dịch vụ của Google Play"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Phạm vi cung cấp các dịch vụ của Google Play"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Lỗi dịch vụ của Google Play"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g> đang gặp sự cố với các dịch vụ của Google Play. Hãy thử lại."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> sẽ không chạy nếu không có các dịch vụ của Google Play. Thiết bị của bạn không hỗ trợ các dịch vụ này."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Cập nhật"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> sẽ không chạy trừ khi bạn cập nhật Dịch vụ của Google Play."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Cập nhật dịch vụ của Google Play"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> sẽ không chạy nếu không có dịch vụ của Google Play. Dịch vụ này hiện đang cập nhật."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Cần phiên bản mới của dịch vụ Google Play. Dịch vụ sẽ sớm tự động cập nhật."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Mở trên điện thoại"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Đăng nhập"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Đăng nhập bằng Google"</string>
+    <string name="complete_req_fields">Hãy hoàn thành tất cả các trường yêu cầu (bắt buộc) trước khi lưu.</string>
+    <string name="conf_level_prompt">Mức tin cậy hai phía</string>
+    <string name="configure_cloud">Không tạo được cấu hình đồng bộ mây dữ liệu. Có thiết lập cấu hình bây giờ không?</string>
+    <string name="confirm_delete_all">Lệnh này sẽ xóa tất cả dữ liệu liên quan đến biểu mẫu này. Bạn có chắc chắn không? </string>
+    <string name="database_error">Đã có lỗi xảy ra trong khi tải cơ sở dữ liệu.</string>
+    <string name="exit_form">Thoát khỏi biểu mẫu?</string>
+    <string name="form_layout">Xếp biểu mẫu thành từng lớp </string>
+    <string name="form_layout_ei7">Các biểu mẫu được xác định vị trí và kích thước phù hợp với bản sao thiết kế biểu mẫu Epi Info 7 cho chính những biểu mẫu này.</string>
+    <string name="form_layout_ei7_title">Giống như Epi Info 7</string>
+    <string name="form_layout_interview">Các yếu tố biểu mẫu được giới thiệu theo từng câu hỏi.</string>
+    <string name="form_layout_interview_title">Chế độ phỏng vấn</string>
+    <string name="form_layout_stacked">Các biểu mẫu được xếp lật trang theo chiều dọc theo thứ tự mục.</string>
+    <string name="form_layout_stacked_title">Xếp lớp tiêu đề cho các tầng</string>
+    <string name="gps_error">Không thể nhận được tín hiệu GPS để xác định vị trí hiện tại. Hãy đảm bảo rằng tầm nhìn của bạn không bị che khuất và hãy thử lại.</string>
+    <string name="gps_settings">Cài đặt GPS</string>
+    <string name="img_analyze">Phân tích số liệu</string>
+    <string name="img_chi_sq">Phân tích xu hướng đường thẳng (Linear Trend)</string>
+    <string name="img_collect">Thu thập số liệu</string>
+    <string name="img_open_epi">Tính toán khác ở OpenEpi.com</string>
+    <string name="img_pop_surv">Điều tra quần thể</string>
+    <string name="img_sample_size">Cỡ mãu</string>
+    <string name="img_touch_opt">Chạm vào “trình đơn lựa chọn” (Options Menu) để bắt đầu</string>
+    <string name="load">Tải</string>
+    <string name="loading_form">Đang tải bản ghi</string>
+    <string name="menu_analyze">Phân tích số liệu</string>
+    <string name="menu_barcode">Quét mã vạch</string>
+    <string name="menu_cloud_sync">Đồng bộ với với mây dữ liệu (máy chủ)</string>
+    <string name="menu_delete">Xóa bản ghi</string>
+    <string name="menu_delete_all">Xóa toàn bộ số liệu</string>
+    <string name="menu_help">Trợ giúp</string>
+    <string name="menu_insert">Thêm bản ghi</string>
+    <string name="menu_locate">Thu thập tọa độ</string>
+    <string name="menu_save">Lưu bản ghi</string>
+    <string name="menu_search">Tìm kiếm</string>
+    <string name="menu_settings">Cài đặt</string>
+    <string name="menu_sync_file">Tạo tập tin đồng bộ</string>
+    <string name="no">Không</string>
+    <string name="no_fields">Không có các trường dữ liệu ở biểu mẫu này.</string>
+    <string name="no_records">&lt;Không có bản ghi></string>
+    <string formatted="false" name="not_in_range">Giá trị không nằm trong khoảng cho trước. Giới hạn thấp nhất: %s Giới hạn cao nhất: %s </string>
+    <string formatted="false" name="not_match_pattern">Giá trị không khớp với dạng cho trước: %s</string>
+    <string name="not_selected">&lt;Không được lựa chọn></string>
+    <string name="ok">OK</string>
+    <string name="photo_error">Không chụp được ảnh. Hãy thử lại.</string>
+    <string name="please_wait">Hãy đợi…</string>
+    <string formatted="false" name="record_count">Các bản ghi (%s)</string>
+    <string name="record_id">Xác định(ID):</string>
+    <string name="record_preview">Xem trước:</string>
+    <string name="record_viewer">Người xem</string>
+    <string name="required_field">Đây là trường yêu cầu </string>
+    <string name="samples">Biểu mẫu cho mẫu</string>
+    <string name="samples_title">Mẫu</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Tìm kiếm"</string>
+    <string name="security">An ninh</string>
+    <string name="select_barcode_field">Lựa chọn trường mã vạch</string>
+    <string name="select_form">Hãy lựa chọn một biểu mẫu Epi Info.</string>
+    <string name="select_form_data_analysis">Hãy lựa chọn một biểu mẫu Epi Info để phân tích số liệu</string>
+    <string name="select_form_data_collection">Hãy lựa chọn một biểu mẫu Epi Info để thu thập số liệu.</string>
+    <string name="select_lat_field">Lựa chọn trường vĩ độ</string>
+    <string name="select_long_field">Lựa chọn kinh độ</string>
+    <string name="set">Cài đặt</string>
+    <string name="statcalc_2x2_desc">Phân tích bảng đơn và bảng phân tầng.</string>
+    <string name="statcalc_95_conf">Khoảng tin cậy 95% </string>
+    <string name="statcalc_binomial_desc">Tính theo nhị phân</string>
+    <string name="statcalc_btn1">Sample Size: Population Survey</string>
+    <string name="statcalc_btn2">Sample Size: Unmatched Case-Control</string>
+    <string name="statcalc_btn3">Sample Size: Cohort / Cross Sectional</string>
+    <string name="statcalc_btn4">Analysis of Single and Stratified Tables</string>
+    <string name="statcalc_btn5">Matched Pair Case Control</string>
+    <string name="statcalc_btn6">Analysis of Linear Trend</string>
+    <string name="statcalc_btn7">Poisson</string>
+    <string name="statcalc_btn8">Binomial</string>
+    <string name="statcalc_btn9">More calculators at OpenEpi.com</string>
+    <string name="statcalc_cases">Ca bệnh</string>
+    <string name="statcalc_cohort_desc">Nghiên cứu cắt ngang/thuần tập không khớp phù hợp.</string>
+    <string name="statcalc_conf_level">Mức tin cậy</string>
+    <string name="statcalc_conf_limits">Khoảng tin cậy/giới hạn tin cậy:</string>
+    <string name="statcalc_control_ratio">Tỷ lệ chứng so với ca bệnh:</string>
+    <string name="statcalc_controls">Chứng</string>
+    <string name="statcalc_corrected">Đã được hiệu chỉnh:</string>
+    <string name="statcalc_disease">Bệnh</string>
+    <string name="statcalc_estimate">Ước tính</string>
+    <string name="statcalc_exp_events">Số lượng sự kiện ước tính:</string>
+    <string name="statcalc_exp_freq">Tần suất mong đợi:</string>
+    <string name="statcalc_exp_pct">Tỷ lệ phần trăm ước tính:</string>
+    <string name="statcalc_exposed">Có phơi nhiễm</string>
+    <string name="statcalc_exposure">Phơi nhiễm</string>
+    <string name="statcalc_lower">Mức thấp</string>
+    <string name="statcalc_matched_desc">Chứng và Ca bệnh ghép phù hợp từng cặp.</string>
+    <string name="statcalc_numerator">Tử số:</string>
+    <string name="statcalc_obs_events">Số lượng sự kiện quan sát được:</string>
+    <string name="statcalc_odds_prm">Thuộc tính dựa vào mức chênh (Odd)</string>
+    <string name="statcalc_odds_ratio">tỷ suất chênh:</string>
+    <string name="statcalc_pct_case_exp">Tỷ lệ phần trăm của ca bệnh có phơi nhiễm:</string>
+    <string name="statcalc_pct_ctrl_exp">Tỷ lệ phần trăm của chứng có phơi nhiễm:</string>
+    <string name="statcalc_pct_out_exp">% Kết quả của nhóm có phơi nhiễm:</string>
+    <string name="statcalc_pct_out_uexp">% Kết quả của nhóm không phơi nhiễm:</string>
+    <string name="statcalc_poisson_desc">Tính theo Poisson</string>
+    <string name="statcalc_poisson_prob">Xác xuất của số sự kiện được tìm thấy </string>
+    <string name="statcalc_pop_size">Kích thước quần thể:</string>
+    <string name="statcalc_pop_srv_desc">Điều tra quần thể hoặc nghiên cứu mô tả sử dụng phương pháp lấy mẫu ngẫu nhiên (không phải lấy mẫu cụm).</string>
+    <string name="statcalc_power">Lực (của nghiên cứu):</string>
+    <string name="statcalc_ratio_exposed">Tỷ lệ (Không phơi nhiễm : Có phơi nhiễm):</string>
+    <string name="statcalc_risk_diff">Sự khác biệt nguy cơ:</string>
+    <string name="statcalc_risk_prm">Thuộc tính dựa vào nguy cơ</string>
+    <string name="statcalc_risk_ratio">Tỷ suất nguy cơ:</string>
+    <string name="statcalc_sample_size">Cỡ mẫu</string>
+    <string name="statcalc_score">Điểm</string>
+    <string name="statcalc_stat_tests">Các phép tính thống kê</string>
+    <string name="statcalc_summary_stat">Tổng kết thống kê</string>
+    <string name="statcalc_total">Tổng số</string>
+    <string name="statcalc_total_obs">Tổng số quan sát:</string>
+    <string name="statcalc_two_sided">Mức tin cậy hai phía:</string>
+    <string name="statcalc_uncorrected">Chưa được hiệu chỉnh:</string>
+    <string name="statcalc_unexposed">Không phơi nhiễm</string>
+    <string name="statcalc_unmatched_desc">Nghiên cứu Bệnh-Chứng không ghép phù hợp.</string>
+    <string name="statcalc_upper">Mức cao</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="sync_file_password">Cài đặt mật khẩu</string>
+    <string name="sync_file_started">Đang tạo tập tin sync mới. Hãy kiểm tra khu vực thông báo để được cập nhật. </string>
+    <string name="yes">Có</string>
+</resources>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="cloud_services">
+        <item>Box</item>
+        <item>FTP Seguro</item>
+        <item>Microsoft Azure</item>
+		<item>CouchDB</item>
+		<item>API de Epi Info</item>
+    </string-array>
+    <string-array name="yn_array">
+        <item>&lt;No Seleccionado></item>
+        <item>Sí</item>
+        <item>No</item>
+    </string-array>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Ir a inicio"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Desplazarse hacia arriba"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Más opciones"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Listo"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Ver todo"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Seleccionar una aplicación"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"DESACTIVADO"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"ACTIVADO"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt +"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl +"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"Suprimir"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Intro"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Función +"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta +"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Mayús +"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"Espacio"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym +"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menú +"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Buscar…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Borrar consulta"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Consulta de búsqueda"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Buscar"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Enviar consulta"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Búsqueda por voz"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Compartir con"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Compartir con <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Ocultar"</string>
+    <string name="admin_password">Contraseña Administrativa</string>
+    <string name="admin_pwd">Bloquee la configuración de la aplicación mediante una contraseña administrativa.</string>
+    <string name="admin_pwd_title">Seña de administrador</string>
+    <string name="analysis">Análisis</string>
+    <string name="analysis_add_2x2">Añadir Tabla 2x2</string>
+    <string name="analysis_add_chart_pie">Añadir Gráfico de Sectores</string>
+    <string name="analysis_add_freq">Añadir Frecuencia</string>
+    <string name="analysis_add_map">Añadir Mapa</string>
+    <string name="analysis_add_means">Añadir Media</string>
+    <string name="analysis_field">Campo:</string>
+    <string name="analysis_freq">Frecuencia</string>
+    <string name="analysis_lat">Campo Latitud:</string>
+    <string name="analysis_long">Campo Longitud:</string>
+    <string name="analysis_max">Máximo:</string>
+    <string name="analysis_mean">Media:</string>
+    <string name="analysis_med">Media:</string>
+    <string name="analysis_min">Mínimo:</string>
+    <string name="analysis_no_sheets">Por favor, descargue una aplicación, como por ejemplo Google Sheets, que le permita ver hojas de cálculo.</string>
+    <string name="analysis_obs">Observaciones:</string>
+    <string name="analysis_outcome">Resultado</string>
+    <string name="analysis_select">&lt;Seleccione></string>
+    <string name="analysis_std">Deviación Std:</string>
+    <string name="analysis_total">Total:</string>
+    <string name="analysis_var">Varianza</string>
+    <string name="analysis_view_list">Ver el Listado</string>
+    <string name="app_name">Epi Info</string>
+    <string name="available_forms">Formularios disponibles</string>
+    <string name="azure_classic">Utilizar Microsoft Azure servicios clásicos</string>
+    <string name="barcode_settings">Configuración para código de barras</string>
+    <string name="blocked_ip_error_message">Está intentando iniciar sesión en Box desde una ubicación que no ha sido aprobada por su administrador. Póngase en contacto con su administrador para solucionar este problema.</string>
+    <string name="box_signin">Iniciar sesión en la cuenta de Box</string>
+    <string name="box_signout">Cerrar la sesión de Box</string>
+    <string name="boxsdk_Authenticating">Autenticando</string>
+    <string name="boxsdk_Authentication_fail">Error en la autenticación</string>
+    <string name="boxsdk_Authentication_fail_forbidden">Póngase en contacto con el administrador para autorizar este dispositivo.</string>
+    <string name="boxsdk_Authentication_fail_url_mismatch">La URL de redireccionamiento no es válida</string>
+    <string name="boxsdk_Go_back">Volver</string>
+    <string name="boxsdk_Please_wait">Espere…</string>
+    <string name="boxsdk_Security_Warning">Advertencia de seguridad</string>
+    <string name="boxsdk_Select_an_account_to_use">Seleccionar una cuenta para utilizar</string>
+    <string name="boxsdk_There_are_problems_with_the_security_certificate_for_this_site">Existen problemas con el certificado de seguridad de este sitio.</string>
+    <string name="boxsdk_Use_a_different_account">Utilizar una cuenta distinta</string>
+    <string description="" name="boxsdk_alert_dialog_cancel">Cancelar</string>
+    <string description="" name="boxsdk_alert_dialog_ok">Enviar</string>
+    <string description="" name="boxsdk_alert_dialog_password">Contraseña</string>
+    <string description="" name="boxsdk_alert_dialog_text_entry">El sitio web o la aplicación solicitan autenticación.</string>
+    <string description="" name="boxsdk_alert_dialog_username">Nombre de usuario</string>
+    <string description="OK on buttons" name="boxsdk_button_ok">ACEPTAR</string>
+    <string description="OK on buttons" name="boxsdk_button_okay">ACEPTAR</string>
+    <string description="size with abbreviation for bytes used in folder list" name="boxsdk_bytes">%4.0f B</string>
+    <string name="boxsdk_common_name">nombre común:</string>
+    <string name="boxsdk_details">Detalles</string>
+    <string name="boxsdk_error_fatal_refresh">La sesión se ha cerrado.</string>
+    <string name="boxsdk_error_network_connection">No se puede detectar una conexión de red</string>
+    <string name="boxsdk_error_terms_of_service">Su administrador ha cambiado las Condiciones de uso. Debe iniciar sesión y aceptar las Condiciones de uso para continuar.</string>
+    <string name="boxsdk_expires_on">vence el:</string>
+    <string description="size in binary gigabyte  1024 * 1024 mbytes used in folder list" name="boxsdk_gigabytes">%4.1f GB</string>
+    <string name="boxsdk_issued_by">emitido por:</string>
+    <string name="boxsdk_issued_on">emitido el:</string>
+    <string name="boxsdk_issued_to">emitido a:</string>
+    <string description="size in binary kilobytes  1024 bytes used in folder list" name="boxsdk_kilobytes">%4.1f KB</string>
+    <string description="size in binary megabyte  1024 * 1024 kbytes used in folder list" name="boxsdk_megabytes">%4.1f MB</string>
+    <string name="boxsdk_no_offline_access">No tiene acceso sin conexión</string>
+    <string name="boxsdk_no_offline_access_detail">No se ha encontrado ninguna conexión de red.</string>
+    <string name="boxsdk_no_offline_access_todo">Para iniciar sesión, conéctese a una red Wi-Fi o una red de datos móviles.</string>
+    <string name="boxsdk_org_name">nombre de la empresa:</string>
+    <string name="boxsdk_org_unit">unidad de la empresa:</string>
+    <string name="boxsdk_ssl_error_details">Ver detalles</string>
+    <string name="boxsdk_ssl_error_warning_DATE_INVALID">La fecha del certificado no es válida.</string>
+    <string name="boxsdk_ssl_error_warning_EXPIRED">El certificado ha vencido.</string>
+    <string name="boxsdk_ssl_error_warning_ID_MISMATCH">Los nombres de host no coinciden.</string>
+    <string name="boxsdk_ssl_error_warning_INVALID">Se ha producido un error genérico.</string>
+    <string name="boxsdk_ssl_error_warning_NOT_YET_VALID">El certificado aún no es válido.</string>
+    <string name="boxsdk_ssl_error_warning_UNTRUSTED">La autoridad de certificación no es de confianza.</string>
+    <string name="boxsdk_ssl_should_not_proceed">Le recomendamos que no continúe, especialmente si es la primera vez que ve esta advertencia para este sitio.</string>
+    <string description="size in binary terabyte  1024 * 1024 gbytes used in folder list" name="boxsdk_terabytes">%4.1f TB</string>
+    <string name="boxsdk_unable_to_connect">No se puede conectar</string>
+    <string name="boxsdk_unable_to_connect_detail">No hemos podido establecer la conexión con su red.</string>
+    <string name="boxsdk_unable_to_connect_todo">Compruebe su conexión de red y vuelva a intentarlo.</string>
+    <string name="boxsdk_validity_period">periodo de validez:</string>
+    <string name="build_number">Número de versión</string>
+    <string name="camera_desc">Epi Info puede utilizar la cámara incorporada al dispositivo para permitirle capturar fotos y videos junto con sus datos estructurados. Si planea tomar fotos o videos, otorgue permiso a Epi Info para accesar a la cámara del dispositivo.</string>
+    <string name="cloud_download_schedule">Recuperando las tareas de hoy. Por favor espera...</string>
+    <string name="cloud_download_schedule_complete">Se recuperó con éxito las tareas de hoy (%s)</string>
+    <string name="cloud_download_schedule_failed">Error al recuperar tareas del servidor</string>
+    <string name="cloud_pwd">Contraseña</string>
+    <string name="cloud_service_desc">Seleccione el servicio en la nube para usar.</string>
+    <string name="cloud_service_title">Servicio de Nube</string>
+    <string name="cloud_sync">Sincronización con Nube</string>
+    <string name="cloud_sync_app_key">Provea la llave para sincronización con la nube</string>
+    <string name="cloud_sync_app_key_dialog">Provea la llave (mayúsculas y minúsculas)</string>
+    <string name="cloud_sync_app_key_dialog_title">Llave para Aplicación</string>
+    <string name="cloud_sync_app_key_title">Llave para aplicación Azure</string>
+    <string formatted="false" name="cloud_sync_complete">Sincronización completada (%s)</string>
+    <string name="cloud_sync_complete_detail">La información fue exitósamente sincronizada con la nube.</string>
+    <string name="cloud_sync_del">Permitir propagar a la nube eliminaciones de registros locales.</string>
+    <string name="cloud_sync_del_title">Eliminación de datos en la nube</string>
+    <string name="cloud_sync_down_only">Los datos sólo se descargan de la nube. Los datos de este usuario no serán enviados.</string>
+    <string name="cloud_sync_down_only_title">Descargar datos de la nube solamente</string>
+    <string formatted="false" name="cloud_sync_failed">Sincronización no fue exitosa (%s)</string>
+    <string name="cloud_sync_failed_detail">Error sincronizando con la nube. Por favor trate de nuevo.</string>
+    <string formatted="false" name="cloud_sync_progress">Sincronizando con la nube (%s)</string>
+    <string name="cloud_sync_receiving">Recibiendo...</string>
+    <string name="cloud_sync_save">Iniciar sincronización en la nube para un registro cuando se guarda.</string>
+    <string name="cloud_sync_save_title">Sincronizar al guardar</string>
+    <string name="cloud_sync_sending">Enviando / actualizando...</string>
+    <string name="cloud_sync_srv_name">Proporcione el nombre de servicio móvil de Windows Azure que se utilizará para la sincronización de datos.</string>
+    <string name="cloud_sync_srv_name_dialog">Provea el nombre del servicio</string>
+    <string name="cloud_sync_srv_name_dialog_title">Nombre  de servicio móbil</string>
+    <string name="cloud_sync_srv_name_title">Servicio Móbil Azure</string>
+    <string name="cloud_sync_started">Sincronizando con la nube. Por favor revise el área de notificaciones para actualizaciones.</string>
+    <string name="cloud_sync_up_down">Los datos se cargan en la nube y datos de otros usuarios se descargan desde la nube. ADVERTENCIA: Este usuario puede actualizar de forma inadvertida los datos de otros usuarios.</string>
+    <string name="cloud_sync_up_down_title">Enviar y descargar datos de la nube</string>
+    <string name="cloud_sync_up_only">Los datos sólo se suben a la nube. Este usuario no verá datos de otros usuarios.</string>
+    <string name="cloud_sync_up_only_title">Enviar datos a nube solamente</string>
+    <string name="cloud_user_name">Nombre de usuario</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Activar"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> no funcionará hasta que no habilites Servicios de Google Play."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Habilita Servicios de Google Play"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Instalar"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> no se ejecutará si los Servicios de Google Play no están instalados en tu dispositivo."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Descargar Servicios de Google Play"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Disponibilidad Servicios de Google Play"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Error de Servicios de Google Play"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"La aplicación <ns1:g id="APP_NAME">%1$s</ns1:g> tiene problemas con los Servicios de Google Play. Vuelve a intentarlo."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"No es posible ejecutar la aplicación <ns1:g id="APP_NAME">%1$s</ns1:g> sin los Servicios de Google Play, que no son compatibles con tu dispositivo."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Actualizar"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> no funcionará hasta que no actualices Servicios de Google Play."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Actualiza Servicios de Google Play"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> no se ejecutará hasta que finalice la actualización en curso de Servicios de Google Play."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Se necesita una nueva versión de Servicios de Google Play. Se actualizará en breve."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Abrir en teléfono"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Iniciar sesión"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Iniciar sesión con Google"</string>
+    <string name="complete_req_fields">Por favor complete todos los campos requeridos antes de guardar el registro.</string>
+    <string name="conf_level_prompt">Intervalos de confianza de dos lados</string>
+    <string name="configure_cloud">Sincronización con la nube no ha sido configurada. ¿Desea configurarla ahora?</string>
+    <string name="confirm">Confirmar:</string>
+    <string name="confirm_delete_all">Todos los datos asociados con este formulario serán borrados. ¿Está seguro?</string>
+    <string name="database_error">Ha occurrido un error al cargar la base de datos.</string>
+    <string name="device_id">Proporcionar un identificador único para este dispositivo (utilizado para sincronizar archivos).</string>
+    <string name="device_id_title">ID del dispositivo</string>
+    <string name="error_camera">No ha concedido permiso a Epi Info para accesar la cámara. Por favor, conceda este permiso desde la configuración de la aplicación en su dispositivo.</string>
+    <string name="error_storage">No ha otorgado permiso de Epi Info para accesar los formularios en su dispositivo. Por favor, conceda este permiso desde la configuración de la aplicación en su dispositivo.</string>
+    <string name="exit_default_form">Salir del modo predeterminado</string>
+    <string name="exit_form">¿Salir del formulario sin guardar registro?</string>
+    <string name="fab_alt_text">Agregar\ndatos</string>
+    <string name="form_layout">Presentación de formulario</string>
+    <string name="form_layout_ei7">Los elementos del formulario se colocan y reajustan en conformidad con el Diseñador de Formularios.</string>
+    <string name="form_layout_ei7_title">Igual que Epi Info 7</string>
+    <string name="form_layout_interview">Los elementos del formulario se presentan como preguntas de una en una.</string>
+    <string name="form_layout_interview_title">Modo de entrevista</string>
+    <string name="form_layout_stacked">Elmentos serán organizados verticalmente basado en tabulación.</string>
+    <string name="form_layout_stacked_title">Presentados verticalmente</string>
+    <string name="gps_error">No se pudo recibir señales GPS para determinar la posición actual.  Por favor, asegúrese de que tiene una vista sin obstrucción y vuelva a intentarlo.</string>
+    <string name="gps_settings">Configuración GPS</string>
+    <string name="identification">Identificación</string>
+    <string name="img_analyze">Analizar Datos</string>
+    <string name="img_chi_sq">Análisis de Tendencia Lineal</string>
+    <string name="img_collect">Recopilar Datos</string>
+    <string name="img_open_epi">Más calculaciones en OpenEpi.com</string>
+    <string name="img_pop_surv">Encuesta de Población</string>
+    <string name="img_sample_size">Tamaño de muestra</string>
+    <string name="img_touch_opt">Toque el "Menú de opciones" para empezar</string>
+    <string name="interviewer">Entrevistador</string>
+    <string name="load">Cargar</string>
+    <string name="loading_form">Cargando formulario</string>
+    <string name="location_desc">Epi Info puede utilizar el GPS incorporado al dispositivo para permitirle recopilar información geográfica. Si planea hacer esto, otorgue permiso a Epi Info para accesar a la ubicación del dispositivo.</string>
+    <string name="menu_analyze">Analizar Datos</string>
+    <string name="menu_barcode">Escanear Barcode</string>
+    <string name="menu_cloud_sync">Sincr. con Nube</string>
+    <string name="menu_daily_download">Descarga las tareas de hoy</string>
+    <string name="menu_delete">Borrar Registro</string>
+    <string name="menu_delete_all">Borrar Todos Datos</string>
+    <string name="menu_exit">Salida</string>
+    <string name="menu_exit_no_save">Salir sin guardar</string>
+    <string name="menu_export_all">Exportar todas las bases de datos</string>
+    <string name="menu_help">Ayuda</string>
+    <string name="menu_insert">Agregar Registro</string>
+    <string name="menu_locate">Capturar Coordenadas</string>
+    <string name="menu_save">Guardar Registro</string>
+    <string name="menu_search">Buscar</string>
+    <string name="menu_settings">Configuración</string>
+    <string name="menu_sync_file">Crear Archivo Sync</string>
+    <string name="mic_desc">Epi Info puede utilizar el micrófono incorporado al dispositivo para permitirle capturar audio junto con sus datos estructurados. Si planea recopilar este tipo de datos, otorgue permiso a Epi Info para accesar al micrófono del dispositivo.</string>
+    <string name="next">Próximo</string>
+    <string name="no">No</string>
+    <string name="no_fields">No existen campos en este formulario.</string>
+    <string name="no_matching_records">No se encontraron registros coincidentes</string>
+    <string name="no_records">&lt;Sin Registros></string>
+    <string formatted="false" name="not_in_range">Valor no pertenence a un rango especificado. \r\nRango mínimo: %s \r\nRango máximo: %s</string>
+    <string name="not_match_password">Las contraseñas no coinciden.</string>
+    <string formatted="false" name="not_match_pattern">Valor no aplica al patrón asignado: %s</string>
+    <string name="not_selected">&lt;No Seleccionado></string>
+    <string name="ok">OK</string>
+    <string name="photo_error">La fotografía no fue capturada.  Por favor trate de nuevo.</string>
+    <string name="please_wait">Por favor espere...</string>
+    <string name="prev">Previo</string>
+    <string formatted="false" name="record_count">Registro (%s)</string>
+    <string name="record_id">ID Registro:  </string>
+    <string name="record_list">Lista de registro</string>
+    <string name="record_preview">Vista Registro:  </string>
+    <string name="record_viewer">Ver Registro</string>
+    <string name="request_camera">Solicitando permiso: cámara</string>
+    <string name="request_location">Solicitando permiso: ubicación</string>
+    <string name="request_mic">Solicitando permiso: micrófono</string>
+    <string name="request_storage">Solicitando permiso: almacenamiento</string>
+    <string name="required_field">Esto es un campo requerido.</string>
+    <string name="reverse_order">Visualizar registros en orden inverso</string>
+    <string name="reverse_order_title">Orden inverso</string>
+    <string name="samples">Formularios muestra</string>
+    <string name="samples_title">Muestras</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Buscar"</string>
+    <string name="security">Seguridad</string>
+    <string name="select_barcode_field">Seleccione campo  para código de barras</string>
+    <string name="select_form">Por favor seleccione un formulario de Epi Info.</string>
+    <string name="select_form_data_analysis">Por favor seleccione un formulario de Epi Info para análisis</string>
+    <string name="select_form_data_collection">Por favor seleccione un formulario de Epi Info para recopilar datos</string>
+    <string name="select_lat_field">Seleccione campo de latitud</string>
+    <string name="select_long_field">Seleccione campo de longitud</string>
+    <string name="set">Establecer</string>
+    <string name="set_default_form">Establecer esto como el formulario predeterminado</string>
+    <string name="set_password">Establecer contraseña para Epi Info 7 sincronización:</string>
+    <string name="set_permissions">Establecer Permisos</string>
+    <string name="sftp_url">URL de servicio</string>
+    <string name="statcalc_2x2_desc">Análisis 2x2</string>
+    <string name="statcalc_95_conf">95% Intervalo de confianza</string>
+    <string name="statcalc_binomial_desc">Calculadora Binomial</string>
+    <string name="statcalc_btn1">Tamaño Muestra</string>
+    <string name="statcalc_btn2">Caso-control no pareado</string>
+    <string name="statcalc_btn3">Cohorte No Pareado</string>
+    <string name="statcalc_btn4">Análisis 2 x 2</string>
+    <string name="statcalc_btn5">Estudio Casos Controles Emparejados</string>
+    <string name="statcalc_btn6">Análisis de Tendencia Lineal</string>
+    <string name="statcalc_btn7">Calculadora Poisson</string>
+    <string name="statcalc_btn8">Calculadora Binomial</string>
+    <string name="statcalc_btn9">Más calculadoras: OpenEpi.com</string>
+    <string name="statcalc_cases">Casos</string>
+    <string name="statcalc_cohort_desc">Cohorte No Pareado / Estudio transversal</string>
+    <string name="statcalc_conf_level">Nivel confianza</string>
+    <string name="statcalc_conf_limits">Limites de confianza:</string>
+    <string name="statcalc_control_ratio">Radio de control a casos:</string>
+    <string name="statcalc_controls">Controles</string>
+    <string name="statcalc_corrected">Corregido:</string>
+    <string name="statcalc_disease">Condición</string>
+    <string name="statcalc_estimate">Estimado</string>
+    <string name="statcalc_exp_events">Número de Eventos Esperados:</string>
+    <string name="statcalc_exp_freq">Frecuencia esperada:</string>
+    <string name="statcalc_exp_pct">Porcentaje esperado:</string>
+    <string name="statcalc_exposed">Expuesto</string>
+    <string name="statcalc_exposure">Exposición</string>
+    <string name="statcalc_lower">Inferior</string>
+    <string name="statcalc_matched_desc">Estudio Casos Controles Emparejados</string>
+    <string name="statcalc_numerator">Numerador:</string>
+    <string name="statcalc_obs_events">Número de Eventos Observados:</string>
+    <string name="statcalc_odds_prm">Parámetros basados ​​en la posibilidad</string>
+    <string name="statcalc_odds_ratio">Odds Ratio:</string>
+    <string name="statcalc_pct_case_exp">Porcentaje de casos con exposición:</string>
+    <string name="statcalc_pct_ctrl_exp">Porcentaje de controles expuestos:</string>
+    <string name="statcalc_pct_out_exp">Resultado% en el grupo no expuesto:</string>
+    <string name="statcalc_pct_out_uexp">% outcome in unexposed group:</string>
+    <string name="statcalc_poisson_desc">Calculadora Poisson</string>
+    <string name="statcalc_poisson_prob">Probabilidad que el número de eventos sea</string>
+    <string name="statcalc_pop_size">Tamaño población:</string>
+    <string name="statcalc_pop_srv_desc">Encuesta poblacional o estudio descriptivo mediante un muestreo aleatorio (no cluster)</string>
+    <string name="statcalc_power">Poder:</string>
+    <string name="statcalc_ratio_exposed">Radio (No expuesto : Expuesto):</string>
+    <string name="statcalc_risk_diff">Diferencia de riesgo:</string>
+    <string name="statcalc_risk_prm">Parámetros basados ​​en el riesgo</string>
+    <string name="statcalc_risk_ratio">Riesgo relativo:</string>
+    <string name="statcalc_sample_size">Tamaño muestra</string>
+    <string name="statcalc_score">Puntuación</string>
+    <string name="statcalc_stat_tests">Pruebas estadísticas</string>
+    <string name="statcalc_summary_stat">Resúmen de Estadísticas</string>
+    <string name="statcalc_total">Total</string>
+    <string name="statcalc_total_obs">Total de Observaciones:</string>
+    <string name="statcalc_two_sided">Intervalos de confianza de dos lados:</string>
+    <string name="statcalc_uncorrected">No corregido:</string>
+    <string name="statcalc_unexposed">No expuesto</string>
+    <string name="statcalc_unmatched_desc">Caso-control no pareado</string>
+    <string name="statcalc_upper">Superior</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="storage_desc">Epi Info almacena formularios de recopilación de datos y archivos de sincronización en el sistema de archivos de Android. Otorgue permiso a Epi Info para accesar el almacenamiento del dispositivo.</string>
+    <string name="sync_file_page_size">Tamaño de archivo de sincronización</string>
+    <string name="sync_file_page_size_desc">La cantidad máxima de registros que debe contener cada archivo de sincronización.</string>
+    <string name="sync_file_page_size_dialog">Por favor especifique la cantidad de registros</string>
+    <string name="sync_file_page_size_dialog_title">Tamaño de archivo de sincronización</string>
+    <string name="sync_file_password">Establesca contraseña</string>
+    <string name="sync_file_pref">Archivos de sincronización</string>
+    <string name="sync_file_started">Creando archivo de sincronización. Por favor revise el área de notificaciones para actualizaciones.</string>
+    <string name="windows_decimal_symbol">Configuración punto decimal</string>
+    <string name="windows_decimal_symbol_desc">La representación de puntos decimales en Microsoft Windows. ALERTA: Esta configuración afecta la cual información numérica es importada a Epi Info 7.</string>
+    <string name="windows_decimal_symbol_dialog">La representación de puntos decimales en Microsoft Windows</string>
+    <string name="windows_decimal_symbol_dialog_title">Configuración punto decimal</string>
+    <string name="yes">Sí</string>
+</resources>
